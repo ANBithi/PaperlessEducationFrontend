@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import 'react-calendar/dist/Calendar.css';
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #3182ce85 !important;
+}
+
+.react-calendar {
+    background: rgb(206,215,227, .1)!important;
+    border: 1px solid #afbdce !important;
+  }
+  .react-calendar__tile:disabled {
+    background-color: #2795d933;
+}
