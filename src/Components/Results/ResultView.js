@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getCurrentUserId } from "../../Helpers/userHelper";
-import leaveService from "../../services/leave.service";
 import { resultService } from "../../services/result.service";
 import DataFetcher from "../DataFetcher";
 import { VIEW_COL } from "./resultViewData";

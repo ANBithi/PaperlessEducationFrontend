@@ -18,12 +18,7 @@ import { LinkIcon, AttachmentIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import DataFetcher from "../DataFetcher";
 import { useParams } from "react-router";
 import sectionService from "../../services/section.service";
-import { CircleIcon } from "../../Icons/CircleIcon";
-import dropboxService from "../../services/dropbox.service";
-import { postService } from "../../services/post.service";
-import { getFileType } from "../../Helpers/userHelper";
 import { chatService } from "../../services/chat.service";
-import { ChatDrawer } from "../Courses/Chat/ChatDrawer";
 import ResultModal from "./ResultModal";
 
 const CourseResults = () => {

@@ -1,6 +1,5 @@
 import { HStack, Flex, Button, useToast, Avatar, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import employeeService from "../../../services/employee.service";
 import ManageProfileForm from "./ManageProfileForm";
 
 const ManageProfile = () => {

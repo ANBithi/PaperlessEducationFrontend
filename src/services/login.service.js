@@ -32,20 +32,5 @@ async function logIn(user) {
   // }
 }
 
-async function checkProfileStatus() {
-  let request = {
-    id : getCurrentUserId()
-  }
-  let response =  await fetch("http://localhost:5000/api/auth/CheckAndUpdate",{
-   method: "POST",
-   headers: {'Content-Type': 'application/json'}, 
-   body: JSON.stringify(request)
- })
-
- if (response.ok) {
-  return await response.json();
-}
- }
-
-const loginService = {isLoggedIn, logOff, logIn, checkProfileStatus}
+const loginService = {isLoggedIn, logOff, logIn}
 export default loginService;

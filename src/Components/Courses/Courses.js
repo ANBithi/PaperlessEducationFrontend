@@ -1,7 +1,6 @@
 import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import courseService from "../../services/course.service";
-import leaveService from "../../services/leave.service";
 import DataFetcher from "../DataFetcher";
 import { CourseCard } from "./CourseCard";
 

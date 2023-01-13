@@ -10,12 +10,6 @@ const Home = () =>{
     const [allNotifications, setAllNotifications] = useState([]);
     const navigate = useNavigate(); 
     useEffect(()=>{
-        loginService.checkProfileStatus().then(d=>{
-            if(d){
-                localStorage.setItem("loggedIn-status", JSON.stringify(false));
-                window.location.reload();
-            }
-        })
         notificationService.getNotifications(getCurrentUserId(), "post").then(p=>{
             setAllNotifications(p);
         })

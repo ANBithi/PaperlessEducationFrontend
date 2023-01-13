@@ -6,17 +6,6 @@ import Login from "./Components/Login";
 import Setting from "./Components/Setting";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
 import ManageProfile from "./Components/Employee/ManageProfile/ManageProfile";
-import ContactInfo from "./Components/Employee/Contact/ContactInfo";
-import PersonalInfo from "./Components/Employee/PersonalInfo";
-import Academic from "./Components/Employee/Academic/Academic";
-import Professional from "./Components/Employee/ProfessionalQualification/Professional";
-import Experience from "./Components/Employee/Experience/Experience";
-import Finance from "./Components/Finance/Finance";
-import LeaveApplication from "./Components/Leave/LeaveApplication/LeaveApplication";
-import LeaveDecline from "./Components/Leave/LeaveDecline";
-import LeaveCancel from "./Components/Leave/LeaveCancel";
-import AppliedLeaveStatus from "./Components/Leave/AppliedLeaveStatus";
-import PendingLeaveRequestStatus from "./Components/Leave/PendingLeaveRequestStatus";
 import Administration from "./Components/Administration/Administration";
 import Courses from "./Components/Courses/Courses";
 import CourseDetails from "./Components/Courses/CourseDetail";
@@ -36,25 +25,14 @@ function App() {
 							path="manage-profile"
 							element={<ManageProfile />}
 						/>
-						<Route path="contact-info" element={<ContactInfo />} />
-						<Route
-							path="personal-info"
-							element={<PersonalInfo />}
-						/>
-						<Route path="academic" element={<Academic />} />
-						<Route path="professional" element={<Professional />} />
+					
 						<Route exact path="courses" element={<Courses />} />
 						<Route exact path="results" element={<Courses />} />
 						<Route exact path="courses/:id" element={<CourseDetails />} />	
 						<Route exact path="results/:id" element={<CourseResult />} />	
 						<Route path="std-results" element={<ResultView />} />	
 						<Route path="enroll" element={<Enroll />} />							
-						<Route path="finance" element={<Finance />} />
-						<Route path="leave-application" element={<LeaveApplication />} />
-						<Route path="leave-decline" element={<LeaveDecline />} />
-						<Route path="leave-cancel" element={<LeaveCancel />} />
-						<Route path="applied-leave-status" element={<AppliedLeaveStatus />} />
-						<Route path="pending-leave-request-status" element={<PendingLeaveRequestStatus />} />
+	
 
 						{/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
