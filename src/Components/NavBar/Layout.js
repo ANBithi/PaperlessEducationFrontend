@@ -40,7 +40,7 @@ export default function Layout() {
 		>
 			<Flex
 				layerStyle="navbarStyle"
-				align="center"
+				align="center"				
 				justify="space-between"
 			>
 				{/* <Image src={Logo.src} h="50px" /> */}

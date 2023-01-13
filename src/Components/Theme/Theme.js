@@ -112,6 +112,8 @@ const theme = extendTheme(
 				px: "6",
 				py: "5",
 				bg: "primary.100",
+				pos: "relative",
+				zIndex: "12",
 				color: "primary.900",
 				".chakra-ui-dark &": {
 					bg: "primary.700",

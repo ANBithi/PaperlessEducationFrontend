@@ -8,6 +8,7 @@ import {
 	Text,
 	VStack,
 	AspectRatio,
+	Divider,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { EditIcon } from "@chakra-ui/icons";
@@ -16,23 +17,34 @@ import DataFetcher from "../DataFetcher";
 import { getCurrentUser } from "../../Helpers/userHelper";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import ImageViewer from "./ImageViewer";
+import Reactions from "../Reactions/Reactions";
+import Comment from "../Comments/Comment";
+import CommentsViewer from "../Comments/CommentsViewer";
+import Comments from "../Comments/Comments";
 
-const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
-	const [currentUser, setCurrentUser] = useState(getCurrentUser());
+const PostViewer = ({ courseId, allPost, fetchData }) => {
+	const currentUser = getCurrentUser() ;
+	const [currentPost, setCurrentPost] = useState();
+	const [showComments, setShowComments] = useState(false);
+	const onCommentsClick = (post) => {
+		setCurrentPost(post);
+		let trigger = showComments;
+		setShowComments(!trigger);
+	}
 	return (
 		<DataFetcher
 			onDataFetched={fetchData}
 			isEmpty={allPost === undefined || allPost?.length === 0}
 		>
 			<VStack w="full" style={{ marginBottom: "5%", marginTop: "5%" }}>
-				{allPost.map((post, index) => {
+				{allPost.map((post) => {
 					return (
 						<VStack
 							w="full"
 							boxShadow="md"
 							alignSelf="flex-end"
 							p={2}
-							key={index}
+							key={post.id}
 							m="5%,5%, 5%, 5%"
 							rounded="5px"
 							border="1px solid"
@@ -54,7 +66,7 @@ const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
 									src="https://bit.ly/broken-link"
 									mb="5px"
 								/>
-								<VStack>
+								<VStack align='start'>
 									<Text
 										fontSize="12px"
 										fontWeight="bold"
@@ -65,7 +77,7 @@ const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
 									<Text
 										fontSize="10px"
 										fontWeight="bold"
-										textAlign="center"
+										textAlign="start"
 									>
 										{new Date(
 											post.createdAt
@@ -73,11 +85,12 @@ const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
 									</Text>
 								</VStack>
 							</HStack>
-							<HStack w="full" align="center" p={2}>
-								<Text flex="1" textAlign="start">
+							<HStack w="full"  align="center" p={2}>
+								<Text flex="1" ml= '48px' textAlign="start">
 									{post.postDescription}
 								</Text>
 							</HStack>
+							<Box style={{marginLeft: '56px'}}>
 							{post.attachments?.length > 0 &&
 								post.attachments.map((attach, i) => {
 									return (
@@ -86,7 +99,7 @@ const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
 											fontWeight="bold"
 											key={i}
 											alignSelf="flex-start"
-											px={2}
+											
 										>
                                             {attach.type === 1 && (
 												<ImageViewer
@@ -119,9 +132,21 @@ const PostViewer = ({ courseId, allPost, setAllPost, fetchData }) => {
 													{attach.metadata.name}
 												</Link>
 											)}
+											
 										</Box>
 									);
 								})}
+							</Box>
+								<Divider mx = {2}  h = "1px" bg = "primary.200" border = "0px"></Divider>
+								<HStack justify="start" w = "full">
+									<Reactions></Reactions>
+									<Comments handleEvent = {onCommentsClick} post = {post.id} ></Comments>
+								</HStack>
+								{
+									(showComments === true && currentPost === post.id) && (
+										<CommentsViewer/>
+									)
+								}
 						</VStack>
 					);
 				})}

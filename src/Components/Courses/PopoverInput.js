@@ -27,7 +27,7 @@ const PopoverInput = ({ icon, setPostObj, postObj, attachments, setAttachments }
 				onOpen={onOpen}
 				onClose={onClose}
 				placement="right"
-				closeOnBlur={false}
+				closeOnBlur={true}
 			>
 				<PopoverTrigger>
 					<Circle layerStyle="InputAddOns" onClick={onToggle}>
