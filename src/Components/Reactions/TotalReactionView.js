@@ -1,29 +1,50 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { findReactionTypes } from "../../Helpers/reactionHelper.js";
 import { postService } from "../../services/post.service";
+import AllReactionsModal from "./AllReactionsModal.js";
 import Reaction from "./Reaction.js";
 import { REACTION_LIST } from "./reactionList";
 import RoundedReactionView from "./RoundedReactionView.js";
 
-function TotalReactionView({ parentId }) {
+function TotalReactionView({
+	reactions,
+	parentId,
+	userReaction,
+	setUserReaction,
+	currentUser,
+}) {
 	const [foundReactions, setFoundReactions] = useState([]);
-	const [reactions, setReactions] = useState([]);
+
+	const { onOpen, isOpen, onClose } = useDisclosure();
+
+	const onReactionsClick = () => {
+		onOpen();
+	};
+
 	useEffect(() => {
-		postService.getAllReactions(parentId).then((count) => {
-			if (count) {
-				setReactions(count);
-				setFoundReactions(findReactionTypes(count));
-			}
-		});
-	}, []);
+		if (reactions === undefined) {
+			return;
+		}
+		setFoundReactions(findReactionTypes(reactions));
+	}, [reactions]);
+
 	return (
-		<HStack alignSelf='start' style={{marginLeft: '54px'}} >
-			{reactions.length > 0 && (
+		<HStack
+			alignSelf="start"
+			py="6px"
+			px="8px"
+			borderRadius="4px"
+			_hover={{ cursor: "pointer", backgroundColor: "primary.100" }}
+			onClick={onReactionsClick}
+			style={{ marginLeft: "46px" }}
+		>
+			{foundReactions.length > 0 && (
 				<>
 					{foundReactions.map((k, i) => {
 						return (
 							<Box
+                                key = {k.view.name}
 								style={{
 									borderRadius: "32px",
 									marginLeft: i > 0 ? "-6px" : "0",
@@ -43,6 +64,11 @@ function TotalReactionView({ parentId }) {
 					<Text>{reactions.length}</Text>
 				</>
 			)}
+			<AllReactionsModal
+				reactions={foundReactions}
+				isOpen={isOpen}
+				onClose={onClose}
+			></AllReactionsModal>
 		</HStack>
 	);
 }

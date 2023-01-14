@@ -20,7 +20,7 @@ import {
 	AttachmentIcon,
 	ArrowUpIcon,
 	ChatIcon,
-	BellIcon
+	BellIcon,
 } from "@chakra-ui/icons";
 import DataFetcher from "../DataFetcher";
 import { useParams } from "react-router";
@@ -35,13 +35,16 @@ import PostViewer from "../Post/PostViewer";
 import { chatService } from "../../services/chat.service";
 import ShowCounter from "../ShowCounter";
 import { FACULTY_NAV } from "../NavBar/navigationData";
+import PostsViewer from "../Post/PostsViewer";
 
 const CourseDetails = () => {
 	const { id } = useParams();
 	const toast = useToast();
 	const [textAreaVal, setTextAreaVal] = useState("");
 	const [sectionDetail, setSectionDetail] = useState();
-	const [newMessageCounter, setNewMessageCounter] = useState(JSON.parse(localStorage.getItem("msgCounter")));
+	const [newMessageCounter, setNewMessageCounter] = useState(
+		JSON.parse(localStorage.getItem("msgCounter"))
+	);
 	const inputFile = useRef(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [postObj, setPostObj] = useState({});
@@ -64,25 +67,25 @@ const CourseDetails = () => {
 	}, []);
 
 	const handleNewPost = (event) => {
-	let data = JSON.parse(event.data);
-	postService.getSingle(data.dataId).then((p)=>{
-		console.log(p);
-		if(p.createdBy !== getCurrentUserId()){
-			toast({
-				containerStyle: {
-					fontSize: "14px",
-					fontWeight: "normal",
-				},
-				title: `${p.userName} posted!`,
-				position: "bottom-right",
-				variant: "subtle",
-				status: "info",
-				duration: 5000,
-				isClosable: true,
-			});
-			fetchPostData();
-		}
-	})
+		let data = JSON.parse(event.data);
+		postService.getSingle(data.dataId).then((p) => {
+			console.log(p);
+			if (p.createdBy !== getCurrentUserId()) {
+				toast({
+					containerStyle: {
+						fontSize: "14px",
+						fontWeight: "normal",
+					},
+					title: `${p.userName} posted!`,
+					position: "bottom-right",
+					variant: "subtle",
+					status: "info",
+					duration: 5000,
+					isClosable: true,
+				});
+				fetchPostData();
+			}
+		});
 	};
 
 	const fetchMessageData = async () => {
@@ -108,12 +111,12 @@ const CourseDetails = () => {
 	};
 	const onChatClick = () => {
 		localStorage.setItem("msgCounter", 0);
-	}
+	};
 	const onAttachmentChange = async (e) => {
 		var file = e.target.files[0];
 		setPostDisable(file ? true : false);
 		setUploadFile(file);
-		 e.target.value = null;
+		e.target.value = null;
 	};
 	const onTextAreaChange = (e) => {
 		let { name, value } = e.target;
@@ -285,12 +288,12 @@ const CourseDetails = () => {
 									</Button>
 								</HStack>
 							</Box>
-							<PostViewer
+							<PostsViewer
 								courseId={id}
 								allPost={allPost}
 								setAllPost={setAllPost}
 								fetchData={fetchPostData}
-							></PostViewer>
+							></PostsViewer>
 						</VStack>
 						<VStack
 							w="90px"
@@ -315,7 +318,7 @@ const CourseDetails = () => {
 								flexDirection="horizontal"
 								align="flex-start"
 								justify="space-between"
-								onClick = {onChatClick}
+								onClick={onChatClick}
 							>
 								<ChatIcon alignSelf="center" />
 								<Text
@@ -327,10 +330,8 @@ const CourseDetails = () => {
 								</Text>
 							</Flex>
 						</VStack>
-						{(newMessageCounter > 0) && (
-							<ShowCounter
-								counter={newMessageCounter}
-							/>
+						{newMessageCounter > 0 && (
+							<ShowCounter counter={newMessageCounter} />
 						)}
 					</HStack>
 				</VStack>
@@ -343,7 +344,7 @@ const CourseDetails = () => {
 					setMessages={setMessages}
 					fetchData={fetchMessageData}
 					setNewMessageCounter={setNewMessageCounter}
-					newMessageCounter= {newMessageCounter}
+					newMessageCounter={newMessageCounter}
 				/>
 			</Flex>
 		</DataFetcher>

@@ -20,7 +20,6 @@ import { getCurrentUser } from "../../Helpers/userHelper";
 export default function Layout() {
 	const navigate = useNavigate();
 	const [userData, setUserData] = useState();
-	
 
 	useEffect(() => {
 		setUserData(JSON.parse(localStorage.getItem("userDetails")));
@@ -40,14 +39,19 @@ export default function Layout() {
 		>
 			<Flex
 				layerStyle="navbarStyle"
-				align="center"				
+				align="center"
 				justify="space-between"
 			>
 				{/* <Image src={Logo.src} h="50px" /> */}
 
 				<HStack as="nav" spacing="10">
-					{((userData?.userType === 2) ? FACULTY_NAV : (userData?.userType === 3) ? STUDENT_NAV : DATA).map((item, i) => (
-						<HStack>
+					{(userData?.userType === 2
+						? FACULTY_NAV
+						: userData?.userType === 3
+						? STUDENT_NAV
+						: DATA
+					).map((item, i) => (
+						<HStack key={i}>
 							{item.hasNotification === true ? (
 								<Menu>
 									<MenuButton
@@ -104,8 +108,8 @@ export default function Layout() {
 									Settings
 								</Link>
 							</MenuItem>
-							{
-							(userData?.userType === 1  || userData?.userType === 0) && (
+							{(userData?.userType === 1 ||
+								userData?.userType === 0) && (
 								<MenuItem>
 									<Link
 										to="/administration"
@@ -118,7 +122,6 @@ export default function Layout() {
 							<MenuItem onClick={onLogoutClick}>Logout</MenuItem>
 						</MenuList>
 					</Menu>
-					
 				</HStack>
 			</Flex>
 

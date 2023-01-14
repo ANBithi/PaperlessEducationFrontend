@@ -18,8 +18,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { getCurrentUser } from "../../Helpers/userHelper";
-const CommentsViewer = () => {
-	const currentUser = getCurrentUser();
+const CommentBox = ({ currentUser }) => {
+	const onCommentPost = () => {};
 	return (
 		<VStack w="full">
 			<HStack w="full">
@@ -33,8 +33,8 @@ const CommentsViewer = () => {
 				<HStack w="900px" bg="blackAlpha.100" rounded="20px">
 					<Textarea
 						style={{ margin: "8px" }}
-            minHeight="4px"
-            py = "0"
+						minHeight="4px"
+						py="0"
 						variant="unstyled"
 						placeholder="Add a comment..."
 						w="full"
@@ -115,9 +115,9 @@ const CommentsViewer = () => {
 									})} */}
 
 				<Button
-				//onClick={onPostClick}
-				//isDisabled={postDisable}
-        rounded= "50px"
+					onClick={onCommentPost}
+					//isDisabled={postDisable}
+					rounded="50px"
 				>
 					<Icon as={CheckIcon}></Icon>
 				</Button>
@@ -126,4 +126,4 @@ const CommentsViewer = () => {
 	);
 };
 
-export default CommentsViewer;
+export default CommentBox;

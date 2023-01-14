@@ -4,9 +4,9 @@ import CustomPopover from "../HelperComponents/CustomPopover";
 import ReactionsTrigger from "./ReactionsTrigger";
 import ReactionsView from "./ReactionsView";
 
-const Reactions = ({parentId}) => {
-    const reactionsTrigger = <ReactionsTrigger/>;
-    const reactionsView = <ReactionsView parentId = {parentId}/>;
+const Reactions = ({parentId, userReaction, setUserReaction, onReactionClicked}) => {
+    const reactionsTrigger = <ReactionsTrigger userReaction={userReaction}/>;
+    const reactionsView = <ReactionsView  setUserReaction={setUserReaction}userReaction={userReaction} parentId = {parentId} onReactionClicked = {onReactionClicked}/>;
 	return (
             <CustomPopover
              trigger = "hover"
