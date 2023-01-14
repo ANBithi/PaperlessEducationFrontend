@@ -11,9 +11,7 @@ const ReactionsTrigger = ({userReaction}) => {
 		setIcon(found);		
 	}, [userReaction])
 	return (
-		<HStack
-			
-			w="200px"
+		<HStack						
 			justify="center"
 			align="center"
 			color={icon !== undefined? icon.color: 'primary.900'}

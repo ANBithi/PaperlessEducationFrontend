@@ -15,3 +15,8 @@
 html{
   overflow: hidden;
 }
+
+.comment-item-footer {
+  transition: opacity .3s;
+
+}

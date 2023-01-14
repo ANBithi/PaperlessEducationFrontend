@@ -18,8 +18,27 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { getCurrentUser } from "../../Helpers/userHelper";
-const CommentBox = ({ currentUser }) => {
-	const onCommentPost = () => {};
+import { useState } from "react";
+import { postService } from "../../services/post.service";
+const CommentBox = ({ currentUser, postId }) => {
+	const [commentContent, setCommentContent] = useState("");
+	const onCommentPost = () => {
+		let postPayload = {
+			content: commentContent,
+			parentId: postId,
+		};
+		postService.postComment(postPayload).then((response) => {
+			if (response === true) {
+				console.log("posted");
+				setCommentContent("");
+			} else {
+				console.log("failed");
+			}
+		});
+	};
+	const onTextAreaChange = (e) => {
+		setCommentContent(e.target.value);
+	};
 	return (
 		<VStack w="full">
 			<HStack w="full">
@@ -30,8 +49,9 @@ const CommentBox = ({ currentUser }) => {
 					src="https://bit.ly/broken-link"
 					mb="5px"
 				/>
-				<HStack w="900px" bg="blackAlpha.100" rounded="20px">
+				<HStack w="100%" bg="blackAlpha.100" rounded="20px">
 					<Textarea
+						value={commentContent}
 						style={{ margin: "8px" }}
 						minHeight="4px"
 						py="0"
@@ -42,7 +62,7 @@ const CommentBox = ({ currentUser }) => {
 						resize="none"
 						//value={textAreaVal}
 						name="postDescription"
-						//	onChange={onTextAreaChange}
+						onChange={onTextAreaChange}
 					/>
 					<Circle
 						p="8px"

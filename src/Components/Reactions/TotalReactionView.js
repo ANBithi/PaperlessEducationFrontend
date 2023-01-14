@@ -31,13 +31,14 @@ function TotalReactionView({
 
 	return (
 		<HStack
+            className="reactions-list"
 			alignSelf="start"
 			py="6px"
 			px="8px"
 			borderRadius="4px"
 			_hover={{ cursor: "pointer", backgroundColor: "primary.100" }}
 			onClick={onReactionsClick}
-			style={{ marginLeft: "46px" }}
+			style={{ marginLeft: "-6px" }}
 		>
 			{foundReactions.length > 0 && (
 				<>
