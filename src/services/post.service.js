@@ -31,5 +31,28 @@ async function getSingle (id) {
 		return await response.json();
 	}
 }
+async function addReaction (reaction) {
+    let user = getCurrentUser();
+    let request = {...reaction, "createdBy" : user.id};
+    console.log(request);
+	let response =  await fetch("http://localhost:5000/api/post/addReaction",{
+		method: "POST",
+		headers: {'Content-Type': 'application/json'}, 
+		body: JSON.stringify(request)
+	  })
+	  if (response.ok) {
+		return await response.json();
+	}
+}
+async function getAllReactions (parentId) {
+	let response =  await fetch(`http://localhost:5000/api/post/getAllReactions?parentId=${parentId}`,{
+		method: "GET",
+		headers: {'Content-Type': 'application/json'}, 
+	  })
+	  if (response.ok) {
+		return await response.json();
+	}
+}
 
-export const postService = {addPost, getAllPost, getSingle}
+
+export const postService = {addPost, getAllPost, getSingle, addReaction, getAllReactions}

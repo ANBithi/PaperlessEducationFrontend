@@ -21,6 +21,7 @@ import Reactions from "../Reactions/Reactions";
 import Comment from "../Comments/Comment";
 import CommentsViewer from "../Comments/CommentsViewer";
 import Comments from "../Comments/Comments";
+import TotalReactionView from "../Reactions/TotalReactionView";
 
 const PostViewer = ({ courseId, allPost, fetchData }) => {
 	const currentUser = getCurrentUser() ;
@@ -137,9 +138,10 @@ const PostViewer = ({ courseId, allPost, fetchData }) => {
 									);
 								})}
 							</Box>
+								<TotalReactionView parentId={post.id}></TotalReactionView>
 								<Divider mx = {2}  h = "1px" bg = "primary.200" border = "0px"></Divider>
 								<HStack justify="start" w = "full">
-									<Reactions></Reactions>
+									<Reactions parentId= {post.id}></Reactions>
 									<Comments handleEvent = {onCommentsClick} post = {post.id} ></Comments>
 								</HStack>
 								{

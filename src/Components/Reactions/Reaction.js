@@ -1,5 +1,4 @@
-import { background, Center } from "@chakra-ui/react";
-import { faCake } from "@fortawesome/free-solid-svg-icons";
+import { Center } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Reaction = ({ reaction, isSelected, handleOnClicked }) => {
@@ -15,6 +14,7 @@ const Reaction = ({ reaction, isSelected, handleOnClicked }) => {
 				handleOnClicked(reaction.id);
 			}}
 		>
+			
 			<FontAwesomeIcon
 				icon={isSelected === true ? reaction.iconFilled : reaction.icon}
 			/>
