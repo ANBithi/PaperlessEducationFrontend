@@ -31,11 +31,10 @@ import { ChatDrawer } from "./Chat/ChatDrawer";
 import dropboxService from "../../services/dropbox.service";
 import { postService } from "../../services/post.service";
 import { getCurrentUserId, getFileType } from "../../Helpers/userHelper";
-import PostViewer from "../Post/PostViewer";
 import { chatService } from "../../services/chat.service";
 import ShowCounter from "../ShowCounter";
 import { FACULTY_NAV } from "../NavBar/navigationData";
-import PostsViewer from "../Post/PostsViewer";
+import PostViewerList from "../Post/PostViewerList";
 
 const CourseDetails = () => {
 	const { id } = useParams();
@@ -162,8 +161,9 @@ const CourseDetails = () => {
 		>
 			<Flex layerStyle="pageStyle" justify="center">
 				<VStack w="90%">
-					<Center w="full" bg="blue.500" rounded="5px">
+					<Center w="full" bg="blue.500" color = "background.50" rounded="16px">
 						<Image
+							roundedLeft="16px"
 							w="100%"
 							h="250px"
 							objectFit="cover"
@@ -187,19 +187,16 @@ const CourseDetails = () => {
 							</Text>
 						</VStack>
 					</Center>
-					<HStack w="full">
+					<HStack w="full" >
 						<VStack w="full">
 							<Box
-								w="full"
-								alignSelf="flex-end"
-								mt="5%"
-								p={5}
-								rounded="5px"
-								border="1px solid"
-								borderColor="primary.200"
+								layerStyle="createPostStyle"
 							>
 								<Textarea
+									rounded= "16px"
+									resize= "none"
 									pt={3}
+									bg= "background.50"
 									placeholder="type something.."
 									size="sm"
 									value={textAreaVal}
@@ -257,7 +254,7 @@ const CourseDetails = () => {
 										);
 									})}
 
-								<HStack pt={3} w="full" justify="space-between">
+								<HStack marginTop="16px" w="full" justify="space-between">
 									<HStack>
 										<Circle
 											onClick={onAttachmentClick}
@@ -288,12 +285,12 @@ const CourseDetails = () => {
 									</Button>
 								</HStack>
 							</Box>
-							<PostsViewer
+							<PostViewerList
 								courseId={id}
 								allPost={allPost}
 								setAllPost={setAllPost}
 								fetchData={fetchPostData}
-							></PostsViewer>
+							></PostViewerList>
 						</VStack>
 						<VStack
 							w="90px"

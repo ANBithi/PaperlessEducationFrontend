@@ -129,12 +129,54 @@ const theme = extendTheme(
 				fontSize: "14px",
 				pb: "1%",
 			},
+			responseBubbleStyle : {
+				background:"background.50",
+				padding : "12px" ,
+				rounded : "20px",
+				minW : "65%",
+
+			},
+			responseContentStyle : {
+				fontSize : "16px",
+			},
+			responseItemFooterStyle : {
+				w : "full",
+				fontSize : "14px",
+				paddingLeft : "12px"
+			},
+			responseTextareaStyle : {
+				paddingLeft: '8px',
+				paddingRight: '8px',				
+				w : "full",
+				size : "sm",
+				resize : "none",
+			},
+			postViewerStyle : {
+				width : "full",
+			boxShadow : "md",
+			alignSelf : "flex-end",
+			bg : "background.100",
+			rounded : "16px",
+			},
+			createPostStyle : {
+				w : "full", 
+				alignSelf : "flex-end",
+				boxShadow  : "md",
+				rounded : "16px",
+				bg : "background.100",
+				padding : "20px",
+				marginTop : "32px"
+			},
+			responseAuthorStyle : {
+				fontSize : "12px",
+				fontWeight : "bold",
+			},
 			pageStyle: {
 				height: "calc(100% - 80px)",
 				overflow: "auto",
 				p: "2%",
 				width: "100%",
-				bg: "primary.50",
+				bg: "background.50",
 				color: "primary.900",
 				".chakra-ui-dark &": {
 					bg: "primary.800",
@@ -181,6 +223,11 @@ const theme = extendTheme(
 				800: "#1c2531",
 				900: "#050c15",
 			},
+			background : {
+				50 : "#ffffff",
+				100  : "#f5f6fa",
+				200 : "#eef1f6",
+			}
 		},
 		fonts: {
 			heading: `Poppins, ${base.fonts?.heading}`,

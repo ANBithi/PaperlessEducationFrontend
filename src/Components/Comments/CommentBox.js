@@ -40,7 +40,7 @@ const CommentBox = ({ currentUser, postId }) => {
 		setCommentContent(e.target.value);
 	};
 	return (
-		<VStack w="full">
+		<VStack w="full" paddingX = "20px" paddingBottom = "12px">
 			<HStack w="full">
 				<Avatar
 					alignSelf="start"
@@ -49,17 +49,13 @@ const CommentBox = ({ currentUser, postId }) => {
 					src="https://bit.ly/broken-link"
 					mb="5px"
 				/>
-				<HStack w="100%" bg="blackAlpha.100" rounded="20px">
+				<HStack w="100%" rounded="24px"  bg = "background.50">
 					<Textarea
+						placeholder  = "Add a comment..."
 						value={commentContent}
-						style={{ margin: "8px" }}
-						minHeight="4px"
-						py="0"
-						variant="unstyled"
-						placeholder="Add a comment..."
-						w="full"
-						size="xs"
-						resize="none"
+						rows='1'
+						variant = "unstyled"
+						layerStyle = "responseTextareaStyle"
 						//value={textAreaVal}
 						name="postDescription"
 						onChange={onTextAreaChange}
@@ -138,6 +134,9 @@ const CommentBox = ({ currentUser, postId }) => {
 					onClick={onCommentPost}
 					//isDisabled={postDisable}
 					rounded="50px"
+					height='48px'
+					width='48px'
+
 				>
 					<Icon as={CheckIcon}></Icon>
 				</Button>

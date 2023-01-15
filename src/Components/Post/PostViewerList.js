@@ -5,7 +5,7 @@ import { getCurrentUser } from "../../Helpers/userHelper";
 
 import PostViewer from "./PostViewer";
 
-const PostsViewer = ({ courseId, allPost, fetchData }) => {
+const PostViewerList = ({ courseId, allPost, fetchData }) => {
 	const currentUser = getCurrentUser();
 
 	return (
@@ -13,7 +13,7 @@ const PostsViewer = ({ courseId, allPost, fetchData }) => {
 			onDataFetched={fetchData}
 			isEmpty={allPost === undefined || allPost?.length === 0}
 		>
-			<VStack w="full" style={{ marginBottom: "5%", marginTop: "5%" }}>
+			<VStack paddingY = "32px" w="full" spacing= "32px">
 				{allPost.map((post) => {
 					return (
 						<PostViewer
@@ -27,4 +27,4 @@ const PostsViewer = ({ courseId, allPost, fetchData }) => {
 		</DataFetcher>
 	);
 };
-export default PostsViewer;
+export default PostViewerList;

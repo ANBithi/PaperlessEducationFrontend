@@ -61,7 +61,9 @@ const CommentItem = ({ comment, currentUser }) => {
 	};
 
 	return (
-		<HStack w="full">
+		<HStack w="full" paddingBottom="16px"
+		paddingX="16px"
+		rounded="10px">
 			<Avatar
 				alignSelf="start"
 				size="xs"
@@ -69,16 +71,20 @@ const CommentItem = ({ comment, currentUser }) => {
 				src="https://bit.ly/broken-link"
 				mb="5px"
 			/>
-			<VStack  m={0} w={"100%"} align={"start"}>
-				<Text> {comment.createdBy} </Text>
-				<Text> {comment.content} </Text>
+			<VStack  m={0} w={"100%"}
+			 align="start">
+				<VStack layerStyle="responseBubbleStyle" align= "start">
+				<Text layerStyle= "responseAuthorStyle"> {comment.createdBy} </Text>
+				<Text layerStyle= "responseContentStyle"> {comment.content} </Text>
+				</VStack>
 
 				{
                  (
 					<>
 						<HStack className="comment-item-footer" style={{
-                            opacity : dataLoaded === true? 1: 0
-                        }} w="full">
+                            opacity : dataLoaded === true? 1: 0, 
+							marginTop : "0"
+                        }} layerStyle = "responseItemFooterStyle">
 							<HStack justify="start">
 								<Reactions
 									onReactionClicked={onReactionClicked}

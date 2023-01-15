@@ -17,10 +17,7 @@ import DataFetcher from "../DataFetcher";
 import { getCurrentUser } from "../../Helpers/userHelper";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import ImageViewer from "./ImageViewer";
-import Reactions from "../Reactions/Reactions";
-import Comment from "../Comments/CommentItem";
-import CommentsViewer from "../Comments/CommentBox";
-import Comments from "../Comments/CommentAction";
+import moment from "moment";
 import TotalReactionView from "../Reactions/TotalReactionView";
 import CommentAction from "../Comments/CommentAction";
 import CommentBox from "../Comments/CommentBox";
@@ -28,6 +25,7 @@ import CommentMetadata from "../Comments/CommentMetadata";
 import CommentsList from "../Comments/CommentsList";
 import CommentContents from "../Comments/CommentContents";
 import ReactionsTrigger from "../Reactions/ReactionsTrigger";
+import PostActions from "./PostActions";
 const PostViewer = ({ currentUser, post }) => {
 	const [showComments, setShowComments] = useState(false);
 	const [userReaction, setUserReaction] = useState();
@@ -74,82 +72,91 @@ const PostViewer = ({ currentUser, post }) => {
 	};
 	return (
 		<VStack
-			w="full"
-			boxShadow="md"
-			alignSelf="flex-end"
-			p={2}
 			key={post.id}
-			m="5%,5%, 5%, 5%"
-			rounded="4px"			
+			layerStyle="postViewerStyle"
 			borderColor={
 				`${currentUser?.firstName} ${currentUser.lastName}` ===
 				post.createdBy
 					? "blue.200"
 					: "primary.200"
 			}
-			fontSize="16px"
-			style={{ marginBottom: "2%", marginTop: "2%" }}
 		>
-			{" "}
-			<HStack w="50%" alignSelf="flex-start">
-				<Avatar
-					alignSelf="center"
-					size="md"
-					name={post.creatorName}
-					src="https://bit.ly/broken-link"
-					mb="5px"
-				/>
-				<VStack align="start">
-					<Text fontSize="12px" fontWeight="bold" textAlign="start">
-						{post.creatorName}
+			<Box width="full" padding="20px" paddingBottom="0px">
+				<HStack w="50%" alignSelf="flex-start">
+					<Avatar
+						alignSelf="center"
+						size="md"
+						name={post.creatorName}
+						src="https://bit.ly/broken-link"
+						mb="5px"
+					/>
+					<VStack align="start">
+						<Text layerStyle="responseAuthorStyle">
+							{post.creatorName}
+						</Text>
+						<Text
+							fontSize="10px"
+							fontWeight="bold"
+							textAlign="start"
+						>
+							{moment(post.createdAt).fromNow()}
+						</Text>
+					</VStack>
+				</HStack>
+				<HStack w="full" align="center" p={2}>
+					<Text
+						flex="1"
+						ml="48px"
+						textAlign="start"
+						layerStyle="responseContentStyle"
+					>
+						{post.postDescription}
 					</Text>
-					<Text fontSize="10px" fontWeight="bold" textAlign="start">
-						{new Date(post.createdAt).toLocaleString()}
-					</Text>
-				</VStack>
-			</HStack>
-			<HStack w="full" align="center" p={2}>
-				<Text flex="1" ml="48px" textAlign="start">
-					{post.postDescription}
-				</Text>
-			</HStack>
-			<Box style={{ marginLeft: "56px" }}>
-				{post.attachments?.length > 0 &&
-					post.attachments.map((attach, i) => {
-						return (
-							<Box
-								fontSize="12px"
-								fontWeight="bold"
-								key={i}
-								alignSelf="flex-start"
-							>
-								{attach.type === 1 && (
-									<ImageViewer url={attach.metadata.url} />
-								)}
-								{attach.type === 2 && (
-									<VideoPlayer
-										fileFormat={attach.fileFormat}
-										url={attach.metadata.url}
-									/>
-								)}
+				</HStack>
+				<Box style={{ marginLeft: "56px" }}>
+					{post.attachments?.length > 0 &&
+						post.attachments.map((attach, i) => {
+							return (
+								<Box
+									fontSize="12px"
+									fontWeight="bold"
+									key={i}
+									alignSelf="flex-start"
+								>
+									{attach.type === 1 && (
+										<ImageViewer
+											url={attach.metadata.url}
+										/>
+									)}
+									{attach.type === 2 && (
+										<VideoPlayer
+											fileFormat={attach.fileFormat}
+											url={attach.metadata.url}
+										/>
+									)}
 
-								{attach.type === 3 && (
-									<Link href={attach.metadata.url} isExternal>
-										{attach.metadata.name}
-									</Link>
-								)}
+									{attach.type === 3 && (
+										<Link
+											href={attach.metadata.url}
+											isExternal
+										>
+											{attach.metadata.name}
+										</Link>
+									)}
 
-								{(attach.type === 0 || attach.type > 3) && (
-									<Link href={attach.metadata.url} isExternal>
-										{attach.metadata.name}
-									</Link>
-								)}
-							</Box>
-						);
-					})}
-			</Box>
-			<VStack w='full'>
-				<HStack paddingLeft={'48px'} w="full" justify="space-between">
+									{(attach.type === 0 || attach.type > 3) && (
+										<Link
+											href={attach.metadata.url}
+											isExternal
+										>
+											{attach.metadata.name}
+										</Link>
+									)}
+								</Box>
+							);
+						})}
+				</Box>
+				<HStack paddingLeft={"48px"} w="full" justify="space-between">
 					<TotalReactionView
 						reactions={reactions}
 						currentUser={currentUser}
@@ -157,25 +164,19 @@ const PostViewer = ({ currentUser, post }) => {
 						setUserReaction={setUserReaction}
 					></TotalReactionView>
 					{comments.length > 0 && (
-						<CommentMetadata label='Comment' comments={comments} />
+						<CommentMetadata label="Comment" comments={comments} />
 					)}
 				</HStack>
-				<Divider mx={2} h="1px" bg="primary.200" border="0px"></Divider>
-				<HStack justify="space-evenly" w="full">					
-					<Reactions
-						onReactionClicked={onReactionClicked}
-						setUserReaction={setUserReaction}
-						userReaction={userReaction}
-						parentId={post.id}
-						reactionsTrigger={<ReactionsTrigger userReaction={userReaction}/>}
-					></Reactions>
+			</Box>
+			<VStack w="full">
+				<PostActions
+					onReactionClicked={onReactionClicked}
+					setUserReaction={setUserReaction}
+					userReaction={userReaction}
+					postId={post.id}
+					onCommentsClick={onCommentsClick}
+				/>
 
-					<CommentAction
-						handleEvent={onCommentsClick}
-						post={post.id}
-						label={"Comments"}
-					></CommentAction>
-				</HStack>
 				<CommentContents
 					isVisible={showComments}
 					parentId={post.id}
