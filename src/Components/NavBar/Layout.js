@@ -8,6 +8,8 @@ import {
 	MenuList,
 	MenuButton,
 	Icon,
+	Text,
+	Box,
 } from "@chakra-ui/react";
 //import Logo from '../public/logo.svg';
 import React, { useEffect, useState } from "react";
@@ -16,6 +18,7 @@ import { ChevronDownIcon, BellIcon } from "@chakra-ui/icons";
 import { DATA, FACULTY_NAV, STUDENT_NAV } from "./navigationData";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../Helpers/userHelper";
+import Notification from "../Notifications/Notification";
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -44,7 +47,7 @@ export default function Layout() {
 			>
 				{/* <Image src={Logo.src} h="50px" /> */}
 
-				<HStack as="nav" spacing="10">
+				<HStack spacing="10">
 					{(userData?.userType === 2
 						? FACULTY_NAV
 						: userData?.userType === 3
@@ -88,40 +91,50 @@ export default function Layout() {
 						</HStack>
 					))}
 				</HStack>
+
 				<HStack>
-					<Menu>
-						<MenuButton
-							style={{ marginInlineStart: "-2rem" }}
-							m={0}
-							as={Button}
-							variant="nav"
-						>
-							<Avatar
-								size="sm"
-								name={`${userData?.firstName} ${userData?.lastName}`}
-								src="https://bit.ly/broken-link"
-							/>
-						</MenuButton>
-						<MenuList>
-							<MenuItem>
-								<Link to="/settings" style={{ width: "100%" }}>
-									Settings
-								</Link>
-							</MenuItem>
-							{(userData?.userType === 1 ||
-								userData?.userType === 0) && (
+					<Notification />
+
+					<HStack>
+						<Menu>
+							<MenuButton								
+								m={0}
+								as={Button}
+								variant="nav"
+							>
+								<Avatar
+									size="sm"
+									name={`${userData?.firstName} ${userData?.lastName}`}
+									src="https://bit.ly/broken-link"
+								/>
+							</MenuButton>
+							<MenuList>
 								<MenuItem>
 									<Link
-										to="/administration"
+										to="/settings"
 										style={{ width: "100%" }}
 									>
-										Administration
+										Settings
 									</Link>
 								</MenuItem>
-							)}
-							<MenuItem onClick={onLogoutClick}>Logout</MenuItem>
-						</MenuList>
-					</Menu>
+
+								{(userData?.userType === 1 ||
+									userData?.userType === 0) && (
+									<MenuItem>
+										<Link
+											to="/administration"
+											style={{ width: "100%" }}
+										>
+											Administration
+										</Link>
+									</MenuItem>
+								)}
+								<MenuItem onClick={onLogoutClick}>
+									Logout
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</HStack>
 				</HStack>
 			</Flex>
 

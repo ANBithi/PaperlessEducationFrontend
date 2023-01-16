@@ -2,23 +2,25 @@ import {
 	Popover,
 	PopoverTrigger,
 	PopoverContent,
-    HStack,
+	HStack,
 } from "@chakra-ui/react";
 
-const CustomPopover = ({popoverTrigger, popoverContent, trigger, placement}) => {
+const CustomPopover = ({
+	popoverTrigger,
+	popoverContent,
+	trigger,
+	placement,
+}) => {
 	return (
 		<Popover
-		placement={placement}
-        trigger={trigger}
-        >
-           <PopoverTrigger>
-            <HStack>
-            {popoverTrigger}
-            </HStack>
-           </PopoverTrigger>
-           <PopoverContent width='auto'>
-            {popoverContent}
-           </PopoverContent>
+			placement={placement}
+			trigger={trigger}
+			returnFocusOnClose={false}
+		>
+			<PopoverTrigger>
+				<HStack>{popoverTrigger}</HStack>
+			</PopoverTrigger>
+			<PopoverContent width="auto">{popoverContent}</PopoverContent>
 		</Popover>
 	);
 };

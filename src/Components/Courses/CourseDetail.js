@@ -167,7 +167,7 @@ const CourseDetails = () => {
 							w="100%"
 							h="250px"
 							objectFit="cover"
-							src="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171__340.jpg"
+							src={sectionDetail?.courseCover}
 						/>
 						<VStack>
 							<Text

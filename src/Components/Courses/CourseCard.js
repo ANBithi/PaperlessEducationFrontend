@@ -19,54 +19,56 @@ export function CourseCard({
 	endTime,
 	sectionId,
 	type,
+	courseCover
 }) {
 	const navigate = useNavigate();
 	const onOpenCourse = () => {
 		navigate(`${sectionId}`);
 	};
 
-	const onEnrollClick = () => {
-		
-	}
+	const onEnrollClick = () => {};
 
 	return (
 		<Center as="section">
-			<Box maxW="420px" bg="white" p="3" rounded="5px">
+			<Box w="350px" bg="background.100" boxShadow="md" rounded="12px">
 				<Image
 					objectFit="cover"
-					h="150px"
+					h="170px"
+					roundedTop="12px"
 					w="full"
-					src="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171__340.jpg"
+					src={courseCover}
 				/>
-				<HStack>
-					<Text fontWeight="bold">Time:</Text>
-					<Text>
-						{" "}
-						{startTime} - {endTime}
-					</Text>
-				</HStack>
-				<HStack mt="5" spacing="3">
-					{[courseCode, section].map((item) => (
-						<Tag key={item} variant="outline">
-							{item}
-						</Tag>
-					))}
-				</HStack>
-				<Heading my="4" size="lg">
-					{courseTitle}
-				</Heading>
-				<Text>{courseDes}</Text>
-				<Center my="6">
-					{type === "enroll" ? (
-						<Button colorScheme="blue" onClick={onEnrollClick}>
-							Enroll Course
-						</Button>
-					) : (
-						<Button colorScheme="blue" onClick={onOpenCourse}>
-							Open Course
-						</Button>
-					)}
-				</Center>
+				<Box padding="12px">
+					<HStack>
+						<Text fontWeight="bold">Time:</Text>
+						<Text>
+							{" "}
+							{startTime} - {endTime}
+						</Text>
+					</HStack>
+					<HStack mt="5" spacing="3">
+						{[courseCode, section].map((item) => (
+							<Tag key={item} variant="outline">
+								{item}
+							</Tag>
+						))}
+					</HStack>
+					<Heading my="4" size="lg">
+						{courseTitle}
+					</Heading>
+					<Text>{courseDes}</Text>
+					<Center my="6">
+						{type === "enroll" ? (
+							<Button colorScheme="blue" onClick={onEnrollClick}>
+								Enroll Course
+							</Button>
+						) : (
+							<Button colorScheme="blue" onClick={onOpenCourse}>
+								Open Course
+							</Button>
+						)}
+					</Center>
+				</Box>
 			</Box>
 		</Center>
 	);

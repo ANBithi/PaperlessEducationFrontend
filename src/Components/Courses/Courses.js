@@ -1,4 +1,4 @@
-import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import courseService from "../../services/course.service";
 import DataFetcher from "../DataFetcher";
@@ -12,25 +12,34 @@ const Courses = () => {
 		setAllCourse(data.data);
 	};
 	return (
-		<DataFetcher onDataFetched={fetchData} isEmpty={allCourse === undefined || allCourse?.length === 0}>
+		<DataFetcher
+			onDataFetched={fetchData}
+			isEmpty={allCourse === undefined || allCourse?.length === 0}
+		>
 			<Flex layerStyle="pageStyle">
 				<VStack w="full" align="flex-start">
 					<Text layerStyle="sectionHeaderStyle">Courses</Text>
+					<Grid templateColumns="repeat(3, 1fr)" gap="32px">
+					{allCourse?.map((course, index) => {
+							return (
+								<GridItem>
+								<CourseCard
+									key={index}
+									courseTitle={course.name}
+									section={course.sectionNumber}
+									courseDes={course.courseDescription}
+									courseCode={course.courseCode}
+									startTime={course.startTime}
+									endTime={course.endTime}
+									sectionId={course.sectionId}
+									courseCover={course.courseCover}
+								/>
+								</GridItem>
+							);
+						})}
+					</Grid>
 					<VStack>
-						{allCourse?.map((course, index) => {
-                           return (
-                            <CourseCard
-                            key = {index}
-							courseTitle={course.name}
-							section={course.sectionNumber}
-							courseDes={course.courseDescription}
-							courseCode={course.courseCode}
-                            startTime = {course.startTime}
-                            endTime = {course.endTime}
-                            sectionId = {course.sectionId}
-						/>
-                           )
-                        })}
+						
 					</VStack>
 				</VStack>
 			</Flex>

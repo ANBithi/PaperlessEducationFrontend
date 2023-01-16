@@ -16,7 +16,7 @@ const LoadingState = () => {
 
 const EmptyState = ({ icon, message }) => {
 	return (
-		<Center height={"100%"} width={"100%"}>
+		<Center paddingY="40px" height={"100%"} width={"100%"}>
 			<VStack>
 				<div style={{ opacity: "0.5" }}>
 					<EmptyIcon></EmptyIcon>

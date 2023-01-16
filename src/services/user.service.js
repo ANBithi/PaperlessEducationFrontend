@@ -48,6 +48,20 @@ async function changePassword(oldPassword, newPassword) {
 	return await response.json();
   }
    }
-const userService = {changePassword, createUser, addStudents}
+
+   async function updateUserInteraction(type) {
+	let user = getCurrentUser();
+	let request = {createdById: user.id, type};
+	console.log(request);
+	let response = await fetch("http://localhost:5000/api/user/userInteraction", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(request),
+	});
+	if (response.ok) {
+		return await response.json();
+	}
+}
+const userService = {changePassword, createUser, addStudents, updateUserInteraction}
 
 export default userService;

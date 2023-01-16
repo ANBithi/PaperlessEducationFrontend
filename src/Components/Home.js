@@ -7,7 +7,7 @@ import { notificationService } from "../services/notification.service";
 
 const Home = () =>{   
     const [currentUser, setCurrentUser] =  useState(getCurrentUser());
-    const [allNotifications, setAllNotifications] = useState([]);
+    const [allNotifications, setAllNotifications] = useState();
     const navigate = useNavigate(); 
     useEffect(()=>{
         notificationService.getNotifications(getCurrentUserId(), "post").then(p=>{
@@ -26,10 +26,10 @@ const Home = () =>{
         <Text fontWeight="bold">Hello! {currentUser?.firstName} {currentUser?.lastName}</Text>
         </Box>
         <Box w ="95%" rounded = "5px"  mt = "12px" p = "12px">
-        <Text fontWeight="bold">{allNotifications.length > 0 ? `${allNotifications.length} Notifications` : "No Notification"} </Text>
+        <Text fontWeight="bold">{allNotifications?.newNotifications.length > 0 ? `${allNotifications?.newNotifications.length} Notifications` : "No Notification"} </Text>
         </Box>
         
-        {
+        {/* {
             allNotifications.map((notification) => {
                 return <Box w ="95%" bg='primary.50' border = "1px solid" rounded = "5px" _hover={{cursor : "pointer"}} style={{
                     margin:'12px 12px 6px 12px',
@@ -39,7 +39,7 @@ const Home = () =>{
                     <Text key = {notification.id}> <strong>{notification.creatorName}</strong> posted on <strong>{notification.courseName}</strong>({notification.section}) </Text>
                 </Box>
             })
-        }
+        } */}
         </VStack>
        </Flex>
     )

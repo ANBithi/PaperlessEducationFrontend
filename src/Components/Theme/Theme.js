@@ -167,6 +167,14 @@ const theme = extendTheme(
 				padding : "20px",
 				marginTop : "32px"
 			},
+			notificationListStyle : {
+				width: '300px',
+				height: '80vh',
+				background: 'background.100',
+				boxShadow: 'md',
+				padding: '16px',
+				rounded: '8px'
+			},
 			responseAuthorStyle : {
 				fontSize : "12px",
 				fontWeight : "bold",
