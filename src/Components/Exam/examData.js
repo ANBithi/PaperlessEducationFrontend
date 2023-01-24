@@ -1,23 +1,23 @@
 export const TYPE_OF_EXAMS = [
     {
-        examType : "Mid Term",
-        type : 0,
+        examTitle : "Mid Term",
+        examType : 0,
         totalMarks : "25",
         answerType : "Broad Question",
         duration : "1 Hour",
-        countPercentile: "100%"
+        countPercentile: 0
     },
     {
-        examType : "Final",
-        type : 1,
+        examTitle : "Final",
+        examType : 1,
         totalMarks : "40",
         answerType : "Broad Question",
         duration : "2 Hour",
-        countPercentile: "100%"
+        countPercentile: 0
     },
     {
-        examType : "Quiz",
-        type : 2,
+        examTitle : "Quiz",
+        examType : 2,
         totalMarks : "15",
     },
 
@@ -42,15 +42,19 @@ export const QUIZ_ANSWER_TYPE_OPTIONS = [
 ]
 export const QUIZ_COUNT_PERCENTILE_OPTIONS = [
     {
-        title : "100%",
-        value : 0,
+        title : "Full",
+        value: 0
+    },
+    {
+        title : "Average of Two",
+        value: 1
     },
     {
         title : "Best One",
-        value : 1,
+        value: 2
     },
     {
         title : "Average of all",
-        value : 2,
+        value : 3
     },
 ]

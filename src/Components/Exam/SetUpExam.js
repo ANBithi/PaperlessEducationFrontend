@@ -6,6 +6,7 @@ import { QUIZ_ANSWER_TYPE_OPTIONS, QUIZ_COUNT_PERCENTILE_OPTIONS, QUIZ_DURATION_
 import courseService from "../../services/course.service";
 import sectionService from "../../services/section.service";
 import CourseDetails from "../Courses/CourseDetail";
+import examService from "../../services/exam.service";
 
 const SetUpExam = () => {
     const { id } = useParams();
@@ -25,7 +26,11 @@ const SetUpExam = () => {
 		setExamMetadata(TYPE_OF_EXAMS[value]);
 	};
     const onCreateClick = () => {
-        console.log(examMetadata);
+        let request = {...examMetadata, courseName : sectionDetail.courseName,
+        sectionNumber : sectionDetail.sectionNumber, sectionId : id};
+        examService.addExamMetadata(request).then((d)=>{
+            console.log("added");
+        })
     }
     const onStartTimeChange = (e) => {
         let {name, value} = e.target;
@@ -75,7 +80,7 @@ const SetUpExam = () => {
                 w = "full"  spacing = "36px">
                     <HStack justify = "center" flex = "1" >
                     <Text>Exam:</Text>
-                <Text>{examMetadata.examType}</Text>
+                <Text>{examMetadata.examTitle}</Text>
                     </HStack>
                     <HStack justify = "center" flex = "1" >
                     <Text>Answer Type:</Text>
@@ -101,7 +106,7 @@ const SetUpExam = () => {
                     </HStack>
                     <HStack justify = "center" flex = "1" >
                     <Text>Count Percentile:</Text>
-                <Text>{examMetadata.countPercentile}</Text>
+                        <Text>{QUIZ_COUNT_PERCENTILE_OPTIONS[parseInt(examMetadata.countPercentile)]?.title}</Text>
                     </HStack>
                 </HStack>
                
@@ -119,10 +124,10 @@ const SetUpExam = () => {
                 {TYPE_OF_EXAMS.map((option) => {
 									return (
 										<option
-											key={option.type}
-											value={option.type}
+											key={option.examType}
+											value={option.examType}
 										>
-											{option.examType}
+											{option.examTitle}
 										</option>
 									);
 								})}
@@ -139,7 +144,7 @@ const SetUpExam = () => {
             <HStack w = "full" layerStyle={"inputStackStyle"}>
                 <Text layerStyle={"inputLabelStyle"}>Type of Answer</Text>
                 {
-                    examMetadata?.type === 2 ?
+                    examMetadata?.examType === 2 ?
                     <Select placeholder = "Select answer type" name = "answerType" onChange={onSelectChange} variant = "unstyled">
                         {QUIZ_ANSWER_TYPE_OPTIONS.map((option) => {
 									return (
@@ -160,7 +165,7 @@ const SetUpExam = () => {
             <HStack w = "full" layerStyle={"inputStackStyle"}>
                 <Text layerStyle={"inputLabelStyle"}>Duration</Text>
                 {
-                    examMetadata?.type === 2 ?
+                    examMetadata?.examType === 2 ?
                     <Select placeholder = "Select duration" variant = "unstyled" onChange={onSelectChange} name = "duration">
                      {QUIZ_DURATION_OPTIONS.map((option) => {
 									return (
@@ -180,7 +185,7 @@ const SetUpExam = () => {
             <HStack w = "full" layerStyle={"inputStackStyle"}>
                 <Text layerStyle={"inputLabelStyle"}>Count Percentile</Text>
                 {
-                    examMetadata?.type === 2 ?
+                    examMetadata?.examType === 2 ?
                     <Select placeholder = "Select count percentile" onChange = {onSelectChange} variant = "unstyled" name = "countPercentile">
                         {QUIZ_COUNT_PERCENTILE_OPTIONS.map((option) => {
 									return (
@@ -194,7 +199,7 @@ const SetUpExam = () => {
 								})}
                     </Select>
                     :
-                    <Input variant = "unstyled" readOnly = {true} value = {examMetadata?.countPercentile}></Input>
+                    <Input variant = "unstyled" readOnly = {true} value = {QUIZ_COUNT_PERCENTILE_OPTIONS[examMetadata?.countPercentile]?.title}></Input>
                 }
             </HStack>
             <HStack alignSelf = "flex-end">
