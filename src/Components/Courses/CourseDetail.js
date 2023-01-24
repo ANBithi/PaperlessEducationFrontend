@@ -23,7 +23,7 @@ import {
 	BellIcon,
 } from "@chakra-ui/icons";
 import DataFetcher from "../DataFetcher";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import sectionService from "../../services/section.service";
 import PopoverInput from "./PopoverInput";
 import { CircleIcon } from "../../Icons/CircleIcon";
@@ -53,6 +53,7 @@ const CourseDetails = () => {
 	const [allPost, setAllPost] = useState([]);
 	const [messages, setMessages] = useState([]);
 	const socketConnectedRef = useRef(false);
+	const navigate = useNavigate();
 	const fetchData = async () => {
 		let res = await sectionService.getSectionDetail(id);
 		setSectionDetail(res.data);
@@ -154,13 +155,27 @@ const CourseDetails = () => {
 			console.log("uploadFile is null");
 		}
 	};
+	const onStartExamClick = () => {
+		navigate(`create-exam`);
+	}
 	return (
 		<DataFetcher
 			onDataFetched={fetchData}
 			isEmpty={sectionDetail === undefined || sectionDetail?.length === 0}
 		>
-			<Flex layerStyle="pageStyle" justify="center">
-				<VStack w="90%">
+			<Flex layerStyle="pageStyleSidePanel">
+				
+				<Box padding="20px" width="30%" maxW="300px">
+				<VStack width="full" layerStyle={"courseActivityStyle"}>
+					<Text>Course Activities</Text>
+					<Button onClick = {onStartExamClick}>Start Exam</Button>
+				</VStack>
+				
+				</Box>
+				
+				
+				<VStack padding="20px" align="start"  w="full"  overflow={"auto"}>
+					<VStack width="70%">
 					<Center w="full" bg="blue.500" color = "background.50" rounded="16px">
 						<Image
 							roundedLeft="16px"
@@ -331,6 +346,7 @@ const CourseDetails = () => {
 							<ShowCounter counter={newMessageCounter} />
 						)}
 					</HStack>
+					</VStack>
 				</VStack>
 				<ChatDrawer
 					onClose={onClose}
@@ -343,6 +359,7 @@ const CourseDetails = () => {
 					setNewMessageCounter={setNewMessageCounter}
 					newMessageCounter={newMessageCounter}
 				/>
+				
 			</Flex>
 		</DataFetcher>
 	);

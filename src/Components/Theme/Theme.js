@@ -105,7 +105,7 @@ const theme = extendTheme(
 				_hover: {
 					background: "white",
 					cursor: "pointer",
-				  },
+				},
 			},
 			navbarStyle: {
 				w: "100%",
@@ -129,55 +129,66 @@ const theme = extendTheme(
 				fontSize: "14px",
 				pb: "1%",
 			},
-			responseBubbleStyle : {
-				background:"background.50",
-				padding : "12px" ,
-				rounded : "20px",
-				minW : "65%",
-
+			responseBubbleStyle: {
+				background: "background.50",
+				padding: "12px",
+				rounded: "20px",
+				minW: "65%",
 			},
-			responseContentStyle : {
-				fontSize : "16px",
+			responseContentStyle: {
+				fontSize: "16px",
 			},
-			responseItemFooterStyle : {
-				w : "full",
-				fontSize : "14px",
-				paddingLeft : "12px"
+			responseItemFooterStyle: {
+				w: "full",
+				fontSize: "14px",
+				paddingLeft: "12px",
 			},
-			responseTextareaStyle : {
-				paddingLeft: '8px',
-				paddingRight: '8px',				
-				w : "full",
-				size : "sm",
-				resize : "none",
+			responseTextareaStyle: {
+				paddingLeft: "8px",
+				paddingRight: "8px",
+				w: "full",
+				size: "sm",
+				resize: "none",
 			},
-			postViewerStyle : {
-				width : "full",
-			boxShadow : "md",
-			alignSelf : "flex-end",
-			bg : "background.100",
-			rounded : "16px",
+			postViewerStyle: {
+				width: "full",
+				boxShadow: "md",
+				alignSelf: "flex-end",
+				bg: "background.100",
+				rounded: "16px",
 			},
-			createPostStyle : {
-				w : "full", 
-				alignSelf : "flex-end",
-				boxShadow  : "md",
-				rounded : "16px",
-				bg : "background.100",
-				padding : "20px",
-				marginTop : "32px"
+			courseActivityStyle: {
+				width: "20%",
+				spacing: "12px",
+				marginRight: "12px",
+				paddingY: "8px",
+				boxShadow: "md",
+				alignSelf: "start",
+				bg: "background.100",
+				rounded: "16px",
+				height: "100%"
 			},
-			notificationListStyle : {
-				width: '300px',
-				height: '80vh',
-				background: 'background.100',
-				boxShadow: 'md',
-				padding: '16px',
-				rounded: '8px'
+			createPostStyle: {
+				w: "full",
+				alignSelf: "flex-end",
+				boxShadow: "md",
+				rounded: "16px",
+				bg: "background.100",
+				padding: "20px",
+				marginTop: "32px",
 			},
-			responseAuthorStyle : {
-				fontSize : "12px",
-				fontWeight : "bold",
+			notificationListStyle: {
+				width: "300px",
+				height: "80vh",
+				background: "background.100",
+				boxShadow: "md",
+				padding: "16px",
+				rounded: "8px",
+				overflow : "auto",
+			},
+			responseAuthorStyle: {
+				fontSize: "12px",
+				fontWeight: "bold",
 			},
 			pageStyle: {
 				height: "calc(100% - 80px)",
@@ -191,6 +202,18 @@ const theme = extendTheme(
 					color: "primary.100",
 				},
 			},
+
+			pageStyleSidePanel: {
+				height: "calc(100% - 80px)",
+				width: "100%",
+				bg: "background.50",
+				color: "primary.900",
+				".chakra-ui-dark &": {
+					bg: "primary.800",
+					color: "primary.100",
+				}				
+			},
+
 			pageButtonStyle: {
 				pt: "2%",
 				pb: "2%",
@@ -198,9 +221,19 @@ const theme = extendTheme(
 			inputStackStyle: {
 				w: "full",
 				pb: ".5%",
+				bg: "background.100",
+				padding: "12px",
+				rounded: "16px",
+				boxShadow: "md",
+			},
+			inputLabelStyle : {
+				width : "40%",
+				fontWeight : "bold",
+				fontSize : "14px",
 			},
 			inputStyle: {
 				w: "70%",
+				
 			},
 		},
 		textStyles: {
@@ -231,11 +264,11 @@ const theme = extendTheme(
 				800: "#1c2531",
 				900: "#050c15",
 			},
-			background : {
-				50 : "#ffffff",
-				100  : "#f5f6fa",
-				200 : "#eef1f6",
-			}
+			background: {
+				50: "#ffffff",
+				100: "#f5f6fa",
+				200: "#eef1f6",
+			},
 		},
 		fonts: {
 			heading: `Poppins, ${base.fonts?.heading}`,

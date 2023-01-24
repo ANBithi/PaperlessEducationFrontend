@@ -48,7 +48,11 @@ const NotificationIcon = ({ handleEvent, notifications }) => (
 const Notification = () => {
 	const { isOpen, onToggle, onClose } = useDisclosure();
 	const [allNotifications, setAllNotifications] = useState();
+
+	
 	useEffect(() => {
+		const webSocket = new WebSocket(`ws://localhost:443/newNotification`);
+		webSocket.onmessage = handleNewNotification;
 		notificationService
 			.getNotifications(getCurrentUserId(), "post")
 			.then((p) => {
@@ -56,11 +60,21 @@ const Notification = () => {
 				setAllNotifications(p);
 			});
 	}, []);
+	const handleNewNotification = (event) => {
+		// let data = JSON.parse(event.data);
+	notificationService.getNotifications(getCurrentUserId(), "post").then((p)=>{
+		console.log("live update received");
+		setAllNotifications(p);
+	})
+	};
 	const onNotificationIconClick = () => {
 		userService.updateUserInteraction(0).then((d)=>{
 			if (d) {
-				var copy = {...allNotifications};
+				let copy = {...allNotifications};
 				copy.unreadCount = 0;
+				copy.oldNotifications = [...copy.oldNotifications, ...copy.newNotifications];
+				copy.newNotifications = [];
+				console.log(copy);
 				setAllNotifications(copy);
 			}
 			else {

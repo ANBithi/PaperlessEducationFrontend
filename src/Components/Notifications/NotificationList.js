@@ -1,9 +1,6 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUser, getCurrentUserId } from "../../Helpers/userHelper";
-import { notificationService } from "../../services/notification.service";
-
 const NotificationList = ({allNotifications}) => {
 	const navigate = useNavigate();
 
@@ -25,7 +22,7 @@ const NotificationList = ({allNotifications}) => {
 					<Box
 						key={notification.id}
 						rounded="8px"
-            backgroundColor='primary.100'
+            backgroundColor= 'primary.100'
 						_hover={{ cursor: "pointer" }}
             fontSize="14px"
             padding='8px'

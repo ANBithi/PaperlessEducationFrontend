@@ -1,5 +1,6 @@
 import { HStack, Flex, Button, useToast, Avatar, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { getCurrentUser } from "../../../Helpers/userHelper";
 import ManageProfileForm from "./ManageProfileForm";
 
 const ManageProfile = () => {
@@ -8,8 +9,7 @@ const ManageProfile = () => {
 	const [userData, setUserData] = useState();
 
 	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem("userDetails")));
-		console.log(userData);
+		setUserData(getCurrentUser());
 	}, []);
 	const onShowProfileEdit = () => {
 		setShowProfileEdit(true);
@@ -26,7 +26,7 @@ const ManageProfile = () => {
 							/>
 				<Text layerStyle="sectionHeaderStyle"  alignSelf= "center">{userData?.firstName} {userData?.lastName}</Text>
 				
-				<Button w="10%" hidden = {showProfileEdit} onClick={onShowProfileEdit} alignSelf= "right">
+				<Button w="10%" disabled = {showProfileEdit} onClick={onShowProfileEdit} alignSelf= "right">
 					Edit Profile
 				</Button>
 				{showProfileEdit === true && <ManageProfileForm />}

@@ -25,7 +25,7 @@ export default function Layout() {
 	const [userData, setUserData] = useState();
 
 	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem("userDetails")));
+		setUserData(getCurrentUser());
 		console.log(userData);
 	}, []);
 

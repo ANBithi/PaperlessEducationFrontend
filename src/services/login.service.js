@@ -16,13 +16,13 @@ async function logIn(user) {
     body: JSON.stringify(user)
   })
 
-  if (response.ok){
+  if (response.ok){    
     let loginResponse = await response.json();  
-    if (loginResponse.isAuthorized === true){
-      return({success: loginResponse.isAuthorized, user : loginResponse.user});  
+    if (loginResponse.success === true){
+      return({success: loginResponse.success, authData: loginResponse.authData});  
     }
     else {
-      return ({success : loginResponse.isAuthorized, message: loginResponse.message});
+      return ({success : loginResponse.success, message: loginResponse.message});
     }    
   }
   

@@ -1,3 +1,4 @@
+import { authHeader } from "../Helpers/authHeader";
 import { getCurrentUser } from "../Helpers/userHelper";
 async function addPost(post) {
 	let user = getCurrentUser();
@@ -5,7 +6,7 @@ async function addPost(post) {
 	console.log(request);
 	let response = await fetch("http://localhost:5000/api/post/add", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	});
 	if (response.ok) {
@@ -17,7 +18,7 @@ async function getAllPost(belongsTo) {
 		`http://localhost:5000/api/post/getAll?belongsTo=${belongsTo}`,
 		{
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
+			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	);
 	if (response.ok) {
@@ -30,7 +31,7 @@ async function getSingle(id) {
 		`http://localhost:5000/api/post/getSingle?postId=${id}`,
 		{
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
+			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	);
 	if (response.ok) {
@@ -43,7 +44,7 @@ async function addReaction(reaction) {
 	console.log(request);
 	let response = await fetch("http://localhost:5000/api/post/addReaction", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	});
 	if (response.ok) {
@@ -55,7 +56,7 @@ async function getAllReactions(parentId) {
 		`http://localhost:5000/api/post/getAllReactions?parentId=${parentId}`,
 		{
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
+			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	);
 	if (response.ok) {
@@ -68,7 +69,7 @@ async function getAllComments(parentId) {
 		`http://localhost:5000/api/post/getAllComments?parentId=${parentId}`,
 		{
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
+			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	);
 	if (response.ok) {
@@ -81,7 +82,7 @@ async function postComment(request) {
 	request = { ...request, createdById: user.id };
 	let response = await fetch("http://localhost:5000/api/post/postComment", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	});
 	if (response.ok) {

@@ -12,6 +12,7 @@ import CourseDetails from "./Components/Courses/CourseDetail";
 import CourseResult from "./Components/Results/CourseResult";
 import ResultView from "./Components/Results/ResultView";
 import Enroll from "./Components/Enroll/Enroll";
+import SetUpExam from "./Components/Exam/SetUpExam";
 function App() {
 	return (
 		<BrowserRouter>
@@ -29,6 +30,7 @@ function App() {
 						<Route exact path="courses" element={<Courses />} />
 						<Route exact path="results" element={<Courses />} />
 						<Route exact path="courses/:id" element={<CourseDetails />} />	
+						<Route exact path="courses/:id/create-exam" element={<SetUpExam />} />	
 						<Route exact path="results/:id" element={<CourseResult />} />	
 						<Route path="std-results" element={<ResultView />} />	
 						<Route path="enroll" element={<Enroll />} />							

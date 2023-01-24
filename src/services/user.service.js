@@ -1,3 +1,4 @@
+import { authHeader } from "../Helpers/authHeader";
 import { getCurrentUserId, getCurrentUser } from "../Helpers/userHelper";
 
 async function createUser (user) {
@@ -10,7 +11,7 @@ async function createUser (user) {
 	console.log(request);
 	let response =  await fetch("http://localhost:5000/api/user/create",{
 		method: "POST",
-		headers: {'Content-Type': 'application/json'}, 
+		headers: {...authHeader(),'Content-Type': 'application/json'}, 
 		body: JSON.stringify(request)
 	  })
 	  if (response.ok) {
@@ -25,7 +26,7 @@ async function addStudents (user) {
 	console.log(request);
 	let response =  await fetch("http://localhost:5000/api/user/addStudents",{
 		method: "POST",
-		headers: {'Content-Type': 'application/json'}, 
+		headers: {...authHeader(),'Content-Type': 'application/json'}, 
 		body: JSON.stringify(request)
 	  })
 	  if (response.ok) {
@@ -40,7 +41,7 @@ async function changePassword(oldPassword, newPassword) {
 	}
 	let response =  await fetch("http://localhost:5000/api/user/changePassword",{
 	 method: "POST",
-	 headers: {'Content-Type': 'application/json'}, 
+	 headers: {...authHeader(),'Content-Type': 'application/json'}, 
 	 body: JSON.stringify(request)
    })
   
@@ -55,7 +56,7 @@ async function changePassword(oldPassword, newPassword) {
 	console.log(request);
 	let response = await fetch("http://localhost:5000/api/user/userInteraction", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: {...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	});
 	if (response.ok) {

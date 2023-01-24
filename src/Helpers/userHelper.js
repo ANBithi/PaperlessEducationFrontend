@@ -1,7 +1,7 @@
 
 const getCurrentUser = () =>
 {
- let user = JSON.parse(localStorage.getItem("userDetails"));
+ let user = JSON.parse(localStorage.getItem("user"));
  return user;
 }
 

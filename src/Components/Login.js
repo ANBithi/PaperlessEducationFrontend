@@ -28,9 +28,9 @@ const Login = () => {
 			email : userEmail,
 			password : userPassword,
 		}
-		loginService.logIn(user).then((data) => {
-         	if (data?.success === true) {
-			localStorage.setItem("userDetails", JSON.stringify(data.user));
+		loginService.logIn(user).then((data) => {			
+         	if (data?.success === true) {			
+			localStorage.setItem('user', JSON.stringify(data.authData));
 			localStorage.setItem("loggedIn-status", JSON.stringify(data.success));
 			navigate("/");
 		}
