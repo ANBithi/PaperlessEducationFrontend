@@ -1,7 +1,7 @@
 import { background, Box, Center, Circle } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const RoundedReactionView = ({ reaction, isSelected, handleOnClicked }) => {
+const RoundedReactionView = ({ reaction, handleOnClicked }) => {
 	return (
 		<Center
 			color={reaction.color}

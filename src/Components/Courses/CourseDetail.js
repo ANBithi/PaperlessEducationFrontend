@@ -107,7 +107,7 @@ const CourseDetails = () => {
 		setAttachments([]);
 		setUploadFile(undefined);
 		setTextAreaVal("");
-		fetchPostData(id);
+		fetchPostData();
 	};
 	const onChatClick = () => {
 		localStorage.setItem("msgCounter", 0);

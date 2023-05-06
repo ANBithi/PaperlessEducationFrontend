@@ -1,6 +1,6 @@
 import "./App.css";
 import Layout from "./Components/NavBar/Layout";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Setting from "./Components/Setting";
@@ -17,28 +17,35 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<ProtectedRoutes />}>
+				<Route element={<ProtectedRoutes />}>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="settings" element={<Setting />} />
-						<Route path="administration" element={<Administration/>} />
+						<Route
+							path="administration"
+							element={<Administration />}
+						/>
 						<Route
 							path="manage-profile"
 							element={<ManageProfile />}
 						/>
-					
-						<Route exact path="courses" element={<Courses />} />
-						<Route exact path="results" element={<Courses />} />
-						<Route exact path="courses/:id" element={<CourseDetails />} />	
-						<Route exact path="courses/:id/create-exam" element={<SetUpExam />} />	
-						<Route exact path="results/:id" element={<CourseResult />} />	
-						<Route path="std-results" element={<ResultView />} />	
-						<Route path="enroll" element={<Enroll />} />							
-	
 
-						{/* Using path="*"" means "match anything", so this route
-                acts like a catch-all for URLs that we don't have explicit
-                routes for. */}
+						<Route path="courses">
+							<Route index element={<Courses />}/>
+							<Route path=":id">
+								<Route index element={<CourseDetails />}/>
+								<Route
+									path="create-exam"
+									element={<SetUpExam />}
+								/>
+							</Route>
+						</Route>
+						<Route path="results">
+							<Route index element={<Courses />}/>
+							<Route path=":id" element={<CourseResult />} />
+						</Route>
+						<Route path="std-results" element={<ResultView />} />
+						<Route path="enroll" element={<Enroll />} />
 					</Route>
 				</Route>
 				<Route path="login" element={<Login />} />

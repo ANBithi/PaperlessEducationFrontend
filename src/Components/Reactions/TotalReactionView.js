@@ -9,10 +9,6 @@ import RoundedReactionView from "./RoundedReactionView.js";
 
 function TotalReactionView({
 	reactions,
-	parentId,
-	userReaction,
-	setUserReaction,
-	currentUser,
 }) {
 	const [foundReactions, setFoundReactions] = useState([]);
 
