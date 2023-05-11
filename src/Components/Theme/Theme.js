@@ -203,6 +203,14 @@ const theme = extendTheme(
 				},
 			},
 
+			examMetadataStyle : {
+				boxShadow :"md",
+				 bg: "white",
+				  p :"12px",
+				rounded :"8px",
+				 w : "360px",
+			},
+
 			pageStyleSidePanel: {
 				height: "calc(100% - 80px)",
 				width: "100%",
@@ -223,7 +231,7 @@ const theme = extendTheme(
 				pb: ".5%",
 				bg: "background.100",
 				padding: "12px",
-				rounded: "16px",
+				rounded: "8px",
 				boxShadow: "md",
 			},
 			inputLabelStyle : {

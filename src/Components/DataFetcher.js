@@ -1,32 +1,8 @@
-import { Center, Flex, Text, VStack, Icon, createIcon, CircularProgress } from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 
 import React, { useEffect, useState } from "react";
-import EmptyIcon from "./EmptyIcon";
-
-const LoadingState = () => {
-	return (
-		<Center height={"100%"} width={"100%"}>
-			<VStack>
-                <CircularProgress isIndeterminate/>
-				<Text>Loading...</Text>
-			</VStack>
-		</Center>
-	);
-};
-
-const EmptyState = ({ icon, message }) => {
-	return (
-		<Center paddingY="40px" height={"100%"} width={"100%"}>
-			<VStack>
-				<div style={{ opacity: "0.5" }}>
-					<EmptyIcon></EmptyIcon>
-				</div>
-				<Text style={{ fontSize: "24px" }}>Its empty here </Text>
-				<Text>{message}</Text>
-			</VStack>
-		</Center>
-	);
-};
+import LoadingState from "./HelperComponents/LoadingState";
+import EmptyState from "./HelperComponents/EmptyState";
 
 const DataFetcher = ({
 	children,

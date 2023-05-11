@@ -16,11 +16,10 @@ async function addExamMetadata(data) {
 		return await response.json();
 	}
 }
-async function addQuestions(id,questions) {
-	debugger;
+async function updateQuestions(id,questions) {
 	var request = {id, questions}
 	console.log(request);
-	let response = await fetch("http://localhost:5000/api/exam/addQuestions", {
+	let response = await fetch(`http://localhost:5000/api/exam/updateQuestions`, {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
@@ -42,6 +41,6 @@ async function getExamMetaData(sectionId) {
 const examService = {
     addExamMetadata,
 	getExamMetaData,
-	addQuestions
+	updateQuestions
 }
 export default examService;
