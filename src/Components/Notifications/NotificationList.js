@@ -21,12 +21,9 @@ const NotificationList = ({allNotifications}) => {
 				return (
 					<Box
 						key={notification.id}
-						rounded="8px"
-            backgroundColor= 'primary.100'
-						_hover={{ cursor: "pointer" }}
-            fontSize="14px"
-            padding='8px'
-            marginTop='12px'
+						layerStyle={"notificationCardStyle"}
+						border = "1px solid"
+						borderColor={"primary.500"}
 						onClick={() => {
 							onNotificationClick(notification);
 						}}
@@ -44,12 +41,7 @@ const NotificationList = ({allNotifications}) => {
 				return (
 					<Box
 						key={notification.id}
-						rounded="8px"
-            backgroundColor='background.50'
-						_hover={{ cursor: "pointer" }}
-            fontSize="14px"
-            padding='8px'
-            marginTop='12px'
+						layerStyle={"notificationCardStyle"}
 						onClick={() => {
 							onNotificationClick(notification);
 						}}

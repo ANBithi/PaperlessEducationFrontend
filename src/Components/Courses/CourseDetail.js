@@ -166,7 +166,7 @@ const CourseDetails = () => {
 			<Flex layerStyle="pageStyleSidePanel">
 				
 				<Box padding="20px" width="30%" maxW="300px">
-				<VStack width="full" layerStyle={"courseActivityStyle"}>
+				<VStack width="full" align = "start" layerStyle={"courseActivityStyle"}>
 					<Text>Course Activities</Text>
 					<Button onClick = {onStartExamClick}>Start Exam</Button>
 				</VStack>
@@ -211,7 +211,7 @@ const CourseDetails = () => {
 									rounded= "16px"
 									resize= "none"
 									pt={3}
-									bg= "background.50"
+									layerStyle={"onSecondarySurfaceStyle"}
 									placeholder="type something.."
 									size="sm"
 									value={textAreaVal}
@@ -315,7 +315,7 @@ const CourseDetails = () => {
 							rounded="5px"
 							border="1px solid"
 							borderColor="primary.200"
-							bg="primary.100"
+							layerStyle={"onSurfaceStyle"}
 							onClick={() => {
 								fetchMessageData();
 								onOpen();

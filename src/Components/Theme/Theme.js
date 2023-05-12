@@ -40,6 +40,34 @@ const Input = {
 	defaultProps: {},
 };
 
+const onSurfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.100",
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.100",
+	},
+};
+
+const onSecondarySurfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.200",
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.200",
+	},
+};
+
+const surfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.50",
+		color: "primary.900",
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.50",
+		color: "primary.100",
+	}
+}
 const Select = {
 	baseStyle: {
 		field: {
@@ -62,6 +90,18 @@ const Select = {
 	},
 	sizes: {},
 	defaultProps: {},
+}
+
+const Modal = {
+	baseStyle: {
+		overlay: {
+			//bg: 'red.200', //change the background
+		  },
+		  dialog: {
+			...onSurfaceStyle
+		  },
+	},
+	
 }
 
 const theme = extendTheme(
@@ -110,15 +150,10 @@ const theme = extendTheme(
 			navbarStyle: {
 				w: "100%",
 				px: "6",
-				py: "5",
-				bg: "primary.100",
+				py: "5",				
 				pos: "relative",
 				zIndex: "12",
-				color: "primary.900",
-				".chakra-ui-dark &": {
-					bg: "primary.700",
-					color: "primary.100",
-				},
+				...onSurfaceStyle
 			},
 			sectionHeaderStyle: {
 				fontSize: "16px",
@@ -154,37 +189,45 @@ const theme = extendTheme(
 				width: "full",
 				boxShadow: "md",
 				alignSelf: "flex-end",
-				bg: "background.100",
 				rounded: "16px",
+				...onSurfaceStyle
 			},
 			courseActivityStyle: {
 				width: "20%",
 				spacing: "12px",
 				marginRight: "12px",
-				paddingY: "8px",
+				padding: "16px",
 				boxShadow: "md",
 				alignSelf: "start",
-				bg: "background.100",
 				rounded: "16px",
-				height: "100%"
+				height: "100%",
+				...onSurfaceStyle
 			},
 			createPostStyle: {
 				w: "full",
 				alignSelf: "flex-end",
 				boxShadow: "md",
 				rounded: "16px",
-				bg: "background.100",
 				padding: "20px",
 				marginTop: "32px",
+				...onSurfaceStyle
 			},
 			notificationListStyle: {
 				width: "300px",
 				height: "80vh",
-				background: "background.100",
 				boxShadow: "md",
 				padding: "16px",
 				rounded: "8px",
 				overflow : "auto",
+				...onSurfaceStyle
+			},
+			notificationCardStyle: {
+				rounded:"8px",
+				_hover:{ cursor: "pointer" },		
+            fontSize:"14px",
+            padding:'8px',
+            marginTop:'12px',
+			...onSecondarySurfaceStyle
 			},
 			responseAuthorStyle: {
 				fontSize: "12px",
@@ -195,32 +238,30 @@ const theme = extendTheme(
 				overflow: "auto",
 				p: "2%",
 				width: "100%",
-				bg: "background.50",
-				color: "primary.900",
-				".chakra-ui-dark &": {
-					bg: "primary.800",
-					color: "primary.100",
-				},
+				...surfaceStyle,
 			},
 
 			examMetadataStyle : {
 				boxShadow :"md",
-				 bg: "white",
 				  p :"12px",
 				rounded :"8px",
 				 w : "360px",
+				 ".chakra-ui-light &": {
+					bg: "background.200",
+				},
+				".chakra-ui-dark &": {
+					bg: "backgroundDark.200",
+				},
 			},
 
 			pageStyleSidePanel: {
 				height: "calc(100% - 80px)",
 				width: "100%",
-				bg: "background.50",
-				color: "primary.900",
-				".chakra-ui-dark &": {
-					bg: "primary.800",
-					color: "primary.100",
-				}				
+				...surfaceStyle			
 			},
+
+			onSurfaceStyle: {...onSurfaceStyle},
+			onSecondarySurfaceStyle: {...onSecondarySurfaceStyle},
 
 			pageButtonStyle: {
 				pt: "2%",
@@ -228,11 +269,11 @@ const theme = extendTheme(
 			},
 			inputStackStyle: {
 				w: "full",
-				pb: ".5%",
-				bg: "background.100",
+				pb: ".5%",				
 				padding: "12px",
 				rounded: "8px",
 				boxShadow: "md",
+				...onSecondarySurfaceStyle
 			},
 			inputLabelStyle : {
 				width : "40%",
@@ -242,6 +283,13 @@ const theme = extendTheme(
 			inputStyle: {
 				w: "70%",
 				
+			},
+
+			courseCardStyle : {
+				w:"350px",
+				 boxShadow:"md",
+				  rounded:"12px",
+				  ...onSurfaceStyle
 			},
 		},
 		textStyles: {
@@ -277,6 +325,11 @@ const theme = extendTheme(
 				100: "#f5f6fa",
 				200: "#eef1f6",
 			},
+			backgroundDark: {
+				50: "#171010",
+				100: "#2B2B2B",
+				200: "#423F3E",
+			},
 		},
 		fonts: {
 			heading: `Poppins, ${base.fonts?.heading}`,
@@ -286,6 +339,7 @@ const theme = extendTheme(
 		components: {
 			Input: Input,
 			Select: Select,
+			Modal : Modal
 		},
 	},
 	withDefaultColorScheme({

@@ -157,10 +157,11 @@ const SetUpExam = () => {
 					fontSize={"14px"}
 				>
 					<HStack
+						layerStyle={"onSurfaceStyle"}
+						align="start"
 						w="full"
 						spacing={8}
-						align="start"
-						bg="background.200"
+						//bg="background.200"
 						padding="16px"
 						rounded="8px"
 					>
@@ -232,6 +233,7 @@ const SetUpExam = () => {
 							</Button>
 						) : (
 							<IconButton
+						
 								icon={faPenToSquare}
 								onClick={() => {
 									onAddExamMetadataModalOpen();
@@ -245,7 +247,7 @@ const SetUpExam = () => {
 								<Stack
 									alignSelf="start"
 									w="full"
-									bg="background.200"
+									layerStyle="onSurfaceStyle"
 									padding="16px"
 									rounded="8px"
 								>
@@ -257,7 +259,7 @@ const SetUpExam = () => {
 												fontWeight="bold"
 												padding={"12px 16px"}
 												rounded="8px"
-												bg={"background.50"}
+												layerStyle={"onSecondarySurfaceStyle"}
 											>
 												<HStack w="85%">
 													<Text flex="1">
@@ -275,6 +277,7 @@ const SetUpExam = () => {
 													w="15%"
 												>
 													<IconButton
+													
 														onClick={() => {
 															onAddQuestionModalOpen();
 
@@ -286,6 +289,7 @@ const SetUpExam = () => {
 														icon={faPenToSquare}
 													/>
 													<IconButton
+													
 														onClick={() => {
 															onDeleteQuestion(i);
 														}}
@@ -351,6 +355,7 @@ const DataRow = ({ title, value }) => {
 const IconButton = ({ icon, ...rest }) => {
 	return (
 		<Center
+		layerStyle ={"themeIconStyle"}
 			borderRadius={"4px"}
 			//bg = {isSelected=== true? "primary.100" : 'transparent' }
 			_hover={{

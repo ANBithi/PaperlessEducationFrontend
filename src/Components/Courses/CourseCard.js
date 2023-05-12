@@ -30,7 +30,7 @@ export function CourseCard({
 
 	return (
 		<Center as="section">
-			<Box w="350px" bg="background.100" boxShadow="md" rounded="12px">
+			<Box layerStyle={"courseCardStyle"}>
 				<Image
 					objectFit="cover"
 					h="170px"

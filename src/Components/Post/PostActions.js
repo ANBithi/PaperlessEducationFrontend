@@ -12,7 +12,7 @@ const PostActions = ({
 	onCommentsClick,
 }) => {
 	return (
-        <Box width= "full" background = "background.200" roundedBottom = "16px" 
+        <Box width= "full" layerStyle={"onSecondarySurfaceStyle"} roundedBottom = "16px" 
         paddingX = "20px" paddingY= "8px">
         <HStack style = {{paddingLeft : "48px"}} justify="space-between" w="full">
 			<Reactions
