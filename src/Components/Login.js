@@ -59,9 +59,11 @@ const Login = () => {
 		setUserPassword((prevUserPassword) => (prevUserPassword = value));
 	};
 	return (
-		<Center h="full" w="full" color = {color}>
-			<VStack w="50%">
-				<Heading mt="12%">Welcome Back</Heading>
+		<Center h="100%" w="full" color = {color} layerStyle = {"noNavPageStyle"}>
+			<VStack w="60%" maxW = "400px"
+			p = "30px" rounded = "8px" boxShadow={"md"}
+			 layerStyle={"onSurfaceStyle"}>
+				<Heading >Welcome Back</Heading>
 				<Text fontSize="14px">
 					Welcome back! Please enter your details.
 				</Text>
@@ -78,7 +80,7 @@ const Login = () => {
 							onChange={onEmailInputChange}
 						></Input>
 					</FormControl>
-					<FormControl isRequired>
+					<FormControl mt = {"12px"}isRequired>
 						<FormLabel fontSize="12px" fontWeight="bold" ml="2%">
 							Password
 						</FormLabel>
@@ -102,7 +104,9 @@ const Login = () => {
 					</Link>
 				</Flex> */}
 				<Button
+					style = {{marginTop : "16px"}}
 					type="submit"
+					
 					layerStyle="customButton"
 					onClick={onSignIn}
 					w = "60%"

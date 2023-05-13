@@ -14,9 +14,16 @@
 }
 html{
   overflow: hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
 .comment-item-footer {
   transition: opacity .3s;
 
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
 }

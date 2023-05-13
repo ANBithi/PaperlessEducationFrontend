@@ -1,4 +1,4 @@
-import { Box, HStack, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, HStack, Text, useDisclosure,useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { findReactionTypes } from "../../Helpers/reactionHelper.js";
 import { postService } from "../../services/post.service";
@@ -10,6 +10,7 @@ import RoundedReactionView from "./RoundedReactionView.js";
 function TotalReactionView({
 	reactions,
 }) {
+	const { colorMode } = useColorMode();
 	const [foundReactions, setFoundReactions] = useState([]);
 
 	const { onOpen, isOpen, onClose } = useDisclosure();
@@ -32,7 +33,7 @@ function TotalReactionView({
 			py="6px"
 			px="8px"
 			borderRadius="4px"
-			_hover={{ cursor: "pointer", backgroundColor: "primary.100" }}
+			layerStyle = "hoverStyle"
 			onClick={onReactionsClick}
 			style={{ marginLeft: "-6px" }}
 		>
@@ -47,7 +48,7 @@ function TotalReactionView({
 									marginLeft: i > 0 ? "-6px" : "0",
 								}}
 								outline="2px solid"
-								outlineColor="primary.50"
+								outlineColor= {colorMode === "light" ? "primary.300" : "primary.800"}
 							>
 								<RoundedReactionView
 									key={i}

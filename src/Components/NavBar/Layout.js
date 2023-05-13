@@ -96,7 +96,7 @@ export default function Layout() {
 					<Notification />
 
 					<HStack>
-						<Menu>
+						<Menu >
 							<MenuButton								
 								m={0}
 								as={Button}
@@ -108,7 +108,7 @@ export default function Layout() {
 									src="https://bit.ly/broken-link"
 								/>
 							</MenuButton>
-							<MenuList>
+							<MenuList layerStyle = "onSurfaceStyle">
 								<MenuItem>
 									<Link
 										to="/settings"

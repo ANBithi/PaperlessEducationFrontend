@@ -1,4 +1,4 @@
-import { Box, Stack, Text, HStack } from "@chakra-ui/react";
+import { Box, Stack, Text, HStack,useColorMode } from "@chakra-ui/react";
 import { faComment, faComments } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -24,7 +24,7 @@ const CommentMetadata = ({ comments, showIcon, label }) => {
         }
     }
     return (
-		<HStack alignSelf='center' px='12px' py ='6px'  borderRadius='4px'  _hover={{cursor: 'pointer', backgroundColor: 'primary.100'}}>
+		<HStack alignSelf='center' px='12px' py ='6px'  borderRadius='4px'  layerStyle = "hoverStyle">
 			{
                 showIcon && 
                 <FontAwesomeIcon icon={faComments} />

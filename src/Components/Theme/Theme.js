@@ -12,9 +12,55 @@ import {
 //   useSystemColorMode: false,
 
 // }
+
+const onSurfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.100",
+
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.100",
+	},
+};
+
+const onSecondarySurfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.200",
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.200",
+	},
+};
+const hoverStyle = {
+	".chakra-ui-light &": {
+		_hover:{ 
+		 cursor: "pointer",
+		 backgroundColor: "primary.200" },
+	},
+	".chakra-ui-dark &": {
+		_hover:{ 
+		 cursor: "pointer",
+		 backgroundColor: "primary.800" },
+	},
+
+}
+
+const surfaceStyle = {
+	".chakra-ui-light &": {
+		bg: "background.50",
+		color: "backgroundDark.200",
+	},
+	".chakra-ui-dark &": {
+		bg: "backgroundDark.50",
+		color: "background.200",
+	}
+}
+
 const Input = {
 	baseStyle: {
-		field: {}
+		field: {
+			...onSecondarySurfaceStyle,
+		}
 	},
 	variants: {
 		outline: {
@@ -40,34 +86,7 @@ const Input = {
 	defaultProps: {},
 };
 
-const onSurfaceStyle = {
-	".chakra-ui-light &": {
-		bg: "background.100",
-	},
-	".chakra-ui-dark &": {
-		bg: "backgroundDark.100",
-	},
-};
 
-const onSecondarySurfaceStyle = {
-	".chakra-ui-light &": {
-		bg: "background.200",
-	},
-	".chakra-ui-dark &": {
-		bg: "backgroundDark.200",
-	},
-};
-
-const surfaceStyle = {
-	".chakra-ui-light &": {
-		bg: "background.50",
-		color: "primary.900",
-	},
-	".chakra-ui-dark &": {
-		bg: "backgroundDark.50",
-		color: "primary.100",
-	}
-}
 const Select = {
 	baseStyle: {
 		field: {
@@ -104,6 +123,26 @@ const Modal = {
 	
 }
 
+const Drawer = {
+	baseStyle: {
+		overlay: {
+			//bg: 'red.200', //change the background
+		  },
+		  dialog: {
+			...onSurfaceStyle
+		  },
+	},
+	
+}
+
+const Popover = {
+	 baseStyle: {
+        content: {
+          ...onSecondarySurfaceStyle,
+          },
+        },
+      }
+
 const theme = extendTheme(
 	{
 		layerStyles: {
@@ -138,14 +177,9 @@ const theme = extendTheme(
 			InputAddOns: {
 				w: "50px",
 				h: "50px",
-				bg: "primary.100",
 				border: "1px solid",
-				borderColor: "primary.200",
-				color: "primary.900",
-				_hover: {
-					background: "white",
-					cursor: "pointer",
-				},
+				...onSecondarySurfaceStyle,
+				...hoverStyle
 			},
 			navbarStyle: {
 				w: "100%",
@@ -165,10 +199,10 @@ const theme = extendTheme(
 				pb: "1%",
 			},
 			responseBubbleStyle: {
-				background: "background.50",
 				padding: "12px",
 				rounded: "20px",
 				minW: "65%",
+				...onSecondarySurfaceStyle
 			},
 			responseContentStyle: {
 				fontSize: "16px",
@@ -177,6 +211,7 @@ const theme = extendTheme(
 				w: "full",
 				fontSize: "14px",
 				paddingLeft: "12px",
+				...onSurfaceStyle
 			},
 			responseTextareaStyle: {
 				paddingLeft: "8px",
@@ -229,6 +264,7 @@ const theme = extendTheme(
             marginTop:'12px',
 			...onSecondarySurfaceStyle
 			},
+
 			responseAuthorStyle: {
 				fontSize: "12px",
 				fontWeight: "bold",
@@ -240,6 +276,15 @@ const theme = extendTheme(
 				width: "100%",
 				...surfaceStyle,
 			},
+
+			noNavPageStyle: {
+				height: "100%",
+				overflow: "auto",
+				p: "16px",
+				width: "100%",
+				...surfaceStyle,
+			},
+
 
 			examMetadataStyle : {
 				boxShadow :"md",
@@ -262,7 +307,7 @@ const theme = extendTheme(
 
 			onSurfaceStyle: {...onSurfaceStyle},
 			onSecondarySurfaceStyle: {...onSecondarySurfaceStyle},
-
+			hoverStyle : {...hoverStyle},
 			pageButtonStyle: {
 				pt: "2%",
 				pb: "2%",
@@ -321,14 +366,14 @@ const theme = extendTheme(
 				900: "#050c15",
 			},
 			background: {
-				50: "#ffffff",
-				100: "#f5f6fa",
-				200: "#eef1f6",
+				50: "#eaeaea",
+				100: "#e1e1e1",
+				200: "#d8d8d8",
 			},
 			backgroundDark: {
-				50: "#171010",
-				100: "#2B2B2B",
-				200: "#423F3E",
+				50: "#1b1b1b",
+				100: "#272727",
+				200: "#373737",
 			},
 		},
 		fonts: {
@@ -339,7 +384,9 @@ const theme = extendTheme(
 		components: {
 			Input: Input,
 			Select: Select,
-			Modal : Modal
+			Modal : Modal,
+			Popover: Popover,
+			Drawer: Drawer
 		},
 	},
 	withDefaultColorScheme({

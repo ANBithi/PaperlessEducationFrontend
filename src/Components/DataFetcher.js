@@ -29,7 +29,7 @@ const DataFetcher = ({
 			) : isEmpty === true ? (
 				<EmptyState message={emptyStateText}></EmptyState>
 			) : (
-				<Flex height={"100%"} width={"100%"}>
+				<Flex layerStyle = "surfaceStyle"  height={"100%"} width={"100%"}>
 					{children}
 				</Flex>
 			)}

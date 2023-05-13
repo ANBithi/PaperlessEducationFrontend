@@ -2,7 +2,7 @@ import { Center, CircularProgress, Text, VStack } from "@chakra-ui/react";
 
 const LoadingState = () => {
 	return (
-		<Center height={"100%"} width={"100%"}>
+		<Center layerStyle = "noNavPageStyle">
 			<VStack>
                 <CircularProgress isIndeterminate/>
 				<Text>Loading...</Text>

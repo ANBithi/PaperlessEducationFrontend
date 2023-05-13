@@ -14,7 +14,7 @@ const ReactionsTrigger = ({userReaction}) => {
 		<HStack						
 			justify="center"
 			align="center"
-			color={icon !== undefined? icon.color: 'primary.900'}
+			color={icon !== undefined? icon.color: ''}
 			_hover={{ cursor: "pointer" }}
 		>
 			<FontAwesomeIcon icon={icon === undefined? faThumbsUp: icon.iconFilled} />

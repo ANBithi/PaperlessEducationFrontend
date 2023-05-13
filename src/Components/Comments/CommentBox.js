@@ -49,7 +49,7 @@ const CommentBox = ({ currentUser, postId }) => {
 					src="https://bit.ly/broken-link"
 					mb="5px"
 				/>
-				<HStack w="100%" rounded="24px"  bg = "background.50">
+				<HStack w="100%" rounded="24px"  layerStyle = "surfaceStyle">
 					<Textarea
 						placeholder  = "Add a comment..."
 						value={commentContent}
