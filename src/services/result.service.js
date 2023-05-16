@@ -1,8 +1,9 @@
+import { authHeader } from "../Helpers/authHeader";
 
 async function addResult (request) {
 	let response =  await fetch("http://localhost:5000/api/result/add",{
 		method: "POST",
-		headers: {'Content-Type': 'application/json'}, 
+		headers: {...authHeader(), 'Content-Type': 'application/json'}, 
 		body: JSON.stringify(request)
 	  })
 	  if (response.ok) {
@@ -13,7 +14,7 @@ async function addResult (request) {
 async function getResults(userId){
     let response =  await fetch(`http://localhost:5000/api/result/getAll?belongsTo=${userId}`,{
 		method: "GET",
-		headers: {'Content-Type': 'application/json'}, 
+		headers: {...authHeader(),'Content-Type': 'application/json'}, 
 	  })
 	  if (response.ok) {
 		return await response.json();

@@ -63,6 +63,17 @@ async function changePassword(oldPassword, newPassword) {
 		return await response.json();
 	}
 }
-const userService = {changePassword, createUser, addStudents, updateUserInteraction}
+
+
+async function getUserProfileData() {
+	let response = await fetch("http://localhost:5000/api/user/userProfile", {
+		method: "GET",
+		headers: {...authHeader(), "Content-Type": "application/json" },
+	});
+	if (response.ok) {
+		return await response.json();
+	}
+}
+const userService = {changePassword, createUser, addStudents, updateUserInteraction, getUserProfileData}
 
 export default userService;
