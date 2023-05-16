@@ -67,8 +67,7 @@ const AllReactionsModal = ({ reactions, isOpen, onClose }) => {
 															size="xs"
 															name={
 																item.createdBy
-															}
-															src="https://bit.ly/broken-link"
+															}															
 															mb="5px"
 														/>
 														<Text>{item.createdBy}</Text>

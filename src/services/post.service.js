@@ -38,6 +38,19 @@ async function getSingle(id) {
 		return await response.json();
 	}
 }
+
+async function getSingleComment(id) {
+	let response = await fetch(
+		`http://localhost:5000/api/post/getSingleComment?commentId=${id}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	);
+	if (response.ok) {
+		return await response.json();
+	}
+}
 async function addReaction(reaction) {
 	let user = getCurrentUser();
 	let request = { ...reaction, createdBy: user.id };
@@ -94,6 +107,7 @@ export const postService = {
 	addPost,
 	getAllPost,
 	getSingle,
+	getSingleComment,
 	addReaction,
 	getAllReactions,
 	getAllComments,

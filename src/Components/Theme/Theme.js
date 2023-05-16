@@ -6,13 +6,6 @@ import {
 	withDefaultVariant,
 } from "@chakra-ui/react";
 
-// 2. Add your color mode config
-// const config = {
-//   initialColorMode: 'dark',
-//   useSystemColorMode: false,
-
-// }
-
 const onSurfaceStyle = {
 	".chakra-ui-light &": {
 		bg: "background.100",
@@ -20,6 +13,18 @@ const onSurfaceStyle = {
 	},
 	".chakra-ui-dark &": {
 		bg: "backgroundDark.100",
+	},
+};
+
+const onSurfaceBorderStyle = {
+	".chakra-ui-light &": {
+		border: "1px solid",
+		borderColor: "background.50",
+
+	},
+	".chakra-ui-dark &": {
+		border: "1px solid",
+		borderColor: "backgroundDark.50",
 	},
 };
 
@@ -177,9 +182,10 @@ const theme = extendTheme(
 			InputAddOns: {
 				w: "50px",
 				h: "50px",
-				border: "1px solid",
 				...onSecondarySurfaceStyle,
-				...hoverStyle
+				...hoverStyle,
+				...onSurfaceBorderStyle,
+
 			},
 			navbarStyle: {
 				w: "100%",
@@ -304,7 +310,7 @@ const theme = extendTheme(
 				width: "100%",
 				...surfaceStyle			
 			},
-
+			onSurfaceBorderStyle: {...onSurfaceBorderStyle},
 			onSurfaceStyle: {...onSurfaceStyle},
 			onSecondarySurfaceStyle: {...onSecondarySurfaceStyle},
 			hoverStyle : {...hoverStyle},

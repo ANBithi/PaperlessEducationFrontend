@@ -20,20 +20,17 @@ import {
 	AttachmentIcon,
 	ArrowUpIcon,
 	ChatIcon,
-	BellIcon,
 } from "@chakra-ui/icons";
 import DataFetcher from "../DataFetcher";
 import { useNavigate, useParams } from "react-router";
 import sectionService from "../../services/section.service";
 import PopoverInput from "./PopoverInput";
-import { CircleIcon } from "../../Icons/CircleIcon";
 import { ChatDrawer } from "./Chat/ChatDrawer";
 import dropboxService from "../../services/dropbox.service";
 import { postService } from "../../services/post.service";
 import { getCurrentUserId, getFileType } from "../../Helpers/userHelper";
 import { chatService } from "../../services/chat.service";
 import ShowCounter from "../ShowCounter";
-import { FACULTY_NAV } from "../NavBar/navigationData";
 import PostViewerList from "../Post/PostViewerList";
 
 const CourseDetails = () => {

@@ -1,45 +1,66 @@
 import {
 	Avatar,
-	Circle,
 	Box,
 	HStack,
-	Icon,
 	Link,
 	Text,
 	VStack,
-	AspectRatio,
-	Divider,
+	useToast
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { EditIcon } from "@chakra-ui/icons";
+import { useEffect, useState, useRef } from "react";
 import { postService } from "../../services/post.service";
-import DataFetcher from "../DataFetcher";
-import { getCurrentUser } from "../../Helpers/userHelper";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import ImageViewer from "./ImageViewer";
 import moment from "moment";
 import TotalReactionView from "../Reactions/TotalReactionView";
-import CommentAction from "../Comments/CommentAction";
-import CommentBox from "../Comments/CommentBox";
 import CommentMetadata from "../Comments/CommentMetadata";
-import CommentsList from "../Comments/CommentsList";
 import CommentContents from "../Comments/CommentContents";
-import ReactionsTrigger from "../Reactions/ReactionsTrigger";
 import PostActions from "./PostActions";
+import { getCurrentUser } from "../../Helpers/userHelper";
 const PostViewer = ({ currentUser, post }) => {
+	const socketConnectedRef = useRef(false);
 	const [showComments, setShowComments] = useState(false);
 	const [userReaction, setUserReaction] = useState();
 	const [comments, setComments] = useState([]);
 	const [reactions, setReactions] = useState([]);
+	const toast = useToast();
 	const onCommentsClick = () => {
 		let trigger = showComments;
 		setShowComments(!trigger);
 	};
 
 	useEffect(() => {
+		if (socketConnectedRef.current === false) {
+			const webSocket = new WebSocket(`ws://localhost:443/comment-${post.id}`);
+			webSocket.onmessage = handleNewComment;
+		}
+		socketConnectedRef.current = true;
 		fetchReactions();
 		fetchComments();
 	}, []);
+
+	const handleNewComment = (event) => {
+		let data = JSON.parse(event.data);
+		console.log(data);
+		postService.getSingleComment(data.dataId).then((p) => {
+			console.log(p);
+			if (p.createdBy !== getCurrentUser()) {
+				toast({
+					containerStyle: {
+						fontSize: "14px",
+						fontWeight: "normal",
+					},
+					title: `${p.createdBy} commented on a post!`,
+					position: "bottom-right",
+					variant: "subtle",
+					status: "info",
+					duration: 5000,
+					isClosable: true,
+				});
+				fetchComments();
+			}
+		});
+	};
 	const fetchReactions = () => {
 		postService.getAllReactions(post.id).then((response) => {
 			if (response) {
@@ -86,8 +107,7 @@ const PostViewer = ({ currentUser, post }) => {
 					<Avatar
 						alignSelf="center"
 						size="md"
-						name={post.creatorName}
-						src="https://bit.ly/broken-link"
+						name={post.creatorName}						
 						mb="5px"
 					/>
 					<VStack align="start">

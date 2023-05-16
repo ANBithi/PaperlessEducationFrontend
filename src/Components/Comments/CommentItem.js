@@ -68,7 +68,6 @@ const CommentItem = ({ comment, currentUser }) => {
 				alignSelf="start"
 				size="xs"
 				name={comment.createdBy}
-				src="https://bit.ly/broken-link"
 				mb="5px"
 			/>
 			<VStack  m={0} w={"100%"}

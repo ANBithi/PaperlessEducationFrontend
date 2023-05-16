@@ -20,8 +20,7 @@ const ManageProfile = () => {
 			<Avatar
 								alignSelf= "center"
 								size="2xl"
-								name={`${userData?.firstName} ${userData?.lastName}`}
-								src="https://bit.ly/broken-link"
+								name={`${userData?.firstName} ${userData?.lastName}`}								
 								mb= "5px"
 							/>
 				<Text layerStyle="sectionHeaderStyle"  alignSelf= "center">{userData?.firstName} {userData?.lastName}</Text>

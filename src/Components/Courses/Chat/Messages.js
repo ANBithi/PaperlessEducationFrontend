@@ -36,8 +36,7 @@ const Messages = ({ messages}) => {
 					return (
 						<Flex key={index} w="100%">
 							<Avatar
-								name={item.creatorName}
-								src="https://bit.ly/broken-link"
+								name={item.creatorName}								
 								bg="blue.300"
 								size = "sm"
 							></Avatar>

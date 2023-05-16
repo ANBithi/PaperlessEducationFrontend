@@ -46,7 +46,7 @@ const CommentBox = ({ currentUser, postId }) => {
 					alignSelf="start"
 					size="md"
 					name={`${currentUser.firstName} ${currentUser.lastName}`}
-					src="https://bit.ly/broken-link"
+										
 					mb="5px"
 				/>
 				<HStack w="100%" rounded="24px"  layerStyle = "surfaceStyle">

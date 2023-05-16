@@ -104,8 +104,7 @@ export default function Layout() {
 							>
 								<Avatar
 									size="sm"
-									name={`${userData?.firstName} ${userData?.lastName}`}
-									src="https://bit.ly/broken-link"
+									name={`${userData?.firstName} ${userData?.lastName}`}									
 								/>
 							</MenuButton>
 							<MenuList layerStyle = "onSurfaceStyle">
