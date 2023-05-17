@@ -13,6 +13,8 @@ import CourseResult from "./Components/Results/CourseResult";
 import ResultView from "./Components/Results/ResultView";
 import Enroll from "./Components/Enroll/Enroll";
 import SetUpExam from "./Components/Exam/SetUpExam";
+import ChangePassword from "./Components/Setting/ChangePassword";
+import { history } from "./Helpers/history";
 function App() {
 	return (
 		<BrowserRouter>
@@ -48,6 +50,13 @@ function App() {
 						<Route path="enroll" element={<Enroll />} />
 					</Route>
 				</Route>
+				<Route path = "changePassword">
+					<Route path = ":userId">
+					<Route path = ":otp" element = {<ChangePassword/>}/>
+					</Route>
+					
+				</Route>
+				<Route path="*" element={<Login />} />
 				<Route path="login" element={<Login />} />
 			</Routes>
 		</BrowserRouter>

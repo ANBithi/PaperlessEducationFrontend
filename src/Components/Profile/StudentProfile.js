@@ -24,10 +24,10 @@ const StudentProfile = ({ userData }) => {
 				alignSelf="start"
 				layerStyle={"sectionHeaderStyle"}
 			>
-				Advisor Details
+				Adviser Details
 			</Text>
 			<HStack w="full" alignSelf={"start"}>
-				<Text layerStyle={"sectionHeaderStyle"}>Advisor :</Text>
+				<Text layerStyle={"sectionHeaderStyle"}>Adviser :</Text>
 				<Text>{userData.advisor}</Text>
 			</HStack>
 			<HStack w="full" alignSelf={"start"}>

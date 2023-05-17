@@ -1,11 +1,20 @@
-import { IconButton, Flex, Text, useColorMode, HStack, Center } from "@chakra-ui/react";
+import { IconButton, Flex, Text, useColorMode, HStack, Center, Button } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import userService from "../services/user.service";
 
 const Setting = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
+
+	const onChangeClick = () => {
+		userService.initiateChangePassword().then((p)=>{
+			console.log(p.url);
+		})
+	}
+
+
 	return (
-		<Flex layerStyle="pageStyle">
-			<HStack spacing={2} align="start">
+		<Flex layerStyle="pageStyle" flexDirection={"column"}>
+			<HStack mt = "16px" spacing={2} align="start">
 				<Center h = "10%">
                 <Text layerStyle="sectionHeaderStyle">Change Theme :</Text>
                 </Center>
@@ -22,6 +31,12 @@ const Setting = () => {
 					}
 				/>
 			</HStack>
+
+			<HStack mt = "16px" spacing={2} alignSelf="start" justify = "center">
+                <Text layerStyle="sectionHeaderStyle">Change Password :</Text>
+				<Button onClick={onChangeClick}>Change</Button>
+			</HStack>
+			
 		</Flex>
 	);
 };

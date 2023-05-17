@@ -1,7 +1,7 @@
 import { HStack, Flex, Button, useToast, Avatar, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getCurrentUser } from "../../../Helpers/userHelper";
-import ManageProfileForm from "./ManageProfileForm";
+import ManageProfileForm from "./ChangePasswordForm";
 import userService from "../../../services/user.service";
 import FacultyProfile from "../../Profile/FacultyProfile";
 import StudentProfile from "../../Profile/StudentProfile";
@@ -13,7 +13,6 @@ const ManageProfile = () => {
 	const fetchData = async () => {
 		var res = await userService.getUserProfileData();
 		if (res.response) {
-			console.log(res.data);
 			setUserData(res.data);
 		}
 	};
