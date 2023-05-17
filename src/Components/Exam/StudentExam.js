@@ -8,23 +8,23 @@ import {
 	useToast,
 	Stack,
 	Center,
+	Textarea,
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import { useLocation, useParams } from "react-router-dom";
-import { QUIZ_COUNT_PERCENTILE_OPTIONS, TYPE_OF_EXAMS } from "./examData";
+import { QUIZ_ANSWER_TYPE_OPTIONS, QUIZ_COUNT_PERCENTILE_OPTIONS, TYPE_OF_EXAMS } from "./examData";
 import sectionService from "../../services/section.service";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import examService from "../../services/exam.service";
-import AddQuestionModal from "./AddQuestionModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
 
-const SetUpExam = () => {
+const StudentExam = () => {
 	const { id } = useParams();
-	const location  = useLocation();
+	const location = useLocation();
 	const toast = useToast();
 	const [examMetaId, setExamMetaId] = useState(null);
 	const [examMetadata, setExamMetadata] = useState();
@@ -32,43 +32,36 @@ const SetUpExam = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [editQuestion, setEditQuestion] = useState(undefined);
 	const [questions, setQuestions] = useState([]);
-	const {
-		isOpen: isAddQuestionModalOpen,
-		onOpen: onAddQuestionModalOpen,
-		onClose: onAddQuestionModalClose,
-	} = useDisclosure();
+
 	const {
 		isOpen: isAddExamMetadataModalOpen,
 		onOpen: onAddExamMetadataModalOpen,
 		onClose: onAddExamMetadataModalClose,
 	} = useDisclosure();
 
-const fetchCourseData = async() => {
-	let res = await sectionService.getSectionDetail(id);
-	setSectionDetail(res.data);
-	setIsLoading(false);
-}
-const fetchQuestions = async (examId) => {
-	let quesRes = await examService.getQuestions(examId);
-	setQuestions(quesRes ?? []);
-	await fetchCourseData();
-};
-
+	const fetchCourseData = async () => {
+		let res = await sectionService.getSectionDetail(id);
+		setSectionDetail(res.data);
+		setIsLoading(false);
+	};
+	const fetchQuestions = async (examId) => {
+		let quesRes = await examService.getQuestions(examId);
+		setQuestions(quesRes ?? []);
+	};
 
 	const fetchExam = async () => {
 		let response = await examService.getExamMetaData(id);
 		setExamMetadata(response);
 		setExamMetaId(response.id);
-		await fetchQuestions(response.id);
 	};
 	useEffect(() => {
-		let {exam} = location.state;
-		if(exam !== undefined){
+		let { exam } = location.state;
+		if (exam !== undefined) {
 			setExamMetadata(exam);
 			setExamMetaId(exam.id);
 			fetchQuestions(exam.id);
-		}
-		else{
+			fetchCourseData();
+		} else {
 			fetchCourseData();
 			// fetchExam();
 		}
@@ -79,10 +72,9 @@ const fetchQuestions = async (examId) => {
 		setExamMetadata(TYPE_OF_EXAMS[value]);
 	};
 	const calcMark = (arr) => {
-
 		if (arr === undefined) {
 			return;
-		 }
+		}
 		let sum = 0;
 		arr.forEach((arr) => {
 			sum += parseInt(arr.marks);
@@ -169,7 +161,7 @@ const fetchQuestions = async (examId) => {
 
 	return isLoading === false ? (
 		<Flex flexDirection="column" layerStyle="pageStyle" align="start">
-			<Text layerStyle="sectionHeaderStyle">Setup Question</Text>
+			<Text layerStyle="sectionHeaderStyle">Exam</Text>
 			{sectionDetail !== undefined && (
 				<VStack
 					spacing={"16px"}
@@ -244,23 +236,6 @@ const fetchQuestions = async (examId) => {
 								</VStack>
 							</>
 						)}
-						{examMetadata === undefined ? (
-							<Button
-								onClick={() => {
-									onAddExamMetadataModalOpen();
-								}}
-							>
-								Configure
-							</Button>
-						) : (
-							<IconButton
-						
-								icon={faPenToSquare}
-								onClick={() => {
-									onAddExamMetadataModalOpen();
-								}}
-							/>
-						)}
 					</HStack>
 					{examMetaId !== null && (
 						<Fragment>
@@ -274,87 +249,19 @@ const fetchQuestions = async (examId) => {
 								>
 									{questions.map((question, i) => {
 										return (
-											<HStack
+											<QuestionItem
+												question={question}
+												index={i}
 												key={i}
-												fontSize={"12px"}
-												fontWeight="bold"
-												padding={"12px 16px"}
-												rounded="8px"
-												layerStyle={"onSecondarySurfaceStyle"}
-											>
-												<HStack w="85%">
-													<Text flex="1">
-														{i + 1}.{" "}
-														{question.question}
-													</Text>
-													<Text>
-														{question.marks}
-													</Text>
-												</HStack>
-												<HStack
-													align={"end"}
-													padding="4px"
-													justify={"end"}
-													w="15%"
-												>
-													<IconButton
-													
-														onClick={() => {
-															onAddQuestionModalOpen();
-
-															setEditQuestion({
-																...question,
-																index: i,
-															});
-														}}
-														icon={faPenToSquare}
-													/>
-													<IconButton
-													
-														onClick={() => {
-															onDeleteQuestion(i);
-														}}
-														icon={faTrashCan}
-													/>
-												</HStack>
-											</HStack>
+												type = {examMetadata.answerType}
+											/>
 										);
 									})}
 								</Stack>
 							)}
-							<Button
-								alignSelf={"start"}
-								style={{ marginTop: "16px" }}
-								onClick={() => onAddQuestionModalOpen()}
-							>
-								Add Question
-							</Button>
 						</Fragment>
 					)}
 				</VStack>
-			)}
-			<AddExamMetadataModal
-				isOpen={isAddExamMetadataModalOpen}
-				onClose={onAddExamMetadataModalClose}
-				{...{
-					onExamTypeChange,
-					examMetadata,
-					onStartTimeChange,
-					onSelectChange,
-					onCreateClick,
-				}}
-			/>
-			{examMetaId !== null && (
-				<AddQuestionModal
-					isOpen={isAddQuestionModalOpen}
-					onClose={onAddQuestionModalClose}
-					setQuestions={setQuestions}
-					questions={questions}
-					calcMark={calcMark}
-					questionCallback={postQuestion}
-					question={editQuestion}
-					setQuestion={setEditQuestion}
-				></AddQuestionModal>
 			)}
 		</Flex>
 	) : (
@@ -362,7 +269,7 @@ const fetchQuestions = async (examId) => {
 	);
 };
 
-export default SetUpExam;
+export default StudentExam;
 
 const DataRow = ({ title, value }) => {
 	return (
@@ -373,20 +280,47 @@ const DataRow = ({ title, value }) => {
 	);
 };
 
-const IconButton = ({ icon, ...rest }) => {
+const QuestionItem = ({ question, index, type }) => {
 	return (
-		<Center
-		layerStyle ={"themeIconStyle"}
-			borderRadius={"4px"}
-			//bg = {isSelected=== true? "primary.100" : 'transparent' }
-			_hover={{
-				backgroundColor: "primary.100",
-			}}
-			h="24px"
-			w="24px"
-			{...rest}
+		<VStack w = "full" spacing = "16px">
+			<HStack
+			w = "full"
+			fontSize={"12px"}
+			fontWeight="bold"
+			padding={"12px 16px"}
+			rounded="8px"
+			layerStyle={"onSecondarySurfaceStyle"}
 		>
-			<FontAwesomeIcon icon={icon} />
-		</Center>
+			<HStack w="85%">
+				<Text flex="1">
+					{index + 1}. {question.question}
+				</Text>
+				<Text>{question.marks}</Text>
+			</HStack>
+			<HStack
+				align={"end"}
+				padding="4px"
+				justify={"end"}
+				w="15%"
+			></HStack>
+		</HStack>
+		<AnswerInput type = {type}/>
+		</VStack>
 	);
 };
+
+const AnswerInput = ({type}) => {
+	return(
+		<>
+		{
+			type === "MCQ" ? 
+			<Text>MCQ</Text>
+			:
+			<Textarea placeholder="Start typing your answer here...">
+
+			</Textarea>
+		}
+		</>
+
+	)
+}

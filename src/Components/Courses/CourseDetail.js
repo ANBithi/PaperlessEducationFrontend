@@ -32,6 +32,7 @@ import { getCurrentUserId, getFileType } from "../../Helpers/userHelper";
 import { chatService } from "../../services/chat.service";
 import ShowCounter from "../ShowCounter";
 import PostViewerList from "../Post/PostViewerList";
+import CourseActivities from "./Activities/CourseActivities";
 
 const CourseDetails = () => {
 	const { id } = useParams();
@@ -50,7 +51,6 @@ const CourseDetails = () => {
 	const [allPost, setAllPost] = useState([]);
 	const [messages, setMessages] = useState([]);
 	const socketConnectedRef = useRef(false);
-	const navigate = useNavigate();
 	const fetchData = async () => {
 		let res = await sectionService.getSectionDetail(id);
 		setSectionDetail(res.data);
@@ -152,9 +152,7 @@ const CourseDetails = () => {
 			console.log("uploadFile is null");
 		}
 	};
-	const onStartExamClick = () => {
-		navigate(`create-exam`);
-	}
+
 	return (
 		<DataFetcher
 			onDataFetched={fetchData}
@@ -162,13 +160,7 @@ const CourseDetails = () => {
 		>
 			<Flex layerStyle="pageStyleSidePanel">
 				
-				<Box padding="20px" width="30%" maxW="300px">
-				<VStack width="full" align = "start" layerStyle={"courseActivityStyle"}>
-					<Text>Course Activities</Text>
-					<Button onClick = {onStartExamClick}>Start Exam</Button>
-				</VStack>
-				
-				</Box>
+				<CourseActivities/>
 				
 				
 				<VStack padding="20px" align="start"  w="full"  overflow={"auto"}>

@@ -22,9 +22,8 @@ const Courses = () => {
 					<Grid templateColumns="repeat(3, 1fr)" gap="32px">
 					{allCourse?.map((course, index) => {
 							return (
-								<GridItem>
+								<GridItem key={index}>
 								<CourseCard
-									key={index}
 									courseTitle={course.name}
 									section={course.sectionNumber}
 									courseDes={course.courseDescription}

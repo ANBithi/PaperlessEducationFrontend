@@ -1,46 +1,61 @@
-import { parse } from "@fortawesome/fontawesome-svg-core";
 import { authHeader } from "../Helpers/authHeader";
+import { handleResponse } from "../Helpers/handleResponse";
 
 async function addExamMetadata(data) {
-    let {totalMarks, countPercentile} = data;
-    totalMarks = parseInt(totalMarks);
-    countPercentile = parseInt(countPercentile);
-    data = {...data, totalMarks, countPercentile};
-    console.log(data);
-	let response = await fetch("http://localhost:5000/api/exam/addMetadata", {
+	let { totalMarks, countPercentile } = data;
+	totalMarks = parseInt(totalMarks);
+	countPercentile = parseInt(countPercentile);
+	data = { ...data, totalMarks, countPercentile };
+
+	return fetch("http://localhost:5000/api/exam/addMetadata", {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(data),
-	});
-	if (response.ok) {
-		return await response.json();
-	}
+	}).then(handleResponse);
 }
-async function updateQuestions(id,questions) {
-	var request = {id, questions}
-	console.log(request);
-	let response = await fetch(`http://localhost:5000/api/exam/updateQuestions`, {
+async function updateQuestions(id, questions) {
+	var request = { id, questions };
+	return fetch(`http://localhost:5000/api/exam/updateQuestions`, {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
-	});
-	if (response.ok) {
-		return await response.json();
-	}
+	}).then(handleResponse);
 }
 async function getExamMetaData(sectionId) {
-	let response =  await fetch(`http://localhost:5000/api/exam/GetMetadata?sectionId=${sectionId}`,{
-	  method: "GET",
-	  headers: {...authHeader(),'Content-Type': 'application/json'}		
-	})
-	if (response.ok){
-		return await response.json();
-	  }    
+	return fetch(
+		`http://localhost:5000/api/exam/GetMetadata?sectionId=${sectionId}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
+}
+
+async function getUpcomingExams(sectionId) {
+	return fetch(
+		`http://localhost:5000/api/exam/getUpcomingExams?sectionId=${sectionId}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
+}
+
+async function getQuestions(examId) {
+	return fetch(
+		`http://localhost:5000/api/exam/getQuestions?examId=${examId}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
 }
 
 const examService = {
-    addExamMetadata,
+	addExamMetadata,
 	getExamMetaData,
-	updateQuestions
-}
+	updateQuestions,
+	getUpcomingExams,
+	getQuestions
+};
 export default examService;

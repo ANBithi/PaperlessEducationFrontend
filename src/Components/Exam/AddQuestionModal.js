@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const initialQuestion = { question: "", marks: "" };
+const initialQuestion = { question: undefined, marks: "" };
 
 const AddQuestionModal = ({
 	isOpen,

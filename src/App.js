@@ -15,6 +15,7 @@ import Enroll from "./Components/Enroll/Enroll";
 import SetUpExam from "./Components/Exam/SetUpExam";
 import ChangePassword from "./Components/Setting/ChangePassword";
 import { history } from "./Helpers/history";
+import StudentExam from "./Components/Exam/StudentExam";
 function App() {
 	return (
 		<BrowserRouter>
@@ -39,6 +40,10 @@ function App() {
 								<Route
 									path="create-exam"
 									element={<SetUpExam />}
+								/>
+								<Route
+									path="exam"
+									element={<StudentExam/>}
 								/>
 							</Route>
 						</Route>
