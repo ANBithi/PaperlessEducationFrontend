@@ -1,7 +1,7 @@
 import { HStack, Text } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
-const CommentAction = ({ handleEvent, post, label, component }) => {
+const CommentAction = ({ handleEvent, label, component }) => {
 	return (
 		<HStack
 			p={2}
@@ -9,7 +9,7 @@ const CommentAction = ({ handleEvent, post, label, component }) => {
 			align="center"
 			_hover={{ cursor: "pointer" }}
 			onClick={() => {
-				handleEvent(post);
+				handleEvent();
 			}}
 		>
 			{component !== undefined ? (

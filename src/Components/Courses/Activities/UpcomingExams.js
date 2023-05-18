@@ -2,29 +2,24 @@ import { Text, VStack,HStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import examService from "../../../services/exam.service";
 import sectionService from "../../../services/section.service";
+
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import DataFetcher from "../../DataFetcher";
 
 const UpcomingExams = ({ handleClick }) => {
 	const { id } = useParams();
 	const [upcomingExam, setUpcomingExam] = useState();
 	const fetchData = async () => {
-		// let res = await sectionService.getSectionDetail(id);
-		// setSectionDetail(res.data);
-		examService.getUpcomingExams(id).then((res) => {
+		let res = await examService.getUpcomingExams(id);
 			setUpcomingExam(res);
-			//setExamMetaId(res.metadataId);
-			//setQuestions(res.examMetadata.questions ?? []);
-
-			//setIsLoading(false);
-		});
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-
 	return (
+		<DataFetcher
+			onDataFetched={fetchData}
+			isEmpty={upcomingExam === undefined || upcomingExam?.length === 0}
+		>
 		<VStack align={"start"} w ="full" >
 			{upcomingExam?.length > 0 ? (
 				<>
@@ -43,6 +38,7 @@ const UpcomingExams = ({ handleClick }) => {
 				<Text>No upcoming exams!</Text>
 			)}
 		</VStack>
+		</DataFetcher>
 	);
 };
 const UpcomingExam = ({ exam, handleClick }) => {

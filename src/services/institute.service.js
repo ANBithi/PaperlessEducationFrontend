@@ -1,32 +1,48 @@
+import { authHeader } from "../Helpers/authHeader";
+import { handleResponse } from "../Helpers/handleResponse";
+
 async function addInstitute (request) {
-	let response =  await fetch("http://localhost:5000/api/institute/addInstitute",{
+
+	return fetch("http://localhost:5000/api/institute/addInstitute", {
 		method: "POST",
-		headers: {'Content-Type': 'application/json'}, 
-		body: JSON.stringify(request)
-	  })
-	  if (response.ok) {
-		return await response.json();
-	}
+		headers: { ...authHeader(), "Content-Type": "application/json" },
+		body: JSON.stringify(request),
+	}).then(handleResponse);
+	// let response =  await fetch("http://localhost:5000/api/institute/addInstitute",{
+	// 	method: "POST",
+	// 	headers: {'Content-Type': 'application/json'}, 
+	// 	body: JSON.stringify(request)
+	//   })
+	//   if (response.ok) {
+	// 	return await response.json();
+	// }
 }
 async function addHolidays (date) {
-	let response =  await fetch("http://localhost:5000/api/institute/addHoliday",{
+
+	return fetch("http://localhost:5000/api/institute/addHoliday", {
 		method: "POST",
-		headers: {'Content-Type': 'application/json'}, 
-		body: JSON.stringify(date)
-	  })
-	  if (response.ok) {
-		return await response.json();
-	}
+		headers: { ...authHeader(), "Content-Type": "application/json" },
+		body: JSON.stringify(date),
+	}).then(handleResponse);
+
+	// let response =  await fetch("http://localhost:5000/api/institute/addHoliday",{
+	// 	method: "POST",
+	// 	headers: {'Content-Type': 'application/json'}, 
+	// 	body: JSON.stringify(date)
+	//   })
+	//   if (response.ok) {
+	// 	return await response.json();
+	// }
 }
 
 async function getHolidays (){
-    let response = await fetch(`http://localhost:5000/api/institute/getHolidays`, {
-		method: "GET",
-		headers: { "Content-Type": "application/json" },
-	});
-	if (response.ok) {
-		return await response.json();
-	}
+	return fetch(
+		`http://localhost:5000/api/institute/getHolidays`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
 }
 
 const instituteService = {getHolidays, addHolidays, addInstitute}

@@ -164,7 +164,7 @@ const CourseDetails = () => {
 				
 				
 				<VStack padding="20px" align="start"  w="full"  overflow={"auto"}>
-					<VStack width="70%">
+					<VStack width="full">
 					<Center w="full" bg="blue.500" color = "background.50" rounded="16px">
 						<Image
 							roundedLeft="16px"

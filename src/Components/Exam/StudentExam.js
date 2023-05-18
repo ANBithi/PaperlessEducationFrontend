@@ -21,23 +21,17 @@ import examService from "../../services/exam.service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
+import answerService from "../../services/answer.service";
 
 const StudentExam = () => {
 	const { id } = useParams();
 	const location = useLocation();
-	const toast = useToast();
 	const [examMetaId, setExamMetaId] = useState(null);
 	const [examMetadata, setExamMetadata] = useState();
 	const [sectionDetail, setSectionDetail] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [editQuestion, setEditQuestion] = useState(undefined);
 	const [questions, setQuestions] = useState([]);
-
-	const {
-		isOpen: isAddExamMetadataModalOpen,
-		onOpen: onAddExamMetadataModalOpen,
-		onClose: onAddExamMetadataModalClose,
-	} = useDisclosure();
 
 	const fetchCourseData = async () => {
 		let res = await sectionService.getSectionDetail(id);
@@ -49,11 +43,6 @@ const StudentExam = () => {
 		setQuestions(quesRes ?? []);
 	};
 
-	const fetchExam = async () => {
-		let response = await examService.getExamMetaData(id);
-		setExamMetadata(response);
-		setExamMetaId(response.id);
-	};
 	useEffect(() => {
 		let { exam } = location.state;
 		if (exam !== undefined) {
@@ -66,98 +55,6 @@ const StudentExam = () => {
 			// fetchExam();
 		}
 	}, []);
-	const onExamTypeChange = (e) => {
-		let value = e.target.value;
-
-		setExamMetadata(TYPE_OF_EXAMS[value]);
-	};
-	const calcMark = (arr) => {
-		if (arr === undefined) {
-			return;
-		}
-		let sum = 0;
-		arr.forEach((arr) => {
-			sum += parseInt(arr.marks);
-		});
-		return {
-			isEqual: sum > examMetadata.totalMarks ? true : false,
-			remainingNumber: examMetadata.totalMarks - sum,
-		};
-	};
-	const postQuestion = (tempQues, suffix) => {
-		examService.updateQuestions(examMetaId, tempQues).then((d) => {
-			if (d) {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: `Question has been ${suffix}.`,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 5000,
-					isClosable: true,
-				});
-			}
-		});
-	};
-	const onCreateClick = () => {
-		let request = {
-			...examMetadata,
-			courseName: sectionDetail.courseName,
-			sectionNumber: sectionDetail.sectionNumber,
-			sectionId: id,
-			questions: [],
-		};
-		examService.addExamMetadata(request).then((d) => {
-			debugger;
-			if (d.response) {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: "Exam set up done.",
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 5000,
-					isClosable: true,
-				});
-				setExamMetaId(d.metadataId);
-				onAddExamMetadataModalClose();
-			} else {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: "Exam set up failed.",
-					position: "bottom-right",
-					variant: "subtle",
-					status: "error",
-					duration: 5000,
-					isClosable: true,
-				});
-			}
-		});
-	};
-	const onDeleteQuestion = (index) => {
-		let temp = questions.filter((x, i) => i !== index);
-		postQuestion(temp, "deleted");
-		setQuestions(temp);
-	};
-	const onStartTimeChange = (e) => {
-		let { name, value } = e.target;
-		let obj = { ...examMetadata, [name]: value };
-		setExamMetadata(obj);
-	};
-	const onSelectChange = (e) => {
-		let { name, value } = e.target;
-		let obj = { ...examMetadata, [name]: value };
-		setExamMetadata(obj);
-	};
 
 	return isLoading === false ? (
 		<Flex flexDirection="column" layerStyle="pageStyle" align="start">
@@ -310,13 +207,25 @@ const QuestionItem = ({ question, index, type }) => {
 };
 
 const AnswerInput = ({type}) => {
+
+	const onAnswerInputChange = async (event) => {
+
+		let answerObj = {
+			answer : event.target.value,
+			answerType : type,
+			//TODO: Pass question id -> questionId : 
+		}
+
+		await answerService.addAnswer(answerObj);
+	}
+
 	return(
 		<>
 		{
 			type === "MCQ" ? 
 			<Text>MCQ</Text>
 			:
-			<Textarea placeholder="Start typing your answer here...">
+			<Textarea onChange = {onAnswerInputChange} placeholder="Start typing your answer here...">
 
 			</Textarea>
 		}

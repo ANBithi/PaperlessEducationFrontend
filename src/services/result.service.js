@@ -1,23 +1,22 @@
 import { authHeader } from "../Helpers/authHeader";
+import { handleResponse } from "../Helpers/handleResponse";
 
 async function addResult (request) {
-	let response =  await fetch("http://localhost:5000/api/result/add",{
+
+	return fetch("http://localhost:5000/api/result/add", {
 		method: "POST",
-		headers: {...authHeader(), 'Content-Type': 'application/json'}, 
-		body: JSON.stringify(request)
-	  })
-	  if (response.ok) {
-		return await response.json();
-	}
+		headers: { ...authHeader(), "Content-Type": "application/json" },
+		body: JSON.stringify(request),
+	}).then(handleResponse);
 }
 
 async function getResults(userId){
-    let response =  await fetch(`http://localhost:5000/api/result/getAll?belongsTo=${userId}`,{
-		method: "GET",
-		headers: {...authHeader(),'Content-Type': 'application/json'}, 
-	  })
-	  if (response.ok) {
-		return await response.json();
-	}
+	return fetch(
+		`http://localhost:5000/api/result/getAll?belongsTo=${userId}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
 }
 export const resultService = {addResult, getResults}

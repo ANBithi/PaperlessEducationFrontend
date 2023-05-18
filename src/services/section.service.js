@@ -5,10 +5,6 @@ async function getSectionDetail(sectionId) {
 		method: "GET",
 		headers: {...authHeader(),'Content-Type': 'application/json'}		
 	  }).then(handleResponse)
-	//   if (response.ok){
-	// 	let JsonResponse = await response.json(); 
-	// 	return JsonResponse;
-	// 	}    
 }
 
 

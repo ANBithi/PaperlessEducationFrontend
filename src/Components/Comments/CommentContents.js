@@ -8,12 +8,12 @@ const CommentContents = ({ isVisible, comments, currentUser, parentId }) => {
 		<>
 			{isVisible === true && (
 				<>
+				<CommentBox currentUser={currentUser} postId={parentId} />
 					{comments.length > 0 && (
 						<Box style={{ width: "100%", paddingLeft: "20px", paddingTop : "16px" }}>
 							<CommentsList comments={comments} currentUser={currentUser} />
 						</Box>
 					)}
-					<CommentBox currentUser={currentUser} postId={parentId} />
 				</>
 			)}
 		</>

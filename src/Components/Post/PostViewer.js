@@ -184,7 +184,7 @@ const PostViewer = ({ currentUser, post }) => {
 						setUserReaction={setUserReaction}
 					></TotalReactionView>
 					{comments.length > 0 && (
-						<CommentMetadata label="Comment" comments={comments} />
+						<CommentMetadata handleEvent = {onCommentsClick} label="Comment" comments={comments} />
 					)}
 				</HStack>
 			</Box>

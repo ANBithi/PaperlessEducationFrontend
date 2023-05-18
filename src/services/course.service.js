@@ -8,9 +8,6 @@ async function getAllCourse() {
 		method: "GET",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 	}).then(handleResponse);
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
 

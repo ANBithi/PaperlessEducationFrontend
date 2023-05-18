@@ -1,23 +1,17 @@
 import {
 	HStack,
-	Text,
 	Circle,
 	Icon,
 	Avatar,
 	Textarea,
 	Button,
 	VStack,
+	Center,
 } from "@chakra-ui/react";
 import {
-	LinkIcon,
 	AttachmentIcon,
-	ArrowUpIcon,
-	ChatIcon,
 	CheckIcon,
 } from "@chakra-ui/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-regular-svg-icons";
-import { getCurrentUser } from "../../Helpers/userHelper";
 import { useState } from "react";
 import { postService } from "../../services/post.service";
 const CommentBox = ({ currentUser, postId }) => {
@@ -40,15 +34,16 @@ const CommentBox = ({ currentUser, postId }) => {
 		setCommentContent(e.target.value);
 	};
 	return (
-		<VStack w="full" paddingX = "20px" paddingBottom = "12px">
+		<VStack w="full" paddingX = "20px" paddingY = "12px">
 			<HStack w="full">
+				<Center>
 				<Avatar
 					alignSelf="start"
-					size="md"
-					name={`${currentUser.firstName} ${currentUser.lastName}`}
-										
+					size="sm"
+					name={`${currentUser.firstName} ${currentUser.lastName}`}			
 					mb="5px"
 				/>
+				</Center>
 				<HStack w="100%" rounded="24px"  layerStyle = "surfaceStyle">
 					<Textarea
 						placeholder  = "Add a comment..."
@@ -133,9 +128,9 @@ const CommentBox = ({ currentUser, postId }) => {
 				<Button
 					onClick={onCommentPost}
 					//isDisabled={postDisable}
-					rounded="50px"
-					height='48px'
-					width='48px'
+					rounded="20px"
+					height='40px'
+					width='40px'
 
 				>
 					<Icon as={CheckIcon}></Icon>

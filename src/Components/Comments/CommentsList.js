@@ -4,7 +4,7 @@ import CommentItem from "./CommentItem";
 
 const CommentsList = ({ comments, currentUser }) => {
 	return (
-		<Box style={{ width: "100%", paddingLeft: "48px" }}>
+		<Box style={{ width: "100%", paddingLeft: "16px" }}>
 			{comments.map((comment) => {
 				return (
 					<CommentItem

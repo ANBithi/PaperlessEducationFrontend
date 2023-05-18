@@ -1,8 +1,5 @@
-import { Text, VStack } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import examService from "../../../services/exam.service";
-import sectionService from "../../../services/section.service";
-import { useNavigate, useParams } from "react-router-dom";
+import { VStack } from "@chakra-ui/react"
+import { useNavigate } from "react-router-dom";
 import UpcomingExams from "./UpcomingExams";
 
 const StudentActivities = () => {
@@ -14,7 +11,9 @@ const StudentActivities = () => {
 
 
     return (
-        <UpcomingExams handleClick={onExamClick}/>
+        <VStack  w="full" align={"start"}>
+            <UpcomingExams handleClick = {onExamClick}/>
+        </VStack>
     )
 }
 
