@@ -61,6 +61,21 @@ const surfaceStyle = {
 	}
 }
 
+const Checkbox = {
+	 baseStyle :{
+		// define the part you're going to style
+		control: {
+			border: "2px solid",
+			".chakra-ui-light &": {
+				borderColor: "backgroundDark.200",
+			},
+			".chakra-ui-dark &": {
+				borderColor: "background.200",
+			}// change the border radius of the control
+		},
+	  }
+}
+
 const Input = {
 	baseStyle: {
 		field: {
@@ -392,7 +407,8 @@ const theme = extendTheme(
 			Select: Select,
 			Modal : Modal,
 			Popover: Popover,
-			Drawer: Drawer
+			Drawer: Drawer,
+			Checkbox: Checkbox
 		},
 	},
 	withDefaultColorScheme({

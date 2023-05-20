@@ -7,7 +7,7 @@ function isLoggedIn() {
     }
 function logOff() {
   localStorage.setItem("loggedIn-status", false);
-  localStorage.setItem("user", {});
+  localStorage.setItem('user', JSON.stringify({}));
 }
 
 async function logIn(user) {

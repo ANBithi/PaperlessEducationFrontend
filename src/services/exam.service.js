@@ -13,12 +13,19 @@ async function addExamMetadata(data) {
 		body: JSON.stringify(data),
 	}).then(handleResponse);
 }
-async function updateQuestions(id, questions) {
-	var request = { id, questions };
-	return fetch(`http://localhost:5000/api/exam/updateQuestions`, {
+
+async function addQuestion(request) {
+	return fetch(`http://localhost:5000/api/exam/addQuestion`, {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
+	}).then(handleResponse);
+}
+async function updateQuestion(question) {
+	return fetch(`http://localhost:5000/api/exam/updateQuestion`, {
+		method: "POST",
+		headers: { ...authHeader(), "Content-Type": "application/json" },
+		body: JSON.stringify(question),
 	}).then(handleResponse);
 }
 async function getExamMetaData(sectionId) {
@@ -41,9 +48,9 @@ async function getUpcomingExams(sectionId) {
 	).then(handleResponse);
 }
 
-async function getQuestions(examId) {
+async function getQuestions(examId, includeAnswers) {
 	return fetch(
-		`http://localhost:5000/api/exam/getQuestions?examId=${examId}`,
+		`http://localhost:5000/api/exam/getQuestions?examId=${examId}&includeAnswers=${includeAnswers}`,
 		{
 			method: "GET",
 			headers: { ...authHeader(), "Content-Type": "application/json" },
@@ -54,8 +61,9 @@ async function getQuestions(examId) {
 const examService = {
 	addExamMetadata,
 	getExamMetaData,
-	updateQuestions,
+	updateQuestion,
 	getUpcomingExams,
-	getQuestions
+	getQuestions,
+	addQuestion
 };
 export default examService;

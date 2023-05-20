@@ -1,5 +1,5 @@
 import { authHeader } from "../Helpers/authHeader";
-import { handleResponse } from "../Helpers/handleResponse";
+import { handleResponse, withToast } from "../Helpers/handleResponse";
 
 
 async function addAnswer(answer) {
@@ -8,7 +8,7 @@ async function addAnswer(answer) {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(answer),
-	}).then(handleResponse);
+	}).then(withToast).then(handleResponse);
 }
 
 

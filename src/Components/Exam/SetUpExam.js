@@ -21,6 +21,8 @@ import AddQuestionModal from "./AddQuestionModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
+import IconButton from "../HelperComponents/IconButton";
+import QuestionItem from "./QuestionItem";
 
 const SetUpExam = () => {
 	const { id } = useParams();
@@ -49,7 +51,7 @@ const fetchCourseData = async() => {
 	setIsLoading(false);
 }
 const fetchQuestions = async (examId) => {
-	let quesRes = await examService.getQuestions(examId);
+	let quesRes = await examService.getQuestions(examId, false);
 	setQuestions(quesRes ?? []);
 	await fetchCourseData();
 };
@@ -272,52 +274,15 @@ const fetchQuestions = async (examId) => {
 									padding="16px"
 									rounded="8px"
 								>
-									{questions.map((question, i) => {
+									{questions.map((question, index) => {
 										return (
-											<HStack
-												key={i}
-												fontSize={"12px"}
-												fontWeight="bold"
-												padding={"12px 16px"}
-												rounded="8px"
-												layerStyle={"onSecondarySurfaceStyle"}
-											>
-												<HStack w="85%">
-													<Text flex="1">
-														{i + 1}.{" "}
-														{question.question}
-													</Text>
-													<Text>
-														{question.marks}
-													</Text>
-												</HStack>
-												<HStack
-													align={"end"}
-													padding="4px"
-													justify={"end"}
-													w="15%"
-												>
-													<IconButton
-													
-														onClick={() => {
-															onAddQuestionModalOpen();
-
-															setEditQuestion({
-																...question,
-																index: i,
-															});
-														}}
-														icon={faPenToSquare}
-													/>
-													<IconButton
-													
-														onClick={() => {
-															onDeleteQuestion(i);
-														}}
-														icon={faTrashCan}
-													/>
-												</HStack>
-											</HStack>
+											<QuestionItem
+												question={question}
+												index={index}
+												key={index}
+												direction = {"row"}
+												additionalComponent={<QuestionEditTools {...{setEditQuestion, question, onAddQuestionModalOpen, index, onDeleteQuestion}}/>}
+											/>
 										);
 									})}
 								</Stack>
@@ -344,12 +309,11 @@ const fetchQuestions = async (examId) => {
 					onCreateClick,
 				}}
 			/>
-			{examMetaId !== null && (
+			{examMetadata !== null && (
 				<AddQuestionModal
 					isOpen={isAddQuestionModalOpen}
 					onClose={onAddQuestionModalClose}
-					setQuestions={setQuestions}
-					questions={questions}
+					examId={examMetadata.id}
 					calcMark={calcMark}
 					questionCallback={postQuestion}
 					question={editQuestion}
@@ -373,20 +337,24 @@ const DataRow = ({ title, value }) => {
 	);
 };
 
-const IconButton = ({ icon, ...rest }) => {
+const QuestionEditTools = ({setEditQuestion, question, onAddQuestionModalOpen, index, onDeleteQuestion}) => {
 	return (
-		<Center
-		layerStyle ={"themeIconStyle"}
-			borderRadius={"4px"}
-			//bg = {isSelected=== true? "primary.100" : 'transparent' }
-			_hover={{
-				backgroundColor: "primary.100",
-			}}
-			h="24px"
-			w="24px"
-			{...rest}
-		>
-			<FontAwesomeIcon icon={icon} />
-		</Center>
+		<HStack alignSelf={"start"} padding="4px" justify={"end"} w="15%">
+			<IconButton
+				onClick={() => {
+					onAddQuestionModalOpen();
+
+					setEditQuestion(question);
+				}}
+				icon={faPenToSquare}
+			/>
+			<IconButton
+				onClick={() => {
+					onDeleteQuestion(index);
+				}}
+				icon={faTrashCan}
+			/>
+		</HStack>
 	);
 };
+

@@ -2,6 +2,8 @@
 // import { store } from './';
 import loginService from '../services/login.service';
 import { history } from './history';
+import { createStandaloneToast } from "@chakra-ui/react";
+const { toast } = createStandaloneToast();
 
 export function handleResponse(response) {
     return response.text().then((text) => {
@@ -83,4 +85,22 @@ export function handleResponse(response) {
             return parsed;
         }
     });
+}
+
+export function withToast(response) {
+    if(response.ok) {
+        toast({
+			containerStyle: {
+				fontSize: "14px",
+				fontWeight: "normal",
+			},
+			title: "Success!",
+			position: "bottom-right",
+			variant: "subtle",
+			status: "success",
+			duration: 2000,
+			isClosable: true,
+		});
+    }
+    return response;
 }

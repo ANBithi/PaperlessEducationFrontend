@@ -7,7 +7,7 @@ import {
 	useDisclosure,
 	useToast,
 	Stack,
-	Center,
+	Checkbox,
 	Textarea,
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
@@ -22,6 +22,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
 import answerService from "../../services/answer.service";
+import IconButton from "../HelperComponents/IconButton";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import QuestionItem from "./QuestionItem";
 
 const StudentExam = () => {
 	const { id } = useParams();
@@ -39,7 +42,7 @@ const StudentExam = () => {
 		setIsLoading(false);
 	};
 	const fetchQuestions = async (examId) => {
-		let quesRes = await examService.getQuestions(examId);
+		let quesRes = await examService.getQuestions(examId, true);
 		setQuestions(quesRes ?? []);
 	};
 
@@ -150,7 +153,7 @@ const StudentExam = () => {
 												question={question}
 												index={i}
 												key={i}
-												type = {examMetadata.answerType}
+												additionalComponent= {<AnswerInput examId = {examMetadata.id} answerType = {question.answerType} question={question}/>}
 											/>
 										);
 									})}
@@ -177,59 +180,58 @@ const DataRow = ({ title, value }) => {
 	);
 };
 
-const QuestionItem = ({ question, index, type }) => {
-	return (
-		<VStack w = "full" spacing = "16px">
-			<HStack
-			w = "full"
-			fontSize={"12px"}
-			fontWeight="bold"
-			padding={"12px 16px"}
-			rounded="8px"
-			layerStyle={"onSecondarySurfaceStyle"}
-		>
-			<HStack w="85%">
-				<Text flex="1">
-					{index + 1}. {question.question}
-				</Text>
-				<Text>{question.marks}</Text>
-			</HStack>
-			<HStack
-				align={"end"}
-				padding="4px"
-				justify={"end"}
-				w="15%"
-			></HStack>
-		</HStack>
-		<AnswerInput type = {type}/>
-		</VStack>
-	);
-};
 
-const AnswerInput = ({type}) => {
 
-	const onAnswerInputChange = async (event) => {
+const AnswerInput = ({answerType, question, examId}) => {
+
+	const [answerObj, setAnswerObj] = useState({});
+	const onAnswerInputChange =  (event) => {
 
 		let answerObj = {
-			answer : event.target.value,
-			answerType : type,
-			//TODO: Pass question id -> questionId : 
+			content : event.target.value,
 		}
 
-		await answerService.addAnswer(answerObj);
+		setAnswerObj(answerObj);		
 	}
 
-	return(
+	const onSaveClick = async () => {
+
+		let obj = {...answerObj, answerType,
+			questionId : question.id, examId,
+			 //TODO: Pass question id -> questionId : 
+		};
+
+		await answerService.addAnswer(obj);
+	}
+
+	return (
 		<>
-		{
-			type === "MCQ" ? 
-			<Text>MCQ</Text>
-			:
-			<Textarea onChange = {onAnswerInputChange} placeholder="Start typing your answer here...">
-
-			</Textarea>
-		}
+			{question.questionType === 0 ? (
+				<VStack align = "start">
+					<Text layerStyle = "sectionHeaderStyle">Select an option</Text>
+					<HStack w="full" spacing = "32px">
+						{question?.options?.map((value) => {
+							return <Checkbox isChecked = {question.answer ? question.answer.content === value.value : answerObj.content === value.value} 
+							onChange  = {(e)=> { setAnswerObj({content : value.value});}} key={value.prefix} value = {value.value}>{value.value}</Checkbox>;
+						})}
+					</HStack>
+				</VStack>
+			) : (
+				<>
+					<Textarea
+						onChange={onAnswerInputChange}
+						placeholder="Start typing your answer here..."
+						defaultValue={question.answer?.content ?? ""}
+					></Textarea>
+				</>
+			)}
+			<IconButton
+						alignSelf="start"
+						icon={faCheck}
+						onClick={onSaveClick}
+					>
+						Save
+					</IconButton>
 		</>
-
-	)
+	);
 }
