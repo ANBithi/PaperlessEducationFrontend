@@ -153,7 +153,7 @@ const StudentExam = () => {
 												question={question}
 												index={i}
 												key={i}
-												additionalComponent= {<AnswerInput examId = {examMetadata.id} answerType = {question.answerType} question={question}/>}
+												additionalComponent= {<AnswerInput examId = {examMetadata.id} question={question}/>}
 											/>
 										);
 									})}
@@ -182,11 +182,11 @@ const DataRow = ({ title, value }) => {
 
 
 
-const AnswerInput = ({answerType, question, examId}) => {
+const AnswerInput = ({question, examId}) => {
 
-	const [answerObj, setAnswerObj] = useState({});
+	const [answerObj, setAnswerObj] = useState({content : question.answer ? question.answer.content : ''});
 	const onAnswerInputChange =  (event) => {
-
+		
 		let answerObj = {
 			content : event.target.value,
 		}
@@ -196,7 +196,7 @@ const AnswerInput = ({answerType, question, examId}) => {
 
 	const onSaveClick = async () => {
 
-		let obj = {...answerObj, answerType,
+		let obj = {...answerObj, answerType: question.questionType,
 			questionId : question.id, examId,
 			 //TODO: Pass question id -> questionId : 
 		};
@@ -211,8 +211,8 @@ const AnswerInput = ({answerType, question, examId}) => {
 					<Text layerStyle = "sectionHeaderStyle">Select an option</Text>
 					<HStack w="full" spacing = "32px">
 						{question?.options?.map((value) => {
-							return <Checkbox isChecked = {question.answer ? question.answer.content === value.value : answerObj.content === value.value} 
-							onChange  = {(e)=> { setAnswerObj({content : value.value});}} key={value.prefix} value = {value.value}>{value.value}</Checkbox>;
+							return <Checkbox isChecked = {answerObj.content === value.value} 
+							onChange  = {(e)=> {console.log(e.target.value); setAnswerObj({content : e.target.value});}} key={value.prefix} value = {value.value}>{value.value}</Checkbox>;
 						})}
 					</HStack>
 				</VStack>

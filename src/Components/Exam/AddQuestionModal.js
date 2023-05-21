@@ -35,7 +35,7 @@ const AddQuestionModal = ({
 	const [disableInput, setDisableInput] = useState(false);
 	const [options, setOptions] = useState(initialOptions);
 	const [individualQuestion, setIndividualQuestion] =
-		useState(initialQuestion);
+		useState({...question});
 	
 
 	
@@ -160,7 +160,7 @@ const AddQuestionModal = ({
 	}, [question]);
 
 	return (
-		<Modal
+		<Modal 
 			isOpen={isOpen}
 			onClose={() => {
 				setQuestion(undefined);
@@ -168,18 +168,21 @@ const AddQuestionModal = ({
 				onClose();
 			}}
 			size="xl"
+			
 		>
 			<ModalOverlay />
-			<ModalContent>
+			<ModalContent maxH = "80vh">
 				<ModalHeader>
 					{question ? "Edit Question" : "Add Question"}
 				</ModalHeader>
 				<ModalCloseButton />
-				<ModalBody>
+				<ModalBody overflowY = "auto" >
 					<VStack
 						minH="30%"
 						spacing="16px"
 						rounded="16px"
+						className="helloStack"
+						
 						fontSize={"14px"}
 					>
 						{disableInput === false ? (
@@ -193,14 +196,13 @@ const AddQuestionModal = ({
 										: "Insert question and mark"}
 								</Text>
 								<VStack w="full">
-									<HStack
-										w="full"
-										layerStyle={"inputStackStyle"}
-									>
+									
 										<Input
 											name="content"
+											layerStyle={"inputStackStyle"}
 											onChange={onInputChange}
 											placeholder="Enter question"
+											w="full"
 											defaultValue={
 												question
 													? question.content
@@ -208,15 +210,13 @@ const AddQuestionModal = ({
 											}
 											variant="unstyled"
 										></Input>
-									</HStack>
-									<HStack
-										w="full"
-										layerStyle={"inputStackStyle"}
-									>
+									
+									
 										<Input
 											name="mark"
 											placeholder="Mark"
 											type="number"
+											layerStyle={"inputStackStyle"}
 											defaultValue={
 												question
 													? question.mark
@@ -225,12 +225,10 @@ const AddQuestionModal = ({
 											variant="unstyled"
 											onChange={onInputChange}
 										></Input>
-									</HStack>
-									<HStack
+									
+										<Select
 										w="full"
 										layerStyle={"inputStackStyle"}
-									>
-										<Select
 											name="questionType"
 											placeholder="Select Question type"
 											type="number"
@@ -246,12 +244,12 @@ const AddQuestionModal = ({
 											<option value = {1}>Broad</option>
 
 										</Select>
-									</HStack>
 									{
 											(individualQuestion.questionType === "0" || question?.questionType === 0 ) && 
-											<VStack w = "full" align = "start">
+											<VStack w = "full" align = "start" overflowY="auto">
 											<Text>Please provide options</Text>
-											{options.map((value)=>{
+											{ options &&
+											options.map((value)=>{
 												return (
 														<HStack
 														layerStyle={
