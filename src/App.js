@@ -16,6 +16,7 @@ import SetUpExam from "./Components/Exam/SetUpExam";
 import ChangePassword from "./Components/Setting/ChangePassword";
 import { history } from "./Helpers/history";
 import StudentExam from "./Components/Exam/StudentExam";
+import FacultyExam from "./Components/Exam/FacultyExam";
 function App() {
 	return (
 		<BrowserRouter>
@@ -46,6 +47,10 @@ function App() {
 									element={<StudentExam/>}
 								/>
 							</Route>
+						</Route>
+						<Route path="exam">
+							<Route index element={<FacultyExam />}/>
+							{/* <Route path=":id" element={<CourseResult />} /> */}
 						</Route>
 						<Route path="results">
 							<Route index element={<Courses />}/>

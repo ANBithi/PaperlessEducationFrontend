@@ -54,41 +54,9 @@ export default function Layout() {
 						? STUDENT_NAV
 						: DATA
 					).map((item, i) => (
-						<HStack key={i}>
-							{item.hasNotification === true ? (
-								<Menu>
-									<MenuButton
-										style={{ marginInlineStart: "-2rem" }}
-										m={0}
-										as={Button}
-										variant="nav"
-										rightIcon={<BellIcon />}
-									>
-										{item.label}
-									</MenuButton>
-									<MenuList>
-										{item.subMenu.map((menu, index) => {
-											return (
-												<MenuItem key={index}>
-													<Link
-														to={menu.link}
-														style={{
-															width: "100%",
-														}}
-													>
-														{menu.label}
-													</Link>
-												</MenuItem>
-											);
-										})}
-									</MenuList>
-								</Menu>
-							) : (
-								<Link key={i} to={item.link}>
-									<Button variant="nav">{item.label}</Button>
-								</Link>
-							)}
-						</HStack>
+						<Link key={i} to={item.link}>
+							<Button variant="nav">{item.label}</Button>
+						</Link>
 					))}
 				</HStack>
 
@@ -96,18 +64,14 @@ export default function Layout() {
 					<Notification />
 
 					<HStack>
-						<Menu >
-							<MenuButton								
-								m={0}
-								as={Button}
-								variant="nav"
-							>
+						<Menu>
+							<MenuButton m={0} as={Button} variant="nav">
 								<Avatar
 									size="sm"
-									name={`${userData?.firstName} ${userData?.lastName}`}									
+									name={`${userData?.firstName} ${userData?.lastName}`}
 								/>
 							</MenuButton>
-							<MenuList layerStyle = "onSurfaceStyle">
+							<MenuList layerStyle="onSurfaceStyle">
 								<MenuItem>
 									<Link
 										to="/settings"
@@ -137,9 +101,6 @@ export default function Layout() {
 				</HStack>
 			</Flex>
 
-			{/* An <Outlet> renders whatever child route is currently active,
-			so you can think about this <Outlet> as a placeholder for
-			the child routes we defined above. */}
 			<Outlet />
 		</div>
 	);

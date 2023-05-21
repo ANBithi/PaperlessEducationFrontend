@@ -7,8 +7,16 @@ async function getSectionDetail(sectionId) {
 	  }).then(handleResponse)
 }
 
+async function getAllStudents(sectionId) {
+	return fetch(`http://localhost:5000/api/section/getAllStudents?sectionId=${sectionId}`,{
+	  method: "GET",
+	  headers: {...authHeader(),'Content-Type': 'application/json'}		
+	}).then(handleResponse)
+}
 
 
 
-const sectionService = { getSectionDetail};
+
+
+const sectionService = { getSectionDetail, getAllStudents};
 export default sectionService;

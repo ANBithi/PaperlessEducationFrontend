@@ -101,7 +101,10 @@ const FACULTY_NAV = [
 	{
 		label: "Courses",
 		link: "/courses",
-		hasNotification : false
+	},
+	{
+		label: "Exam",
+		link: "/exam",
 	},
 	{
 		label: "Results",
@@ -147,11 +150,15 @@ const STUDENT_NAV = [
 	{
 		label: "Courses",
 		link: "/courses",
-		hasNotification : false
+		
 	},
 	{
 		label: "Enroll",
 		link: "/enroll",
+	},
+	{
+		label: "Exam",
+		link: "/exam",
 	},
 	{
 		label: "Results",

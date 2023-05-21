@@ -4,7 +4,7 @@ import { getCurrentUserId, getCurrentUser } from "../Helpers/userHelper";
 
 async function getAllCourse() {
 	let user = getCurrentUser();	
-	return fetch(`http://localhost:5000/api/section/getAllSections?user=${user.id}&type=${user.userType}`, {
+	return fetch(`http://localhost:5000/api/section/getAllSections`, {
 		method: "GET",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 	}).then(handleResponse);
