@@ -32,9 +32,6 @@ function AddExamMetadataModal({
 	onCreateClick,
 }) {
 	const parseDate = (date) => {
-
-		
-		debugger;
 		var currentDate  = new Date(date) ?? new Date();
 		// var isoDateTime = new Date("2015-10-05T08:30:00");
 		// var localDateTime = isoDateTime.toLocaleDateString() + " " + isoDateTime.toLocaleTimeString();

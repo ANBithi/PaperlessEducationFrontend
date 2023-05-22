@@ -23,6 +23,7 @@ import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
 import IconButton from "../HelperComponents/IconButton";
 import QuestionItem from "./QuestionItem";
+import DataRow from "../HelperComponents/DataRow";
 
 const SetUpExam = () => {
 	const { id } = useParams();
@@ -117,6 +118,7 @@ const fetchQuestions = async (examId) => {
 			...examMetadata,
 			courseName: sectionDetail.courseName,
 			sectionNumber: sectionDetail.sectionNumber,
+			courseCode : sectionDetail.courseCode,
 			sectionId: id,
 			questions: [],
 		};
@@ -184,7 +186,7 @@ const fetchQuestions = async (examId) => {
 						align="start"
 						w="full"
 						spacing={8}
-						//bg="background.200"
+						
 						padding="16px"
 						rounded="8px"
 					>
@@ -327,15 +329,6 @@ const fetchQuestions = async (examId) => {
 };
 
 export default SetUpExam;
-
-const DataRow = ({ title, value }) => {
-	return (
-		<HStack fontWeight={"bold"} w="full" spacing="8px">
-			<Text>{title}</Text>
-			<Text>{value}</Text>
-		</HStack>
-	);
-};
 
 const QuestionEditTools = ({setEditQuestion, question, onAddQuestionModalOpen, index, onDeleteQuestion}) => {
 	return (

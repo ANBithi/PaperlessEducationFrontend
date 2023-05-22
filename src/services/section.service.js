@@ -13,10 +13,16 @@ async function getAllStudents(sectionId) {
 	  headers: {...authHeader(),'Content-Type': 'application/json'}		
 	}).then(handleResponse)
 }
+async function getStudentDetails(studentId) {
+	return fetch(`http://localhost:5000/api/section/getStudentDetails?studentId=${studentId}`,{
+	  method: "GET",
+	  headers: {...authHeader(),'Content-Type': 'application/json'}		
+	}).then(handleResponse)
+}
 
 
 
 
 
-const sectionService = { getSectionDetail, getAllStudents};
+const sectionService = { getSectionDetail, getAllStudents, getStudentDetails};
 export default sectionService;

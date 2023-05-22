@@ -3,9 +3,6 @@ import {
 	Flex,
 	VStack,
 	HStack,
-	Button,
-	useDisclosure,
-	useToast,
 	Stack,
 	Checkbox,
 	Textarea,
@@ -13,14 +10,10 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import { useLocation, useParams } from "react-router-dom";
-import { QUIZ_ANSWER_TYPE_OPTIONS, QUIZ_COUNT_PERCENTILE_OPTIONS, TYPE_OF_EXAMS } from "./examData";
+import { QUIZ_COUNT_PERCENTILE_OPTIONS } from "./examData";
 import sectionService from "../../services/section.service";
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import examService from "../../services/exam.service";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
-import AddExamMetadataModal from "./AddExamMetadataModal";
 import answerService from "../../services/answer.service";
 import IconButton from "../HelperComponents/IconButton";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";

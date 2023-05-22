@@ -17,6 +17,7 @@ import ChangePassword from "./Components/Setting/ChangePassword";
 import { history } from "./Helpers/history";
 import StudentExam from "./Components/Exam/StudentExam";
 import FacultyExam from "./Components/Exam/FacultyExam";
+import FacultyExamView from "./Components/Exam/FacultyExamView";
 function App() {
 	return (
 		<BrowserRouter>
@@ -50,6 +51,7 @@ function App() {
 						</Route>
 						<Route path="exam">
 							<Route index element={<FacultyExam />}/>
+							<Route path=":id" element = {<FacultyExamView/>}/>
 							{/* <Route path=":id" element={<CourseResult />} /> */}
 						</Route>
 						<Route path="results">

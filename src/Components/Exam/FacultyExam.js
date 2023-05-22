@@ -1,76 +1,60 @@
-import { Flex, Text, VStack, Box } from "@chakra-ui/react"
+import { Flex, Text, VStack, Box, HStack } from "@chakra-ui/react"
 import React, { useEffect, useState } from "react";
-import courseService from "../../services/course.service";
 import sectionService from "../../services/section.service"
+import examService from "../../services/exam.service";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 
 const FacultyExam = () => {
-    const [allCourses, setAllCourses] = useState([]);
-    const [selectedCourse, setSelectedCourse] = useState();
-    const [students, setStudents] = useState([]);
-    const fetchCourses = async () => {
-		let data = await courseService.getAllCourse();
-		setAllCourses(data.data);
+    const [allExams, setAllExams] = useState([]);
+    const [selectedExam, setSelectedExam] = useState();
+    const navigate = useNavigate();
+    const fetchExams = async () => {
+		let data = await examService.getAllExams();
+		setAllExams(data);
 	};
 
-    const fetchStudents = async () => {
-        let data = await sectionService.getAllStudents(selectedCourse.sectionId);
-        setStudents(data);
-    }
-
     useEffect(()=>{
-        fetchCourses();
+        fetchExams();
     }, [])
     useEffect(()=>{
-        if(selectedCourse === undefined)
+        if(selectedExam === undefined)
         {
             return;
         }
-        fetchStudents();
-    }, [selectedCourse])
+        navigate(`${selectedExam.id}`, { state: {exam : selectedExam}});
+    }, [selectedExam])
 
     return (
-        <Flex layerStyle = "pageStyle" p = "0">
-            <VStack style = {{borderRight : "1px solid"}} w = "250px" align = "start" p = "16px" layerStyle = "onSecondarySurfaceStyle">
-                <Text layerStyle = "sectionHeaderStyle">All courses</Text>
+        <Flex layerStyle = "pageStyle" flexDir={"column"}>
+             <Text layerStyle = "sectionHeaderStyle">All Exams</Text>
+            <HStack spacing  = "16px" w = "full" align = "start" py = "16px">
                 {
-                    allCourses.map((course, i)=>{
+                    allExams.map((exam, i)=>{
                         return(
-                            <Box layerStyle={"onSurfaceStyle"}
-                            w = "full" p = "8px 16px"
-                             rounded = "8px" boxShadow = "md"
-                             key = {i}
-                             onClick={()=>{setSelectedCourse(course)}}>
-                                <Text>
-                                    {course.courseName}
+                            <Box layerStyle={"courseCardStyle"}
+                            p = "8px"
+                            key = {i}
+                             onClick={()=>{setSelectedExam(exam)}}  _hover={{cursor : "pointer"}}>
+                                 <Text fontWeight={"bold"}>
+                                    {exam.examTitle}
+                                </Text>
+                                <Text fontWeight={"bold"}>
+                                    {exam.courseName}
+                                </Text>
+                                <Text mt = "8px" textStyle={"smallAndBoldStyle"}>
+                                    Section : {exam.sectionNumber}
+                                </Text>
+                                <Text mt = "8px" textStyle={"smallAndBoldStyle"}>
+                                    Date : {moment(exam.startTime).format("DD-MM-yy @ hh:mm")}
                                 </Text>
                             </Box>
                         )
                     })
                 }
 
-            </VStack>
-            <VStack w = "250px" align = "start" p = "16px" layerStyle = "onSecondarySurfaceStyle">
-            <Text layerStyle = "sectionHeaderStyle">All Students</Text>
-            {
-                    students.map((student, i)=>{
-                        return(
-                            <Box layerStyle={"onSurfaceStyle"}
-                            w = "full" p = "8px 16px"
-                             rounded = "8px" boxShadow = "md"
-                             key = {i}
-                             >
-                                <Text>
-                                    {student.name}
-                                </Text>
-                            </Box>
-                        )
-                    })
-                }
-            </VStack>
-            <VStack flex = "1">
-
-            </VStack>
+            </HStack>
         </Flex>
     )
 }

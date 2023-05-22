@@ -48,6 +48,16 @@ async function getUpcomingExams(sectionId) {
 	).then(handleResponse);
 }
 
+async function getAllExams() {
+	return fetch(
+		`http://localhost:5000/api/exam/getAllExamsByUser`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
+}
+
 async function getQuestions(examId, includeAnswers) {
 	return fetch(
 		`http://localhost:5000/api/exam/getQuestions?examId=${examId}&includeAnswers=${includeAnswers}`,
@@ -64,6 +74,7 @@ const examService = {
 	updateQuestion,
 	getUpcomingExams,
 	getQuestions,
-	addQuestion
+	addQuestion,
+	getAllExams
 };
 export default examService;
