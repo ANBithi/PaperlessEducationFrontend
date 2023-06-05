@@ -51,24 +51,23 @@ export const ChatDrawer = ({
 
 	const handleNewMessage = (event) => {
 		let data = JSON.parse(event.data);
-	chatService.getSingle(data.dataId).then((p)=>{
-		console.log(p);
-		if(p.createdBy !== getCurrentUserId()){
-			toast({
-				containerStyle: {
-					fontSize: "14px",
-					fontWeight: "normal",
-				},
-				title: `${p.creatorName} messaged!`,
-				position: "bottom-right",
-				variant: "subtle",
-				status: "info",
-				duration: 5000,
-				isClosable: true,
-			});
-			fetchData();
-		}
-	})
+		chatService.getSingle(data.dataId).then((p) => {
+			if (p.createdBy !== getCurrentUserId()) {
+				toast({
+					containerStyle: {
+						fontSize: "14px",
+						fontWeight: "normal",
+					},
+					title: `${p.creatorName} messaged!`,
+					position: "bottom-right",
+					variant: "subtle",
+					status: "info",
+					duration: 5000,
+					isClosable: true,
+				});
+				fetchData();
+			}
+		});
 	};
 
 	

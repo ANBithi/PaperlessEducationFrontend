@@ -26,7 +26,7 @@ const Administration = () => {
 	const [allUsers, setAllUsers] = useState();
 	const [addInstituteObj, setAddInstituteObj] = useState();
 	const [addUserObj, setAddUserObj] = useState();
-	const [addStudentsObj, setAddStudentsObj] = useState();
+	const [addStudentsObj, setAddStudentsObj] = useState({});
 	const [addHoliday, setAddHoliday] = useState([]);
 	const [addDepartments, setAddDepartments] = useState([]);
 	const toast = useToast();
@@ -112,6 +112,8 @@ const Administration = () => {
 					duration: 1000,
 					isClosable: true,
 				});
+
+				setAddStudentsObj({})
 			} else {
 				toast({
 					containerStyle: {
@@ -203,6 +205,7 @@ const Administration = () => {
 								<HStack layerStyle="inputStackStyle">
 									<Text w="20%">Student Names</Text>
 									<Textarea
+										defaultValue={addStudentsObj.students}
 										name="students"
 										layerStyle="inputStyle"
 										onChange={onAddStudentsChange}
@@ -211,18 +214,19 @@ const Administration = () => {
 								<HStack layerStyle="inputStackStyle">
 									<Text w="20%">Batch</Text>
 									<Input
+										defaultValue={addStudentsObj.batch}
 										name="batch"
 										layerStyle="inputStyle"
 										onChange={onAddStudentsChange}
 									/>
 								</HStack>
-								{/* email input */}
 								<HStack layerStyle="inputStackStyle">
 									<Text w="20%">Advisor</Text>
 									<Input
 										name="advisorId"
 										layerStyle="inputStyle"
 										onChange={onAddStudentsChange}
+										defaultValue={addStudentsObj.advisorId}
 									/>
 								</HStack>
 
@@ -230,6 +234,7 @@ const Administration = () => {
 								<HStack layerStyle="inputStackStyle">
 									<Text w="20%">Department</Text>
 									<Select
+										defaultValue={addStudentsObj.department}
 										name="department"
 										w="70%"
 										placeholder="Select a type"

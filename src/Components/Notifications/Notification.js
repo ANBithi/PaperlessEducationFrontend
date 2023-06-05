@@ -60,6 +60,7 @@ const Notification = () => {
 				setAllNotifications(p);
 			});
 	}, []);
+	
 	const handleNewNotification = (event) => {
 		// let data = JSON.parse(event.data);
 	notificationService.getNotifications(getCurrentUserId(), "post").then((p)=>{

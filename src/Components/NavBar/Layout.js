@@ -22,12 +22,11 @@ import Notification from "../Notifications/Notification";
 
 export default function Layout() {
 	const navigate = useNavigate();
-	const [userData, setUserData] = useState();
+	const userData = getCurrentUser();
 
 	useEffect(() => {
-		setUserData(getCurrentUser());
-		console.log(userData);
 	}, []);
+
 
 	const onLogoutClick = () => {
 		loginService.logOff();

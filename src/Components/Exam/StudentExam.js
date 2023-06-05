@@ -7,7 +7,7 @@ import {
 	Checkbox,
 	Textarea,
 } from "@chakra-ui/react";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { useLocation, useParams } from "react-router-dom";
 import { QUIZ_COUNT_PERCENTILE_OPTIONS } from "./examData";
@@ -18,9 +18,12 @@ import answerService from "../../services/answer.service";
 import IconButton from "../HelperComponents/IconButton";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import QuestionItem from "./QuestionItem";
+import { getCurrentUserId } from "../../Helpers/userHelper";
+import { authHeader } from "../../Helpers/authHeader";
 
 const StudentExam = () => {
 	const { id } = useParams();
+	const socketConnectedRef = useRef(false);
 	const location = useLocation();
 	const [examMetaId, setExamMetaId] = useState(null);
 	const [examMetadata, setExamMetadata] = useState();
@@ -38,7 +41,6 @@ const StudentExam = () => {
 		let quesRes = await examService.getQuestions(examId, true);
 		setQuestions(quesRes ?? []);
 	};
-
 	useEffect(() => {
 		let { exam } = location.state;
 		if (exam !== undefined) {
@@ -46,11 +48,30 @@ const StudentExam = () => {
 			setExamMetaId(exam.id);
 			fetchQuestions(exam.id);
 			fetchCourseData();
+			if (socketConnectedRef.current === false) {
+				const webSocket = new WebSocket(`ws://localhost:443/exam`);
+				webSocket.onmessage = handleConnection;
+				webSocket.onopen = () => {
+					webSocket.send(JSON.stringify({
+						userId: getCurrentUserId(),
+						activityFor : 3,
+						activityForId: exam.id,
+					}));
+				}
+			}
+			socketConnectedRef.current = true;
 		} else {
 			fetchCourseData();
 			// fetchExam();
 		}
 	}, []);
+
+
+	const handleConnection = (event) => {
+		console.log("live working");
+		let data = JSON.parse(event.data);
+		console.log(data);
+	}
 
 	return isLoading === false ? (
 		<Flex flexDirection="column" layerStyle="pageStyle" align="start">
