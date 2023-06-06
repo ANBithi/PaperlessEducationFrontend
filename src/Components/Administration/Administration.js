@@ -21,12 +21,13 @@ import {
 import { useEffect, useState } from "react";
 import instituteService from "../../services/institute.service";
 import userService from "../../services/user.service";
+import AddStudentView from "./AddStudentView";
 
 const Administration = () => {
 	const [allUsers, setAllUsers] = useState();
 	const [addInstituteObj, setAddInstituteObj] = useState();
 	const [addUserObj, setAddUserObj] = useState();
-	const [addStudentsObj, setAddStudentsObj] = useState({});
+	
 	const [addHoliday, setAddHoliday] = useState([]);
 	const [addDepartments, setAddDepartments] = useState([]);
 	const toast = useToast();
@@ -48,11 +49,7 @@ const Administration = () => {
 		var newObj = { ...addUserObj, [name]: value};
 		setAddUserObj(newObj);
 	};
-	const onAddStudentsChange = (e) => {
-		let { value, name } = e.target;
-		var newObj = { ...addStudentsObj, [name]: value};
-		setAddStudentsObj(newObj);
-	};
+
 	const onHolidayAddChange = (e) => {
 		let { value } = e.target;
 		let list = [...addHoliday, new Date(value)];
@@ -96,40 +93,7 @@ const Administration = () => {
 		});
 	};
 
-	const onAddStudent = () => {
-		console.log(addStudentsObj);
-		userService.addStudents(addStudentsObj).then((d) => {
-			if (d.isCreated) {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 1000,
-					isClosable: true,
-				});
-
-				setAddStudentsObj({})
-			} else {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "error",
-					duration: 1000,
-					isClosable: true,
-				});
-			}
-		});
-	};
+	
 
 	const onAddInstitute = () => {
 		let {establishedYear, semesterDuration} = addInstituteObj;
@@ -201,50 +165,7 @@ const Administration = () => {
 							<AccordionIcon />
 						</AccordionButton>
 						<AccordionPanel pb={4}>
-							<VStack spacing={2}>
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Student Names</Text>
-									<Textarea
-										defaultValue={addStudentsObj.students}
-										name="students"
-										layerStyle="inputStyle"
-										onChange={onAddStudentsChange}
-									/>
-								</HStack>
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Batch</Text>
-									<Input
-										defaultValue={addStudentsObj.batch}
-										name="batch"
-										layerStyle="inputStyle"
-										onChange={onAddStudentsChange}
-									/>
-								</HStack>
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Advisor</Text>
-									<Input
-										name="advisorId"
-										layerStyle="inputStyle"
-										onChange={onAddStudentsChange}
-										defaultValue={addStudentsObj.advisorId}
-									/>
-								</HStack>
-
-								
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Department</Text>
-									<Select
-										defaultValue={addStudentsObj.department}
-										name="department"
-										w="70%"
-										placeholder="Select a type"
-										onChange={onAddStudentsChange}
-									>
-										<option value="6390085e0816ceea4ce5ebc9">CSE</option>
-									</Select>
-								</HStack>
-								<Button onClick={onAddStudent}>Add</Button>
-							</VStack>
+							<AddStudentView/>
 						</AccordionPanel>
 					</AccordionItem>
 					<AccordionItem>

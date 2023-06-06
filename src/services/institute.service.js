@@ -45,5 +45,27 @@ async function getHolidays (){
 	).then(handleResponse);
 }
 
-const instituteService = {getHolidays, addHolidays, addInstitute}
+
+async function getDepartments (){
+	return fetch(
+		`http://localhost:5000/api/institute/getDepartments`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
+}
+
+async function getFacultiesByDepartment (departmentId){
+	return fetch(
+		`http://localhost:5000/api/institute/getFacultiesByDepartment?departmentId=${departmentId}`,
+		{
+			method: "GET",
+			headers: { ...authHeader(), "Content-Type": "application/json" },
+		}
+	).then(handleResponse);
+}
+
+const instituteService = {getHolidays, addHolidays, addInstitute, 
+	getDepartments, getFacultiesByDepartment}
 export default instituteService;
