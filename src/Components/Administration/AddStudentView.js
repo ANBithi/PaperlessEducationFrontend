@@ -12,69 +12,30 @@ import {
 import { useState } from "react";
 import userService from "../../services/user.service";
 import instituteService from "../../services/institute.service";
-const AddStudentView = () => {
+const AddStudentView = ({ departments }) => {
 	const [addStudentsObj, setAddStudentsObj] = useState({});
-    const [departments, setDepartments] = useState([]);
-    const [faculties, setFaculties] = useState([]);
-	const toast = useToast();
+	const [faculties, setFaculties] = useState([]);
 
-    useEffect(()=>{
-        fetchDepartments();
-    }, [])
-
-    const fetchFaculties = async (departmentId) => {
-        let response = await instituteService.getFacultiesByDepartment(departmentId);
-        setFaculties(response);
-    }
-    const fetchDepartments = async () => {
-       let response = await instituteService.getDepartments();
-        setDepartments(response);
-    }
-
-
+	const fetchFaculties = async (departmentId) => {
+		let response = await instituteService.getFacultiesByDepartment(
+			departmentId
+		);
+		setFaculties(response);
+	};
 
 	const onAddStudentsChange = (e) => {
 		let { value, name } = e.target;
-        if(name === "department"){
-            fetchFaculties(value);
-        }
+		if (name === "department") {
+			fetchFaculties(value);
+		}
 		var newObj = { ...addStudentsObj, [name]: value };
 		setAddStudentsObj(newObj);
 	};
 
-	const onAddStudent = () => {
-		userService.addStudents(addStudentsObj).then((d) => {
-			if (d.isCreated) {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 1000,
-					isClosable: true,
-				});
-
-				setAddStudentsObj({});
-                setFaculties([]);
-			} else {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "error",
-					duration: 1000,
-					isClosable: true,
-				});
-			}
-		});
+	const onAddStudent = async () => {
+		await userService.addStudents(addStudentsObj);
+		setAddStudentsObj({});
+		setFaculties([]);
 	};
 
 	return (
@@ -106,38 +67,35 @@ const AddStudentView = () => {
 					placeholder="Select a department"
 					onChange={onAddStudentsChange}
 				>
-                    {
-                        departments.map((dep)=>{
-                            return(
-                            <option value={dep.id} key = {dep.id}>{dep.name}</option>
-                            )
-                        })
-                    }
-					
+					{departments.map((dep) => {
+						return (
+							<option value={dep.id} key={dep.id}>
+								{dep.name}
+							</option>
+						);
+					})}
 				</Select>
 			</HStack>
-           {
-            faculties.length > 0 && 
-            <HStack layerStyle="inputStackStyle">
-            <Text w="20%">Advisor</Text>
-				<Select
-					value={addStudentsObj.advisorId}
-					name="advisorId"
-					w="70%"
-					placeholder="Select a advisor"
-					onChange={onAddStudentsChange}
-				>
-                    {
-                        faculties.map((fac)=>{
-                            return(
-                            <option value={fac.id} key = {fac.id}>{fac.name}</option>
-                            )
-                        })
-                    }
-					
-				</Select>
-			</HStack>
-           }
+			{faculties.length > 0 && (
+				<HStack layerStyle="inputStackStyle">
+					<Text w="20%">Advisor</Text>
+					<Select
+						value={addStudentsObj.advisorId}
+						name="advisorId"
+						w="70%"
+						placeholder="Select a advisor"
+						onChange={onAddStudentsChange}
+					>
+						{faculties.map((fac) => {
+							return (
+								<option value={fac.id} key={fac.id}>
+									{fac.name}
+								</option>
+							);
+						})}
+					</Select>
+				</HStack>
+			)}
 			<Button onClick={onAddStudent}>Add</Button>
 		</VStack>
 	);

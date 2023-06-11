@@ -26,7 +26,6 @@ export function CourseCard({
 		navigate(`${sectionId}`);
 	};
 
-	const onEnrollClick = () => {};
 
 	return (
 		<Center as="section">
@@ -58,15 +57,9 @@ export function CourseCard({
 					</Heading>
 					<Text>{courseDes}</Text>
 					<Center my="6">
-						{type === "enroll" ? (
-							<Button colorScheme="blue" onClick={onEnrollClick}>
-								Enroll Course
-							</Button>
-						) : (
 							<Button colorScheme="blue" onClick={onOpenCourse}>
 								Open Course
 							</Button>
-						)}
 					</Center>
 				</Box>
 			</Box>

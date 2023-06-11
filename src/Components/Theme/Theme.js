@@ -165,6 +165,8 @@ const Popover = {
 
 const theme = extendTheme(
 	{
+		
+		
 		layerStyles: {
 			gridItemStyle: {
 				fontSize: "14px",
@@ -398,8 +400,8 @@ const theme = extendTheme(
 			},
 		},
 		fonts: {
-			heading: `Poppins, ${base.fonts?.heading}`,
-			body: `Poppins, ${base.fonts?.body}`,
+				heading: `'Noto Sans',${base.fonts?.heading}`,
+				body: `'Noto Sans', ${base.fonts?.body}`,
 		},
 
 		components: {

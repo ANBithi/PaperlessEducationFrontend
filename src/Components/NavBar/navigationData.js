@@ -1,169 +1,45 @@
-const DATA = [
+const NAV_ITEMS = [
 	{
 		label: "Home",
 		link: "",
         
-	},
-	// {
-	// 	label: "Leave",
-	// 	link: "/leave",
-	// 	subMenu: [
-	// 		{
-	// 			label: "Leave Application",
-	// 			link: "/leave-application",
-	// 		},
-	// 		// {
-	// 		// 	label: "Leave Decline",
-	// 		// 	link: "/leave-decline",
-	// 		// },
-    //         {
-    //             label: "Leave Cancel",
-	// 			link: "/leave-cancel",
-    //         },
-    //         {
-    //             label: "Applied Leave Status",
-    //             link: "/applied-leave-status"
-    //         },
-    //         {
-    //             label: "Pending Leave Request Status",
-    //             link: "/pending-leave-request-status"
-    //         },
-	// 	],
-	// },
-	{
-		label: "Profile",
-		link: "/profile",
-		subMenu: [
-			{
-				label: "Manage Profile",
-				link: "/manage-profile",
-			},
-			{
-				label: "Contact Information",
-				link: "/contact-info",
-			},
-            {
-                label: "Personal Information",
-                link: "/personal-info"
-            },
-            {
-                label: "Academic Qualification",
-                link: "/academic"
-            },
-            {
-                label: "Professional Qualification",
-                link: "/professional"
-            },
-            {
-                label: "Experience",
-                link: "/experience"
-            }
-		],
-	},
-];
-
-const FACULTY_NAV = [
-	{
-		label: "Home",
-		link: "",
-        
-	},
-	{
-		label: "Profile",
-		link: "/manage-profile",
-		subMenu: [
-			{
-				label: "Manage Profile",
-				link: "/manage-profile",
-			},
-			{
-				label: "Contact Information",
-				link: "/contact-info",
-			},
-            {
-                label: "Personal Information",
-                link: "/personal-info"
-            },
-            {
-                label: "Academic Qualification",
-                link: "/academic"
-            },
-            {
-                label: "Professional Qualification",
-                link: "/professional"
-            },
-            {
-                label: "Experience",
-                link: "/experience"
-            }
-		],
 	},
 	{
 		label: "Courses",
 		link: "/courses",
+		userTypes: [0, 2, 3],
+		isAuthorized: true
 	},
 	{
-		label: "Exam",
-		link: "/exam",
-	},
-	{
-		label: "Results",
-		link: "/results",
-	}
-];
-const STUDENT_NAV = [
-	{
-		label: "Home",
-		link: "",
-        
-	},
-	{
-		label: "Profile",
-		link: "/manage-profile",
-		// subMenu: [
-		// 	{
-		// 		label: "Manage Profile",
-		// 		link: "/manage-profile",
-		// 	},
-		// 	{
-		// 		label: "Contact Information",
-		// 		link: "/contact-info",
-		// 	},
-        //     {
-        //         label: "Personal Information",
-        //         link: "/personal-info"
-        //     },
-        //     {
-        //         label: "Academic Qualification",
-        //         link: "/academic"
-        //     },
-        //     {
-        //         label: "Professional Qualification",
-        //         link: "/professional"
-        //     },
-        //     {
-        //         label: "Experience",
-        //         link: "/experience"
-        //     }
-		// ],
-	},
-	{
-		label: "Courses",
-		link: "/courses",
-		
+		label: "Administration",
+		link: "/administration",
+		userTypes : [0, 1],
+		isAuthorized : true
 	},
 	{
 		label: "Enroll",
 		link: "/enroll",
+		userTypes : [0, 3],
+		isAuthorized : true
 	},
 	{
 		label: "Exam",
 		link: "/exam",
+		userTypes: [0, 2],
+		isAuthorized: true
+	},
+	{
+		label: "Results",
+		link: "/results",
+		userTypes: [0, 2],
+		isAuthorized: true
 	},
 	{
 		label: "Results",
 		link: "/std-results",
+		userTypes : [3],
+		isAuthorized : true
 	},
 ];
 
-export {DATA, FACULTY_NAV, STUDENT_NAV};
+export {NAV_ITEMS};

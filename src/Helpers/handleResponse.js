@@ -101,6 +101,19 @@ export function withToast(response) {
 			duration: 2000,
 			isClosable: true,
 		});
+    } else {
+        toast({
+			containerStyle: {
+				fontSize: "14px",
+				fontWeight: "normal",
+			},
+			title: "Failed!",
+			position: "bottom-right",
+			variant: "subtle",
+			status: "error",
+			duration: 2000,
+			isClosable: true,
+		});
     }
     return response;
 }

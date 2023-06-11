@@ -12,8 +12,8 @@ const ManageProfile = () => {
 	const [userData, setUserData] = useState();
 	const fetchData = async () => {
 		var res = await userService.getUserProfileData();
-		if (res.response) {
-			setUserData(res.data);
+		if (res) {
+			setUserData(res);
 		}
 	};
 	const onShowProfileEdit = () => {

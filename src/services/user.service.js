@@ -1,48 +1,21 @@
 import { authHeader } from "../Helpers/authHeader";
-import { handleResponse } from "../Helpers/handleResponse";
+import { handleResponse, withToast } from "../Helpers/handleResponse";
 import { getCurrentUserId, getCurrentUser } from "../Helpers/userHelper";
 
 async function createUser(user) {
-	let { userType } = user;
-	userType = parseInt(userType);
-	let currentUser = getCurrentUser();
-	let createdBy = `${currentUser.firstName} ${currentUser.lastName}`;
-	let createdById = currentUser.id;
-	let request = { ...user, userType, createdBy, createdById };
-
 	return fetch("http://localhost:5000/api/user/create", {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
-		body: JSON.stringify(request),
-	}).then(handleResponse);
-	// let response = await fetch("http://localhost:5000/api/user/create", {
-	// 	method: "POST",
-	// 	headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	body: JSON.stringify(request),
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
+		body: JSON.stringify(user),
+	}).then(withToast).then(handleResponse);
 }
 async function addStudents(user) {
-	let currentUser = getCurrentUser();
-	let createdBy = `${currentUser.firstName} ${currentUser.lastName}`;
-	let createdById = currentUser.id;
-	let request = { ...user, createdBy, createdById };
-
 	return fetch("http://localhost:5000/api/user/addStudents", {
 		method: "POST",
 		headers: { ...authHeader(), "Content-Type": "application/json" },
-		body: JSON.stringify(request),
-	}).then(handleResponse);
-	// let response = await fetch("http://localhost:5000/api/user/addStudents", {
-	// 	method: "POST",
-	// 	headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	body: JSON.stringify(request),
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
+		body: JSON.stringify(user),
+	}).then(withToast).then(handleResponse);
+
 }
 async function changePassword(newPassword, otp) {
 	let request = {

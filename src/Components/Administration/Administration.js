@@ -20,138 +20,99 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import instituteService from "../../services/institute.service";
-import userService from "../../services/user.service";
 import AddStudentView from "./AddStudentView";
-
+import AddUserView from "./AddUserView";
+import AddDepartmentView from "./AddDepartmentView";
+import AddCourseView from "./AddCourseView";
+import departmentService from "../../services/department.service";
 const Administration = () => {
 	const [allUsers, setAllUsers] = useState();
 	const [addInstituteObj, setAddInstituteObj] = useState();
-	const [addUserObj, setAddUserObj] = useState();
-	
+	const [departments, setDepartments] = useState([]);
 	const [addHoliday, setAddHoliday] = useState([]);
-	const [addDepartments, setAddDepartments] = useState([]);
+
 	const toast = useToast();
-	useEffect(() => {
-		// userService.getAllUsers().then((d) => {
-		// 	console.log(d);
-		// 	setAllUsers(d);
-		// });
-	}, []);
+    useEffect(()=>{
+        fetchDepartments();
+    }, [])
 
-	const onInstituteAdd = (e) => {
-		let { value, name } = e.target;
-		var newObj = { ...addInstituteObj, [name]: value };
-		setAddInstituteObj(newObj);
-	};
+	const fetchDepartments = async () => {
+		let response = await departmentService.getDepartments();
+		 setDepartments(response);
+	 }
+ 
 
-	const onAddUserChange = (e) => {
-		let { value, name } = e.target;
-		var newObj = { ...addUserObj, [name]: value};
-		setAddUserObj(newObj);
-	};
+	// const onInstituteAdd = (e) => {
+	// 	let { value, name } = e.target;
+	// 	var newObj = { ...addInstituteObj, [name]: value };
+	// 	setAddInstituteObj(newObj);
+	// };
 
-	const onHolidayAddChange = (e) => {
-		let { value } = e.target;
-		let list = [...addHoliday, new Date(value)];
-		setAddHoliday(list);
-	};
 
-	const onAddUserClick = () => {
-		console.log(addUserObj);
-		let user = {...addUserObj,
-			 department: "6390085e0816ceea4ce5ebc9",
-			advisorId : "638e1d245620743855a70ba3" ,
-		batch : "222"}
-		userService.createUser(user).then((d) => {
-			if (d.isCreated) {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 1000,
-					isClosable: true,
-				});
-			} else {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: d.message,
-					position: "bottom-right",
-					variant: "subtle",
-					status: "error",
-					duration: 1000,
-					isClosable: true,
-				});
-			}
-		});
-	};
 
-	
+	// const onHolidayAddChange = (e) => {
+	// 	let { value } = e.target;
+	// 	let list = [...addHoliday, new Date(value)];
+	// 	setAddHoliday(list);
+	// };
 
-	const onAddInstitute = () => {
-		let {establishedYear, semesterDuration} = addInstituteObj;
-		establishedYear = parseInt(establishedYear);
-		semesterDuration =parseInt(semesterDuration);
-		let request = {...addInstituteObj, establishedYear, semesterDuration, departments: addDepartments};
-		console.log(request);
-		instituteService.addInstitute(request).then((d)=>{
-			console.log("Institute Added")
-		});
-	 };
-	const onDepartmentsChange = (e) => {
-		let { value } = e.target;
-		let list = [...addDepartments, value];
-		setAddDepartments(list);
-	};
-	const onDepartmentRemove = (index) => {
-		let arr = [...addDepartments];
-		arr = arr.filter((x, i) => i !== index);
-		setAddDepartments(arr);
-	}
-	const onDayRemove = (index) => {
-		let arr = [...addHoliday];
-		arr = arr.filter((x, i) => i !== index);
-		setAddHoliday(arr);
-	};
-	const onAddHolidayClick = () => {
-		instituteService.addHolidays(addHoliday).then((d) => {
-			if (d) {
-				setAddHoliday([]);
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: "Holidays have been added.",
-					position: "bottom-right",
-					variant: "subtle",
-					status: "success",
-					duration: 1000,
-					isClosable: true,
-				});
-			} else {
-				toast({
-					containerStyle: {
-						fontSize: "14px",
-						fontWeight: "normal",
-					},
-					title: "Something went wrong.",
-					position: "bottom-right",
-					variant: "subtle",
-					status: "error",
-					duration: 1000,
-					isClosable: true,
-				});
-			}
-		});
-	};
+	// const onAddInstitute = () => {
+	// 	let {establishedYear, semesterDuration} = addInstituteObj;
+	// 	establishedYear = parseInt(establishedYear);
+	// 	semesterDuration =parseInt(semesterDuration);
+	// 	let request = {...addInstituteObj, establishedYear, semesterDuration, departments: addDepartments};
+	// 	console.log(request);
+	// 	instituteService.addInstitute(request).then((d)=>{
+	// 		console.log("Institute Added")
+	// 	});
+	//  };
+	// const onDepartmentsChange = (e) => {
+	// 	let { value } = e.target;
+	// 	let list = [...addDepartments, value];
+	// 	setAddDepartments(list);
+	// };
+	// const onDepartmentRemove = (index) => {
+	// 	let arr = [...addDepartments];
+	// 	arr = arr.filter((x, i) => i !== index);
+	// 	setAddDepartments(arr);
+	// }
+	// const onDayRemove = (index) => {
+	// 	let arr = [...addHoliday];
+	// 	arr = arr.filter((x, i) => i !== index);
+	// 	setAddHoliday(arr);
+	// };
+	// const onAddHolidayClick = () => {
+	// 	instituteService.addHolidays(addHoliday).then((d) => {
+	// 		if (d) {
+	// 			setAddHoliday([]);
+	// 			toast({
+	// 				containerStyle: {
+	// 					fontSize: "14px",
+	// 					fontWeight: "normal",
+	// 				},
+	// 				title: "Holidays have been added.",
+	// 				position: "bottom-right",
+	// 				variant: "subtle",
+	// 				status: "success",
+	// 				duration: 1000,
+	// 				isClosable: true,
+	// 			});
+	// 		} else {
+	// 			toast({
+	// 				containerStyle: {
+	// 					fontSize: "14px",
+	// 					fontWeight: "normal",
+	// 				},
+	// 				title: "Something went wrong.",
+	// 				position: "bottom-right",
+	// 				variant: "subtle",
+	// 				status: "error",
+	// 				duration: 1000,
+	// 				isClosable: true,
+	// 			});
+	// 		}
+	// 	});
+	// };
 	return (
 		<Flex layerStyle="pageStyle">
 			<VStack align="start" w="full" gap={2}>
@@ -165,70 +126,44 @@ const Administration = () => {
 							<AccordionIcon />
 						</AccordionButton>
 						<AccordionPanel pb={4}>
-							<AddStudentView/>
+							<AddStudentView departments={departments}/>
 						</AccordionPanel>
 					</AccordionItem>
 					<AccordionItem>
 						<AccordionButton _expanded={{ fontWeight: "bold" }}>
 							<Box flex="1" textAlign="left">
-								Add Faculty
+								Add User
 							</Box>
 							<AccordionIcon />
 						</AccordionButton>
 						<AccordionPanel pb={4}>
-							<VStack spacing={2}>
-								{/* firstName input */}
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">First Name</Text>
-									<Input
-										name="firstName"
-										layerStyle="inputStyle"
-										onChange={onAddUserChange}
-									/>
-								</HStack>
-								{/* lastName input */}
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Last Name</Text>
-									<Input
-										name="lastName"
-										layerStyle="inputStyle"
-										onChange={onAddUserChange}
-									/>
-								</HStack>
-								{/* email input */}
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Email</Text>
-									<Input
-										name="email"
-										layerStyle="inputStyle"
-										onChange={onAddUserChange}
-									/>
-								</HStack>
-								{/* password input */}
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">Password</Text>
-									<Input
-										name="password"
-										type="password"
-										layerStyle="inputStyle"
-										onChange={onAddUserChange}
-									/>
-								</HStack>
-								{/* role input */}
-								<HStack layerStyle="inputStackStyle">
-									<Text w="20%">UserType</Text>
-									<Select
-										name="userType"
-										w="70%"
-										placeholder="Select a type"
-										onChange={onAddUserChange}
-									>
-										<option value="0">Admin</option>
-										<option value="2">Faculty</option>
-									</Select>
-								</HStack>
-								<Button onClick={onAddUserClick}>Add</Button>
-							</VStack>
+							<AddUserView departments={departments}/>
+						</AccordionPanel>
+					</AccordionItem>
+
+
+					<AccordionItem>
+						<AccordionButton _expanded={{ fontWeight: "bold" }}>
+							<Box flex="1" textAlign="left">
+								Add Department
+							</Box>
+							<AccordionIcon />
+						</AccordionButton>
+						<AccordionPanel pb={4}>
+							<AddDepartmentView fetchDepartments={fetchDepartments}/>
+						</AccordionPanel>
+					</AccordionItem>
+
+
+					<AccordionItem>
+						<AccordionButton _expanded={{ fontWeight: "bold" }}>
+							<Box flex="1" textAlign="left">
+								Add Course
+							</Box>
+							<AccordionIcon />
+						</AccordionButton>
+						<AccordionPanel pb={4}>
+							<AddCourseView departments={departments}/>
 						</AccordionPanel>
 					</AccordionItem>
 
@@ -314,7 +249,7 @@ const Administration = () => {
 							</VStack>
 						</AccordionPanel>
 					</AccordionItem> */}
-					<AccordionItem>
+					{/* <AccordionItem>
 						<AccordionButton>
 							<Box flex="1" textAlign="left" w="full">
 								Add Holidays
@@ -359,7 +294,7 @@ const Administration = () => {
 								<Button onClick={onAddHolidayClick}>Add</Button>
 							</VStack>
 						</AccordionPanel>
-					</AccordionItem>
+					</AccordionItem> */}
 				</Accordion>
 			</VStack>
 		</Flex>

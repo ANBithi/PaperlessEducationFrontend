@@ -3,13 +3,26 @@ import { useEffect, useState } from "react";
 import courseService from "../../services/course.service";
 import DataFetcher from "../DataFetcher";
 import { CourseCard } from "./CourseCard";
+import { getCurrentUser } from "../../Helpers/userHelper";
 
 const Courses = () => {
+	const user = getCurrentUser();
 	const [allCourse, setAllCourse] = useState([]);
 
 	const fetchData = async () => {
-		let data = await courseService.getAllCourse();
+		if(user.userType === 2){
+			let data = await courseService.getAllCourseByFaculty();
 		setAllCourse(data.data);
+		}
+		else if (user.userType === 3 ){
+			let data = await courseService.getAllCourseByStudent();
+		setAllCourse(data.data);
+		}
+		else {
+			let data = await courseService.getAllCourse();
+			setAllCourse(data.data);
+		}
+
 	};
 	return (
 		<DataFetcher

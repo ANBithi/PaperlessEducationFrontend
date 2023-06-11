@@ -1,4 +1,5 @@
 import { Divider, HStack, Text, VStack } from "@chakra-ui/react";
+import DataRow from "../HelperComponents/DataRow";
 
 const StudentProfile = ({ userData }) => {
 	return (
@@ -19,25 +20,24 @@ const StudentProfile = ({ userData }) => {
 				w="full"
 				layerStyle={"onSecondarySurfaceStyle"}
 			></Divider>
-			<Text
+			{
+				userData.advisor ?
+				<>
+				<Text
 				fontSize="18px"
 				alignSelf="start"
 				layerStyle={"sectionHeaderStyle"}
 			>
 				Adviser Details
 			</Text>
-			<HStack w="full" alignSelf={"start"}>
-				<Text layerStyle={"sectionHeaderStyle"}>Adviser :</Text>
-				<Text>{userData.advisor}</Text>
-			</HStack>
-			<HStack w="full" alignSelf={"start"}>
-				<Text layerStyle={"sectionHeaderStyle"}>Designation :</Text>
-				<Text>{userData.designation}</Text>
-			</HStack>
-			<HStack w="full" alignSelf={"start"}>
-				<Text layerStyle={"sectionHeaderStyle"}>Contact :</Text>
-				<Text>{userData.advisorContact}</Text>
-			</HStack>
+			<DataRow title={"Adviser :"} value={userData.advisor.name}/>
+			<DataRow title={"Designation :"} value={userData.advisor.designation}/>
+
+			<DataRow title={"Contact :"} value={userData.advisor.email}/>
+				</> 
+				: 
+				<Text>Unassigned Advisor, please talk to admin office.</Text>
+			}
 			<Divider
 				h="2px"
 				w="full"

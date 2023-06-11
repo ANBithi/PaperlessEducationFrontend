@@ -12,10 +12,11 @@ import {
 	Box,
 } from "@chakra-ui/react";
 //import Logo from '../public/logo.svg';
+import { AuthorizationComponent } from "../HelperComponents/AuthorizationComponent";
 import React, { useEffect, useState } from "react";
 import loginService from "../../services/login.service";
 import { ChevronDownIcon, BellIcon } from "@chakra-ui/icons";
-import { DATA, FACULTY_NAV, STUDENT_NAV } from "./navigationData";
+import { NAV_ITEMS, STUDENT_NAV } from "./navigationData";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../Helpers/userHelper";
 import Notification from "../Notifications/Notification";
@@ -24,9 +25,7 @@ export default function Layout() {
 	const navigate = useNavigate();
 	const userData = getCurrentUser();
 
-	useEffect(() => {
-	}, []);
-
+	useEffect(() => {}, []);
 
 	const onLogoutClick = () => {
 		loginService.logOff();
@@ -47,16 +46,30 @@ export default function Layout() {
 				{/* <Image src={Logo.src} h="50px" /> */}
 
 				<HStack spacing="10">
-					{(userData?.userType === 2
-						? FACULTY_NAV
-						: userData?.userType === 3
-						? STUDENT_NAV
-						: DATA
-					).map((item, i) => (
-						<Link key={i} to={item.link}>
-							<Button variant="nav">{item.label}</Button>
-						</Link>
-					))}
+					{NAV_ITEMS.map((item, i) => {
+						const com = ()=>(
+							<Link key={i} to={item.link}>
+								<Button variant="nav">{item.label}</Button>
+							</Link>
+						);
+						if (item.isAuthorized === true) {
+							return (
+								<AuthorizationComponent
+									component={
+										com
+									}
+									userTypes={item.userTypes}
+									user={userData}
+								/>
+							);
+						} else {
+							return (
+								<Link key={i} to={item.link}>
+									<Button variant="nav">{item.label}</Button>
+								</Link>
+							);
+						}
+					})}
 				</HStack>
 
 				<HStack>
@@ -73,6 +86,14 @@ export default function Layout() {
 							<MenuList layerStyle="onSurfaceStyle">
 								<MenuItem>
 									<Link
+										to="/manage-profile"
+										style={{ width: "100%" }}
+									>
+										Profile
+									</Link>
+								</MenuItem>
+								<MenuItem>
+									<Link
 										to="/settings"
 										style={{ width: "100%" }}
 									>
@@ -80,17 +101,6 @@ export default function Layout() {
 									</Link>
 								</MenuItem>
 
-								{(userData?.userType === 1 ||
-									userData?.userType === 0) && (
-									<MenuItem>
-										<Link
-											to="/administration"
-											style={{ width: "100%" }}
-										>
-											Administration
-										</Link>
-									</MenuItem>
-								)}
 								<MenuItem onClick={onLogoutClick}>
 									Logout
 								</MenuItem>

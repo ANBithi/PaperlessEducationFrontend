@@ -3,7 +3,7 @@ import EmptyIcon from "../EmptyIcon";
 
 const EmptyState = ({ icon, message }) => {
 	return (
-		<Center paddingY="40px" height={"100%"} width={"100%"}>
+		<Center layerStyle={"onSecondarySurfaceStyle"} paddingY="40px" height={"100%"} width={"100%"}>
 			<VStack>
 				<div style={{ opacity: "0.5" }}>
 					<EmptyIcon></EmptyIcon>

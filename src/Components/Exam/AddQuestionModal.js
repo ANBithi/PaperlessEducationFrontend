@@ -16,6 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import examService from "../../services/exam.service";
+import SelectInput from "../HelperComponents/SelectInput";
+import { COURSE_TYPE } from "../Administration/CourseData";
 
 const initialQuestion = { content: undefined, mark: "" };
 
