@@ -12,12 +12,13 @@ import {
 import { useState } from "react";
 import userService from "../../services/user.service";
 import instituteService from "../../services/institute.service";
+import departmentService from "../../services/department.service";
 const AddStudentView = ({ departments }) => {
 	const [addStudentsObj, setAddStudentsObj] = useState({});
 	const [faculties, setFaculties] = useState([]);
 
 	const fetchFaculties = async (departmentId) => {
-		let response = await instituteService.getFacultiesByDepartment(
+		let response = await departmentService.getFacultiesByDepartment(
 			departmentId
 		);
 		setFaculties(response);

@@ -315,7 +315,7 @@ const fetchQuestions = async (examId) => {
 				<AddQuestionModal
 					isOpen={isAddQuestionModalOpen}
 					onClose={onAddQuestionModalClose}
-					examId={examMetadata.id}
+					examId={examMetadata?.id}
 					calcMark={calcMark}
 					questionCallback={postQuestion}
 					question={editQuestion}

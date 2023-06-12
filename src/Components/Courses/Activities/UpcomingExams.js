@@ -29,7 +29,7 @@ const UpcomingExams = ({ handleClick }) => {
 							<UpcomingExam
                                 key={exam.id}
 								exam={exam}
-								handleClick={handleClick}
+								handleClick={()=>{handleClick(exam)}}
 							/>
 						);
 					})}

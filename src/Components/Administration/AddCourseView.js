@@ -5,15 +5,10 @@ import TextInput from "../HelperComponents/TextInput";
 import { COURSE_TYPE, LESSON_TYPE } from "./CourseData";
 import courseService from "../../services/course.service";
 
-const AddCourseView = ({ departments }) => {
+const AddCourseView = ({ departments, fetchCourses, allCourses, setAllCourses }) => {
 	const [disableAdd, setDisableAdd] = useState(true);
 	const [addCourseObj, setAddCourseObj] = useState({});
-	const [allCourses, setAllCourses] = useState([]);
 
-	const fetchCourses = async (departmentId) => {
-		let res = await courseService.getAllCourseByDepartment(departmentId);
-		setAllCourses(res);
-	};
 	useEffect(() => {
 		if (addCourseObj === {}) {
 			return;
@@ -139,7 +134,9 @@ const AddCourseView = ({ departments }) => {
 				</Select>
 			</HStack>
 
-			<HStack layerStyle="inputStackStyle">
+			{
+				allCourses !== undefined && allCourses.length > 0 &&
+				<HStack layerStyle="inputStackStyle">
 				<Select
 					value={addCourseObj.prerequisites ?? ""}
 					name="prerequisites"
@@ -156,6 +153,7 @@ const AddCourseView = ({ departments }) => {
 					})}
 				</Select>
 			</HStack>
+			}
 			<TextInput
 				maxLength={80}
 				value={addCourseObj.courseDetails ?? ""}

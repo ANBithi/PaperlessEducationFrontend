@@ -25,16 +25,23 @@ import AddUserView from "./AddUserView";
 import AddDepartmentView from "./AddDepartmentView";
 import AddCourseView from "./AddCourseView";
 import departmentService from "../../services/department.service";
+import courseService from "../../services/course.service";
+import SectionAddView from "./SectionAddView";
 const Administration = () => {
 	const [allUsers, setAllUsers] = useState();
 	const [addInstituteObj, setAddInstituteObj] = useState();
 	const [departments, setDepartments] = useState([]);
 	const [addHoliday, setAddHoliday] = useState([]);
-
-	const toast = useToast();
+	const [allCourses, setAllCourses] = useState([]);
+	
     useEffect(()=>{
         fetchDepartments();
     }, [])
+
+	const fetchCourses = async (departmentId) => {
+		let res = await courseService.getAllCourseByDepartment(departmentId);
+		setAllCourses(res);
+	};
 
 	const fetchDepartments = async () => {
 		let response = await departmentService.getDepartments();
@@ -163,7 +170,23 @@ const Administration = () => {
 							<AccordionIcon />
 						</AccordionButton>
 						<AccordionPanel pb={4}>
-							<AddCourseView departments={departments}/>
+							<AddCourseView departments={departments} 
+							allCourses={allCourses}
+							setAllCourses={setAllCourses}
+							fetchCourses={fetchCourses}/>
+						</AccordionPanel>
+					</AccordionItem>
+
+
+					<AccordionItem>
+						<AccordionButton _expanded={{ fontWeight: "bold" }}>
+							<Box flex="1" textAlign="left">
+								Open new section
+							</Box>
+							<AccordionIcon />
+						</AccordionButton>
+						<AccordionPanel pb={4}>
+							<SectionAddView setCourses={setAllCourses} setDepartments={setDepartments} fetchCourses={fetchCourses} allCourses={allCourses} departments={departments}/>
 						</AccordionPanel>
 					</AccordionItem>
 

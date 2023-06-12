@@ -12,7 +12,7 @@ const Courses = () => {
 	const fetchData = async () => {
 		if(user.userType === 2){
 			let data = await courseService.getAllCourseByFaculty();
-		setAllCourse(data.data);
+		setAllCourse(data);
 		}
 		else if (user.userType === 3 ){
 			let data = await courseService.getAllCourseByStudent();
@@ -20,7 +20,7 @@ const Courses = () => {
 		}
 		else {
 			let data = await courseService.getAllCourse();
-			setAllCourse(data.data);
+			setAllCourse(data);
 		}
 
 	};
