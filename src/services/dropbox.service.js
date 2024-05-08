@@ -1,7 +1,7 @@
 import { handleResponse } from "../Helpers/handleResponse";
 
-const ACCESS_KEY = "sl.BVgYC3vbsf0tWGYRT0XMT2XwQAb8feqxmuRSd4cS0KbkXzIsSPJNv_hh5xs1Lrkpl0oZQilK8VxU6AncWKe8UEcPf5qN8lV2Eoklaye2cLwlC0Vd5BWo0VhgIaGb1Nh_NqbCPcBZ";
-const APP_KEY_AND_SECRET = "MDN5c3lmandzbmV6cGs3OjU2cG5qdmFkOGRxYWFmZQ==";
+const ACCESS_KEY = "KEY_GO_HERE";
+const APP_KEY_AND_SECRET = "KEYS_GOES_HERE";
 
 async function checkDropBox() {
     let request = {query: "foo"};
@@ -35,18 +35,6 @@ async function uploadFile(path, file) {
         body :file,
 		}
 	).then(handleResponse);
-
-
-	// let response = await fetch("https://content.dropboxapi.com/2/files/upload", {
-	// 	method: "POST",
-	// 	headers: {"Content-Type": "application/octet-stream", 
-    //     "Authorization": `Bearer ${ACCESS_KEY}`,
-    //     "Dropbox-API-Arg" : JSON.stringify(fileUploadArgs),},
-    //     body :file,
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
 async function CreateSharedLink(path) {
@@ -70,18 +58,7 @@ async function CreateSharedLink(path) {
             body : JSON.stringify(request),
 		}
 	).then(handleResponse);
-	// let response = await fetch("https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings", {
-	// 	method: "POST",
-	// 	headers: { 
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${ACCESS_KEY}`,
-    //     },
-    //     body : JSON.stringify(request),
-	// });
-	// if (response.ok) {
-    //    let {url, preview_type} = await response.json();
-	// 	return await {url, preview_type} ;
-	// }
+
 }
 
 async function getFileRequest() {
@@ -98,16 +75,6 @@ async function getFileRequest() {
         "Dropbox-API-Arg" : JSON.stringify(request),},
 		}
 	).then(handleResponse);
-
-	// let response = await fetch("https://api.dropboxapi.com/2/file_requests/get", {
-	// 	method: "POST",
-	// 	headers: { 
-    //     "Authorization": `Bearer ${ACCESS_KEY}`,
-    //     "Dropbox-API-Arg" : JSON.stringify(request),},
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
    

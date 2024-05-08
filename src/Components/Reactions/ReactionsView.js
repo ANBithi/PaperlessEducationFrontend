@@ -1,14 +1,10 @@
-import { HStack, Text } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { postService } from "../../services/post.service";
+import { HStack } from "@chakra-ui/react";
 import Reaction from "./Reaction";
 import { REACTION_LIST } from "./reactionList";
 
 const ReactionsView = ({
 	parentId,
 	userReaction,
-	setUserReaction,
 	onReactionClicked,
 }) => {
 	return (

@@ -1,21 +1,19 @@
-import { Flex, Text, Box,VStack, HStack, Center, Avatar, AvatarBadge, Button, useDisclosure } from "@chakra-ui/react"
-import { useState, useEffect,useRef } from "react";
+import { Flex, Text, VStack, HStack, Button, useDisclosure } from "@chakra-ui/react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import sectionService from "../../services/section.service";
 import DataRow from "../HelperComponents/DataRow";
 import moment from "moment";
-import { QUIZ_COUNT_PERCENTILE_OPTIONS } from "./examData";
 import GenericModal from "../HelperComponents/GenericModal";
 import StudentProfile from "../Profile/StudentProfile";
 import { getCurrentUserId } from "../../Helpers/userHelper";
 import activityService from "../../services/activity.service";
 import UserViewListItem from "./UserViewListItem";
-import useStateRef from 'react-usestateref'
+import useStateRef from 'react-usestateref';
 
 
 const FacultyExamView = () => {
     const [students, setStudents] = useState([]);
-	
 	const [onlineUserList, setOnlineUserList, onlineUserListRef] = useStateRef([]);
     const [currentExam, setCurrentExam] = useState({});
     const [selectedStudentId, setSelectedStudentId] = useState();
@@ -164,32 +162,7 @@ const FacultyExamView = () => {
                         <Button onClick={onOpen}>ViewDetails</Button>
                     </HStack>
                 }
-				{/* {currentExam.id !== null && (
-                   <Fragment>
-                       {questions.length > 0 && (
-                           <Stack
-                               alignSelf="start"
-                               w="full"
-                               layerStyle="onSurfaceStyle"
-                               padding="16px"
-                               rounded="8px"
-                           >
-                               {questions.map((question, index) => {
-                                   return (
-                                       <QuestionItem
-                                           ques
-                                           tion={question}
-                                           index={index}
-                                           key={index}
-                                           direction = {"row"}
-                                           additionalComponent={<QuestionEditTools {...{setEditQuestion, question, onAddQuestionModalOpen, index, onDeleteQuestion}}/>}
-                                       />
-                                   );
-                               })}
-                           </Stack>
-                       )}
-                   </Fragment>
-               )} */}
+				
 			</VStack>
             <GenericModal
             title={"Student Details"}

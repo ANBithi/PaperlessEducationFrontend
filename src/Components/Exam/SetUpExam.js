@@ -6,8 +6,7 @@ import {
 	Button,
 	useDisclosure,
 	useToast,
-	Stack,
-	Center,
+	Stack
 } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import moment from "moment";
@@ -18,7 +17,6 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import examService from "../../services/exam.service";
 import AddQuestionModal from "./AddQuestionModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoadingState from "../HelperComponents/LoadingState";
 import AddExamMetadataModal from "./AddExamMetadataModal";
 import IconButton from "../HelperComponents/IconButton";
@@ -56,14 +54,6 @@ const fetchQuestions = async (examId) => {
 	setQuestions(quesRes ?? []);
 	await fetchCourseData();
 };
-
-
-	const fetchExam = async () => {
-		let response = await examService.getExamMetaData(id);
-		setExamMetadata(response);
-		setExamMetaId(response.id);
-		await fetchQuestions(response.id);
-	};
 	useEffect(() => {
 		let {exam} = location.state;
 		if(exam !== undefined){

@@ -1,10 +1,7 @@
-import { Box, HStack, Text, useDisclosure,useColorMode } from "@chakra-ui/react";
+import { Box, HStack, Text, useDisclosure, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { findReactionTypes } from "../../Helpers/reactionHelper.js";
-import { postService } from "../../services/post.service";
 import AllReactionsModal from "./AllReactionsModal.js";
-import Reaction from "./Reaction.js";
-import { REACTION_LIST } from "./reactionList";
 import RoundedReactionView from "./RoundedReactionView.js";
 
 function TotalReactionView({

@@ -36,3 +36,18 @@ export const LESSON_TYPE = [
         value: 1
     }
 ]
+
+export const WEEK_DAYS = [
+    {
+        label : "Sun & Tue",
+        value : 0
+    },
+    {
+        label : "Mon & Wed",
+        value : 1
+    },
+    {
+        label : "Thursday",
+        value : 2
+    },
+]

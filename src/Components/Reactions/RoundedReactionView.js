@@ -1,4 +1,4 @@
-import { background, Box, Center } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RoundedReactionView = ({ reaction, handleOnClicked }) => {

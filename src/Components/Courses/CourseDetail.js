@@ -22,7 +22,7 @@ import {
 	ChatIcon,
 } from "@chakra-ui/icons";
 import DataFetcher from "../DataFetcher";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import sectionService from "../../services/section.service";
 import PopoverInput from "./PopoverInput";
 import { ChatDrawer } from "./Chat/ChatDrawer";
@@ -148,8 +148,6 @@ const CourseDetails = () => {
 			setPostObj(obj);
 			setAttachments(updatedAttachments);
 			setPostDisable(false);
-		} else {
-			console.log("uploadFile is null");
 		}
 	};
 

@@ -51,13 +51,11 @@ const CommentBox = ({ currentUser, postId }) => {
 						rows='1'
 						variant = "unstyled"
 						layerStyle = "responseTextareaStyle"
-						//value={textAreaVal}
 						name="postDescription"
 						onChange={onTextAreaChange}
 					/>
 					<Circle
 						p="8px"
-						//onClick={onAttachmentClick}
 						alignSelf="flex-end"
 						_hover={{ bg: "blackAlpha.50" }}
 						style={{ margin: "8px" }}
@@ -66,68 +64,14 @@ const CommentBox = ({ currentUser, postId }) => {
 						<input
 							type="file"
 							name="input"
-							//ref={inputFile}
-							//	onChange={onAttachmentChange}
 							style={{ display: "none" }}
 						/>
 						<Icon as={AttachmentIcon}></Icon>
 					</Circle>
 				</HStack>
 
-				{/* {((uploadFile !== null &&
-									uploadFile !== undefined) ||
-									uploadFile?.length > 0) && (
-									<HStack w="full" justify="space-between">
-										<Text
-											fontSize="12px"
-											textAlign="center"
-											mt="2"
-											fontWeight="bold"
-										>
-											{uploadFile.name}
-										</Text>
-										<Icon
-											as={ArrowUpIcon}
-											color={
-												postDisable
-													? "red.500"
-													: "green.500"
-											}
-											size="md"
-											alignSelf="flex-end"
-											_hover={{ cursor: "pointer" }}
-											onClick={onUploadClick}
-										/>
-									</HStack>
-								)}
-								{((attachments !== null &&
-									attachments !== undefined) ||
-									attachments?.length > 0) &&
-									attachments.map((attachment, i) => {
-										console.log(attachment);
-										return (
-											<HStack
-												w="full"
-												key={i}
-												justify="space-between"
-											>
-												<Link
-													fontSize="12px"
-													textAlign="center"
-													mt="2"
-													fontWeight="bold"
-													href={attachment.url}
-													isExternal
-												>
-													{attachment.name}
-												</Link>
-											</HStack>
-										);
-									})} */}
-
 				<Button
 					onClick={onCommentPost}
-					//isDisabled={postDisable}
 					rounded="20px"
 					height='40px'
 					width='40px'

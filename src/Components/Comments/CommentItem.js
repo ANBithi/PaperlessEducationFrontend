@@ -1,8 +1,6 @@
-import { Box, Text, Avatar, VStack, HStack } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Text, Avatar, VStack, HStack } from "@chakra-ui/react";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "../../Helpers/userHelper";
 import { postService } from "../../services/post.service";
 import Reactions from "../Reactions/Reactions";
 import CommentAction from "./CommentAction";
@@ -37,9 +35,7 @@ const CommentItem = ({ comment, currentUser }) => {
 			if (d === true) {
 				setUserReaction({ iconId: id });
 				fetchReactions();
-			} else {
-				console.log("failed");
-			}
+			} 
 		});
 	};
 

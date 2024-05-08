@@ -1,7 +1,6 @@
 import { Text, VStack,HStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import examService from "../../../services/exam.service";
-import sectionService from "../../../services/section.service";
 
 import { useParams } from "react-router-dom";
 import moment from "moment";

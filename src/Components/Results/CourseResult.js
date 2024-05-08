@@ -1,20 +1,11 @@
 import {
 	Flex,
-	HStack,
-	Icon,
-	Text,
+	HStack, Text,
 	VStack,
-	Button,
-	Box,
-	Center,
-	Circle,
-	Textarea,
-	Image,
-	useDisclosure,
-	Link,
+	Button, Center, Image,
+	useDisclosure
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
-import { LinkIcon, AttachmentIcon, ArrowUpIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 import DataFetcher from "../DataFetcher";
 import { useParams } from "react-router";
 import sectionService from "../../services/section.service";
@@ -29,7 +20,7 @@ const CourseResults = () => {
 		onOpen: onResultModalOpen,
 		onClose: onResultModalClose,
 	} = useDisclosure();
-	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	const [messages, setMessages] = useState([]);
 	const [currentStudent, setCurrentStudent] = useState();
 	const fetchData = async () => {

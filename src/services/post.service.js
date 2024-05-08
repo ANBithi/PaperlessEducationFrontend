@@ -10,15 +10,6 @@ async function addPost(post) {
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	}).then(handleResponse);
-
-	// let response = await fetch("http://localhost:5000/api/post/add", {
-	// 	method: "POST",
-	// 	headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	body: JSON.stringify(request),
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 async function getAllPost(belongsTo) {
 	return fetch(
@@ -28,16 +19,6 @@ async function getAllPost(belongsTo) {
 			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	).then(handleResponse);
-	// let response = await fetch(
-	// 	`http://localhost:5000/api/post/getAll?belongsTo=${belongsTo}`,
-	// 	{
-	// 		method: "GET",
-	// 		headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	}
-	// );
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
 async function getSingle(id) {
@@ -48,16 +29,6 @@ async function getSingle(id) {
 			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	).then(handleResponse);
-	// let response = await fetch(
-	// 	`http://localhost:5000/api/post/getSingle?postId=${id}`,
-	// 	{
-	// 		method: "GET",
-	// 		headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	}
-	// );
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
 async function getSingleComment(id) {
@@ -68,16 +39,6 @@ async function getSingleComment(id) {
 			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	).then(handleResponse);
-	// let response = await fetch(
-	// 	`http://localhost:5000/api/post/getSingleComment?commentId=${id}`,
-	// 	{
-	// 		method: "GET",
-	// 		headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	}
-	// );
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 async function addReaction(reaction) {
 	let user = getCurrentUser();
@@ -89,14 +50,7 @@ async function addReaction(reaction) {
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	}).then(handleResponse);
-	// let response = await fetch("http://localhost:5000/api/post/addReaction", {
-	// 	method: "POST",
-	// 	headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	body: JSON.stringify(request),
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
+
 }
 async function getAllReactions(parentId) {
 
@@ -107,16 +61,7 @@ async function getAllReactions(parentId) {
 			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	).then(handleResponse);
-	// let response = await fetch(
-	// 	`http://localhost:5000/api/post/getAllReactions?parentId=${parentId}`,
-	// 	{
-	// 		method: "GET",
-	// 		headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	}
-	// );
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
+
 }
 
 async function getAllComments(parentId) {
@@ -127,16 +72,6 @@ async function getAllComments(parentId) {
 			headers: { ...authHeader(), "Content-Type": "application/json" },
 		}
 	).then(handleResponse);
-	// let response = await fetch(
-	// 	`http://localhost:5000/api/post/getAllComments?parentId=${parentId}`,
-	// 	{
-	// 		method: "GET",
-	// 		headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	}
-	// );
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
 }
 
 async function postComment(request) {
@@ -148,14 +83,7 @@ async function postComment(request) {
 		headers: { ...authHeader(), "Content-Type": "application/json" },
 		body: JSON.stringify(request),
 	}).then(handleResponse);
-	// let response = await fetch("http://localhost:5000/api/post/postComment", {
-	// 	method: "POST",
-	// 	headers: { ...authHeader(), "Content-Type": "application/json" },
-	// 	body: JSON.stringify(request),
-	// });
-	// if (response.ok) {
-	// 	return await response.json();
-	// }
+
 }
 
 export const postService = {

@@ -1,8 +1,8 @@
-import { color, HStack, Text } from "@chakra-ui/react";
+import { HStack, Text } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { REACTION_LIST } from "./reactionList";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 const ReactionsTrigger = ({userReaction}) => {
 	const [icon, setIcon] = useState();
 	useEffect(() => {

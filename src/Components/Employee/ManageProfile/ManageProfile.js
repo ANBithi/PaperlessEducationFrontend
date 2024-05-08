@@ -1,23 +1,16 @@
-import { HStack, Flex, Button, useToast, Avatar, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { getCurrentUser } from "../../../Helpers/userHelper";
-import ManageProfileForm from "./ChangePasswordForm";
+import { Flex, useToast, Avatar, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import userService from "../../../services/user.service";
 import FacultyProfile from "../../Profile/FacultyProfile";
 import StudentProfile from "../../Profile/StudentProfile";
 import DataFetcher from "../../DataFetcher";
 const ManageProfile = () => {
-	const [showProfileEdit, setShowProfileEdit] = useState(false);
-	const toast = useToast();
 	const [userData, setUserData] = useState();
 	const fetchData = async () => {
 		var res = await userService.getUserProfileData();
 		if (res) {
 			setUserData(res);
 		}
-	};
-	const onShowProfileEdit = () => {
-		setShowProfileEdit(true);
 	};
 	return (
 		<DataFetcher
@@ -41,10 +34,7 @@ const ManageProfile = () => {
 				) : (
 					<></>
 				)}
-				{/* <Button w="10%" disabled = {showProfileEdit} onClick={onShowProfileEdit} alignSelf= "right">
-					Edit Profile
-				</Button> */}
-				{/* {showProfileEdit === true && <ManageProfileForm />} */}
+
 			</Flex>
 		</DataFetcher>
 	);

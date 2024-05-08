@@ -38,11 +38,19 @@ async function getStudentDetails(studentId) {
 	  headers: {...authHeader(),'Content-Type': 'application/json'}		
 	}).then(handleResponse)
 }
-
+async function enrollSectionByStudent(request) {
+	return fetch("http://localhost:5000/api/enroll/enrollByStudent", {
+		method: "POST",
+		headers: { ...authHeader(), "Content-Type": "application/json" },
+		body: JSON.stringify(request),
+	})
+		.then(withToast)
+		.then(handleResponse);
+}
 
 
 
 
 const sectionService = { getSectionDetail, getAllStudents, getStudentDetails,
-	getAllSectionsByCourse, addSection};
+	getAllSectionsByCourse, addSection, enrollSectionByStudent};
 export default sectionService;

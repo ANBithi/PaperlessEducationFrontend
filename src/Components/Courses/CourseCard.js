@@ -18,7 +18,6 @@ export function CourseCard({
 	startTime,
 	endTime,
 	sectionId,
-	type,
 	courseCover
 }) {
 	const navigate = useNavigate();

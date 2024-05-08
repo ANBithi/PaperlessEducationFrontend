@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
 	Text,
 	VStack,
@@ -7,11 +7,9 @@ import {
 	Input,
 	Button,
 	Textarea,
-	useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import userService from "../../services/user.service";
-import instituteService from "../../services/institute.service";
 import departmentService from "../../services/department.service";
 const AddStudentView = ({ departments }) => {
 	const [addStudentsObj, setAddStudentsObj] = useState({});

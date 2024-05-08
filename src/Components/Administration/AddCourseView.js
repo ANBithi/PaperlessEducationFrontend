@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Text, VStack, HStack, Select, Input, Button } from "@chakra-ui/react";
-import instituteService from "../../services/institute.service";
 import TextInput from "../HelperComponents/TextInput";
 import { COURSE_TYPE, LESSON_TYPE } from "./CourseData";
 import courseService from "../../services/course.service";

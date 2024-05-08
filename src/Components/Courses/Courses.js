@@ -1,5 +1,5 @@
 import { Flex, Grid, GridItem, Text, VStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import courseService from "../../services/course.service";
 import DataFetcher from "../DataFetcher";
 import { CourseCard } from "./CourseCard";

@@ -1,5 +1,3 @@
-// import { userActions, alertActions } from '../components';
-// import { store } from './';
 import loginService from '../services/login.service';
 import { history } from './history';
 import { createStandaloneToast } from "@chakra-ui/react";
@@ -7,7 +5,6 @@ const { toast } = createStandaloneToast();
 
 export function handleResponse(response) {
     return response.text().then((text) => {
-        //console.log('GET ALL PROOF Response', text)
         if (!response.ok) {
             var error = '';
             switch (response.status) {
@@ -18,8 +15,6 @@ export function handleResponse(response) {
                             erroCode: response.status,
                             message: error
                         });
-                        //store.dispatch(alertActions.error('Something went wrong ! Please retry.'));
-                        //store.dispatch(userActions.logout());
                     }
                     break;
                 case 401:
@@ -29,14 +24,6 @@ export function handleResponse(response) {
                             erroCode: response.status,
                             message: error
                         });
-                        // if (!text)
-                        //     store.dispatch(
-                        //         alertActions.warn('Session Expired ! Please try login again.')
-                        //     );
-                        // else store.dispatch(alertActions.error(JSON.parse(text).message));
-
-                        // logout() has relation to the process in login screen
-                        //store.dispatch(userActions.logout());
                         loginService.logOff();
                         const location = {
                             pathname: '/login',
@@ -59,7 +46,7 @@ export function handleResponse(response) {
                             erroCode: response.status,
                             message: error
                         });
-                        //store.dispatch(alertActions.error('Something went wrong ! Please retry.'));
+                       
                     }
                     break;
                 default:
@@ -69,7 +56,7 @@ export function handleResponse(response) {
                             erroCode: response.status,
                             message: error
                         });
-                        //store.dispatch(alertActions.error('Something went wrong ! Please retry.'));
+                    
                     }
                     break;
             }

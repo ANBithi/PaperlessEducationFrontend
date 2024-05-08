@@ -6,21 +6,15 @@ import {
 	Menu,
 	MenuItem,
 	MenuList,
-	MenuButton,
-	Icon,
-	Text,
-	Box,
+	MenuButton
 } from "@chakra-ui/react";
-//import Logo from '../public/logo.svg';
 import { AuthorizationComponent } from "../HelperComponents/AuthorizationComponent";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import loginService from "../../services/login.service";
-import { ChevronDownIcon, BellIcon } from "@chakra-ui/icons";
-import { NAV_ITEMS, STUDENT_NAV } from "./navigationData";
+import { NAV_ITEMS } from "./navigationData";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../Helpers/userHelper";
 import Notification from "../Notifications/Notification";
-
 export default function Layout() {
 	const navigate = useNavigate();
 	const userData = getCurrentUser();
@@ -43,7 +37,6 @@ export default function Layout() {
 				align="center"
 				justify="space-between"
 			>
-				{/* <Image src={Logo.src} h="50px" /> */}
 
 				<HStack spacing="10">
 					{NAV_ITEMS.map((item, i) => {

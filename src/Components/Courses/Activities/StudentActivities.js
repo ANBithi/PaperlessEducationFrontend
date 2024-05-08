@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react"
+import { VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import UpcomingExams from "./UpcomingExams";
 
@@ -13,6 +13,7 @@ const StudentActivities = () => {
     return (
         <VStack  w="full" align={"start"}>
             <UpcomingExams handleClick = {onExamClick}/>
+            
         </VStack>
     )
 }

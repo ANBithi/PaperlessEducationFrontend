@@ -19,8 +19,6 @@ import IconButton from "../HelperComponents/IconButton";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import QuestionItem from "./QuestionItem";
 import { getCurrentUserId } from "../../Helpers/userHelper";
-import { authHeader } from "../../Helpers/authHeader";
-
 const StudentExam = () => {
 	const { id } = useParams();
 	const socketConnectedRef = useRef(false);
@@ -29,7 +27,6 @@ const StudentExam = () => {
 	const [examMetadata, setExamMetadata] = useState();
 	const [sectionDetail, setSectionDetail] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [editQuestion, setEditQuestion] = useState(undefined);
 	const [questions, setQuestions] = useState([]);
 
 	const fetchCourseData = async () => {
@@ -88,7 +85,6 @@ const StudentExam = () => {
 						align="start"
 						w="full"
 						spacing={8}
-						//bg="background.200"
 						padding="16px"
 						rounded="8px"
 					>

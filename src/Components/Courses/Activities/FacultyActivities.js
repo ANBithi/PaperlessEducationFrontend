@@ -1,5 +1,5 @@
-import { Button, Text, VStack } from "@chakra-ui/react"
-import { useNavigate, useParams } from "react-router";
+import { Button, VStack } from "@chakra-ui/react"
+import { useNavigate } from "react-router";
 import UpcomingExams from "./UpcomingExams";
 
 const FacultyActivities = () => {

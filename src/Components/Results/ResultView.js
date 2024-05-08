@@ -6,7 +6,7 @@ import {
 	VStack,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getCurrentUserId } from "../../Helpers/userHelper";
 import { resultService } from "../../services/result.service";
 import DataFetcher from "../DataFetcher";
@@ -14,9 +14,6 @@ import { VIEW_COL } from "./resultViewData";
 
 const CourseResults = () => {
 	const [courseResults, setCourseResults] = useState([]);
-	const [currentLeave, setCurrentLeave] = useState();
-	const { isOpen, onOpen, onClose } = useDisclosure();
-
 	const fetchData = async () => {
 		let d= await resultService.getResults(getCurrentUserId());
 		setCourseResults(d.data);

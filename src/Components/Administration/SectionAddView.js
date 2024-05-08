@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Text, VStack, HStack, Select, Input, Button, Box } from "@chakra-ui/react";
-import instituteService from '../../services/institute.service';
+import { Text, VStack, HStack, Select, Button, Box } from "@chakra-ui/react";
 import TextInput from "../HelperComponents/TextInput";
 import sectionService from "../../services/section.service";
 import departmentService from "../../services/department.service";
-import moment from "moment";
+import { WEEK_DAYS } from "./CourseData";
 
 const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, setDepartments})=> {
 
@@ -65,7 +64,8 @@ const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, s
         setAddSectionObj({})
         setFaculties([]);
         setAllCourses([]);
-        setDepartments([])
+        setDepartments([]);
+		setAvailableSections([]);
 	};
 
 	const setChangeSection = (e) => {
@@ -105,36 +105,44 @@ const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, s
 			</HStack>
 
 			{allCourses !== undefined && allCourses.length > 0 && (
-                <VStack w = "full" align = "start">
-				<HStack layerStyle="inputStackStyle">
-					<Select
-						value={addSectionObj.courseId ?? ""}
-						name="courseId"
-						variant={"unstyled"}
-						placeholder="Select course"
-						onChange={setChangeSection}
-					>
-					{allCourses.map((cor) => {
+				<VStack w="full" align="start">
+					<HStack layerStyle="inputStackStyle">
+						<Select
+							value={addSectionObj.courseId ?? ""}
+							name="courseId"
+							variant={"unstyled"}
+							placeholder="Select course"
+							onChange={setChangeSection}
+						>
+							{allCourses.map((cor) => {
+								return (
+									<option value={cor.id} key={cor.id}>
+										{cor.name}
+									</option>
+								);
+							})}
+						</Select>
+					</HStack>
+
+					{availableSections.length > 0 &&
+						availableSections.map((section) => {
 							return (
-								<option value={cor.id} key={cor.id}>
-									{cor.name}
-								</option>
+								<Box
+									fontSize="14px"
+									h="40px"
+									w="33%"
+									rounded={"8px"}
+									p="8px"
+									align="center"
+									layerStyle={"onSecondarySurfaceStyle"}
+								>
+									<Text fontWeight={"bold"}>
+										Section - {section.sectionNumber}
+									</Text>
+								</Box>
 							);
 						})}
-					</Select>
-                    
-				</HStack>
-                
-                {
-                    availableSections.length > 0 &&
-                    availableSections.map((section)=>{
-                        return <Box fontSize = "14px" h = "40px" w = "33%" rounded={"8px"} p = "8px" align = "center"
-                        layerStyle={"onSecondarySurfaceStyle"}>
-                            <Text fontWeight={"bold"}>Section - {section.sectionNumber}</Text>
-                            </Box>
-                    })
-                    }
-                </VStack>
+				</VStack>
 			)}
 			<TextInput
 				title="Type digits from 1 to 9"
@@ -147,7 +155,7 @@ const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, s
 				name="sectionNumber"
 				onChange={setChangeSection}
 			/>
-            <TextInput
+			<TextInput
 				title="Type digits from 1 to 9"
 				maxLength={2}
 				placeholder="Max allocated number of students"
@@ -165,7 +173,7 @@ const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, s
 						value={addSectionObj.faculty}
 						name="faculty"
 						w="full"
-                        variant={"unstyled"}
+						variant={"unstyled"}
 						placeholder="Select a faculty"
 						onChange={setChangeSection}
 					>
@@ -180,25 +188,42 @@ const SectionAddView = ({departments, allCourses, fetchCourses, setAllCourses, s
 				</HStack>
 			)}
 
+			<HStack layerStyle="inputStackStyle">
+				<Select
+					value={addSectionObj.weekdays}
+					name="weekdays"
+					w="full"
+					variant={"unstyled"}
+					placeholder="Select weekly slot"
+					onChange={setChangeSection}
+				>
+					{WEEK_DAYS.map((day) => {
+						return (
+							<option value={day.value} key={day.value}>
+								{day.label}
+							</option>
+						);
+					})}
+				</Select>
+			</HStack>
+
 			<TextInput
 				maxLength={80}
 				value={addSectionObj.classStartTime ?? ""}
-                type = "time"
+				type="time"
 				name="classStartTime"
 				placeholder="Class start time"
 				onChange={setChangeSection}
 			/>
-            <TextInput
+			<TextInput
 				maxLength={80}
-				value={addSectionObj.classEndTime?? ""}
-                type = "time"
+				value={addSectionObj.classEndTime ?? ""}
+				type="time"
 				name="classEndTime"
 				placeholder="Class end time"
 				onChange={setChangeSection}
 			/>
-			<Button  onClick={onAddClick}>
-				Add
-			</Button>
+			<Button onClick={onAddClick}>Add</Button>
 		</VStack>
 	);
 }

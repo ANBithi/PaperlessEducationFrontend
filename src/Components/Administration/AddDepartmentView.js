@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, VStack, HStack, Input, Button } from "@chakra-ui/react";
+import { VStack, Button } from "@chakra-ui/react";
 import TextInput from "../HelperComponents/TextInput";
 import departmentService from "../../services/department.service";
 const AddDepartmentView = ({ fetchDepartments }) => {
@@ -40,7 +40,7 @@ const AddDepartmentView = ({ fetchDepartments }) => {
 		await departmentService.addDepartment(addDepartmentObj);
 		setAddDepartmentObj({});
 		fetchDepartments();
-		// console.log(addDepartmentObj);
+	
 	};
 
 	const onChangeDepartment = (e) => {

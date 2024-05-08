@@ -1,6 +1,5 @@
-import { Flex, Text, VStack, Box, HStack } from "@chakra-ui/react"
+import { Flex, Text, Box, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import sectionService from "../../services/section.service"
 import examService from "../../services/exam.service";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";

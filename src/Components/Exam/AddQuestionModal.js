@@ -10,14 +10,10 @@ import {
 	Input,
 	VStack,
 	HStack,
-	Text,
-	useToast,
-	Select,
+	Text, Select
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import examService from "../../services/exam.service";
-import SelectInput from "../HelperComponents/SelectInput";
-import { COURSE_TYPE } from "../Administration/CourseData";
 
 const initialQuestion = { content: undefined, mark: "" };
 
@@ -27,13 +23,9 @@ const AddQuestionModal = ({
 	isOpen,
 	onClose,
 	examId,
-	calcMark,
-	questionCallback,
 	question,
 	setQuestion,
 }) => {
-	const toast = useToast();
-	const [option, setOption] = useState("");
 	const [disableInput, setDisableInput] = useState(false);
 	const [options, setOptions] = useState(initialOptions);
 	const [individualQuestion, setIndividualQuestion] =
@@ -66,52 +58,6 @@ const AddQuestionModal = ({
 		let temp = [...options, {prefix : options.length + 1 , value : ""}];
 		setOptions(temp);
 	}
-
-	// const onDoneClick = () => {
-	// 	let temp = [];
-	// 	let suffix = "";
-	// 	if (question === undefined) {
-	// 		temp = [...questions, individualQuestion];
-	// 		suffix = "added";
-	// 	} else {
-	// 		temp = questions.map((q, i) => {
-	// 			let ques = { ...q };
-	// 			if (i === question.index) {
-	// 				ques.question =
-	// 					individualQuestion.question === ""
-	// 						? ques.question
-	// 						: individualQuestion.question;
-	// 				ques.marks =
-	// 					individualQuestion.marks === ""
-	// 						? ques.marks
-	// 						: individualQuestion.marks;
-	// 			}
-	// 			return ques;
-	// 		});
-	// 		suffix = "updated";
-	// 	}
-	// 	let { isEqual, remainingNumber } = calcMark(temp);
-	// 	if (remainingNumber < 0) {
-	// 		toast({
-	// 			containerStyle: {
-	// 				fontSize: "14px",
-	// 				fontWeight: "normal",
-	// 			},
-	// 			title: "Total marks is crossed, please decrease the marks.",
-	// 			position: "bottom-right",
-	// 			variant: "subtle",
-	// 			status: "info",
-	// 			duration: 5000,
-	// 			isClosable: true,
-	// 		});
-	// 		return;
-	// 	}
-
-	// 	setQuestions(temp);
-	// 	questionCallback(temp, suffix);
-	// 	setShowInputBox(false);
-	// 	onClose();
-	// };
 	
 	const onDoneClick = async () => {
 		
@@ -141,7 +87,6 @@ const AddQuestionModal = ({
 			if(ques.questionType === 0){
 				ques.options = options;
 			}
-			console.log(ques);
 			await examService.updateQuestion({ ...ques, id: question.id });
 		}
 		//TODO : clear data before on close,

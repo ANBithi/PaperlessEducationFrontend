@@ -62,7 +62,6 @@ const Notification = () => {
 	}, []);
 	
 	const handleNewNotification = (event) => {
-		// let data = JSON.parse(event.data);
 	notificationService.getNotifications(getCurrentUserId(), "post").then((p)=>{
 		console.log("live update received");
 		setAllNotifications(p);

@@ -6,7 +6,6 @@ const IconButton = ({ icon, ...rest }) => {
 		<Center
 		layerStyle ={"themeIconStyle"}
 			borderRadius={"4px"}
-			//bg = {isSelected=== true? "primary.100" : 'transparent' }
 			_hover={{
 				backgroundColor: "primary.100",
 			}}

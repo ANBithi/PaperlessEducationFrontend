@@ -4,13 +4,10 @@ import {
 	Input,
 	Text,
 	Button,
-	useToast,
-	Flex,
-	Center,
+	useToast, Center
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUser } from "../../../Helpers/userHelper";
 import loginService from "../../../services/login.service";
 import userService from "../../../services/user.service";
 

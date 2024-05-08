@@ -12,8 +12,7 @@ import {
 	Input,
 	VStack,
 	HStack,
-	Text,
-	useToast,
+	Text
 } from "@chakra-ui/react";
 import {
 	QUIZ_ANSWER_TYPE_OPTIONS,
@@ -21,7 +20,6 @@ import {
 	QUIZ_DURATION_OPTIONS,
 	TYPE_OF_EXAMS,
 } from "./examData";
-import moment from "moment";
 function AddExamMetadataModal({
 	isOpen,
 	onClose,
@@ -31,13 +29,7 @@ function AddExamMetadataModal({
 	onSelectChange,
 	onCreateClick,
 }) {
-	const parseDate = (date) => {
-		var currentDate  = new Date(date) ?? new Date();
-		// var isoDateTime = new Date("2015-10-05T08:30:00");
-		// var localDateTime = isoDateTime.toLocaleDateString() + " " + isoDateTime.toLocaleTimeString();
-		var momentdateNow = moment(currentDate).format('yy-MM-ddThh:mm');
-		return momentdateNow;
-	}
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} size="xl">
 			<ModalOverlay />

@@ -1,6 +1,5 @@
 import { Avatar, AvatarBadge, HStack, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
-import activityService from '../../services/activity.service';
+import React, { useEffect } from 'react';
 
 const UserViewListItem = ({student, setSelectedStudentId, isOnline, fetchActivityStatus}) => {
 
