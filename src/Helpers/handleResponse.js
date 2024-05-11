@@ -12,7 +12,7 @@ export function handleResponse(response) {
                     {
                         error = response.statusText + ' ' + text;
                         console.error('SYSTEM ERROR', {
-                            erroCode: response.status,
+                            errorCode: response.status,
                             message: error
                         });
                     }
@@ -21,7 +21,7 @@ export function handleResponse(response) {
                     {
                         error = response.statusText + ' ' + text;
                         console.error('SYSTEM ERROR', {
-                            erroCode: response.status,
+                            errorCode: response.status,
                             message: error
                         });
                         loginService.logOff();
@@ -43,7 +43,7 @@ export function handleResponse(response) {
                     {
                         error = response.statusText + ' ' + text;
                         console.error('SYSTEM ERROR', {
-                            erroCode: response.status,
+                            errorCode: response.status,
                             message: error
                         });
                        
@@ -53,7 +53,7 @@ export function handleResponse(response) {
                     {
                         error = response.statusText + ' ' + text;
                         console.error('SYSTEM ERROR', {
-                            erroCode: response.status,
+                            errorCode: response.status,
                             message: error
                         });
                     

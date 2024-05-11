@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
 	Text,
 	VStack,
 	Select,
-	HStack,
-	useToast,
-	Input,
-	Button,
+	HStack, Input,
+	Button
 } from "@chakra-ui/react";
 import userService from "../../services/user.service";
 
